@@ -43,7 +43,6 @@ export const siteConfig = {
   heroImage: "/hero-house.jpg",
   // Owner photo for About page
   ownerImage: "/josh.jpg",
-  // Featured video section - change this YouTube ID to update the video
-  featuredVideoId: "dQw4w9WgXcQ", // Replace with your actual YouTube video ID
+  // Featured video section - add via Sanity CMS when ready
   featuredVideoTitle: "See How Our Process Works"
 };

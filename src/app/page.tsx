@@ -113,6 +113,8 @@ export default async function HomePage() {
   const heroImage = settings?.heroImage
     ? urlFor(settings.heroImage).url()
     : siteConfig.heroImage;
+  const featuredVideoId = settings?.featuredVideoId || null;
+  const featuredVideoTitle = settings?.featuredVideoTitle || siteConfig.featuredVideoTitle;
   const phone = settings?.phone || siteConfig.phone;
   const phoneTel = settings?.phone
     ? `tel:+1${settings.phone.replace(/\D/g, '')}`
@@ -196,6 +198,48 @@ export default async function HomePage() {
               <p className="text-gray-300 mb-6">No obligation. We&apos;ll respond within 24 hours.</p>
               <LeadForm variant="compact" darkMode />
             </div>
+          </div>
+        </div>
+      </section>
+
+      {/* Featured Video Section */}
+      <section className="section-padding bg-white">
+        <div className="container-custom mx-auto">
+          <div className="text-center mb-10">
+            <h2 className="text-3xl md:text-4xl font-bold text-navy mb-4">
+              {featuredVideoTitle}
+            </h2>
+            <p className="text-xl text-gray-600 max-w-2xl mx-auto">
+              {featuredVideoId
+                ? "Watch this short video to learn how we help Central Texas homeowners sell their houses fast."
+                : "We're creating a video to show you exactly how our process works."}
+            </p>
+          </div>
+
+          <div className="max-w-4xl mx-auto">
+            {featuredVideoId ? (
+              <div className="relative aspect-video rounded-2xl overflow-hidden shadow-xl">
+                <iframe
+                  src={`https://www.youtube.com/embed/${featuredVideoId}`}
+                  title={featuredVideoTitle}
+                  allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+                  allowFullScreen
+                  className="absolute inset-0 w-full h-full"
+                />
+              </div>
+            ) : (
+              <div className="relative aspect-video rounded-2xl overflow-hidden shadow-xl bg-gradient-to-br from-navy to-navy-dark flex flex-col items-center justify-center text-white">
+                <div className="w-20 h-20 rounded-full bg-white/10 flex items-center justify-center mb-6">
+                  <svg className="w-10 h-10 text-orange" fill="currentColor" viewBox="0 0 24 24">
+                    <path d="M8 5v14l11-7z" />
+                  </svg>
+                </div>
+                <h3 className="text-2xl font-bold mb-2">Video Coming Soon</h3>
+                <p className="text-gray-300 text-center max-w-md px-4">
+                  We&apos;re creating a video to show you exactly how our process works
+                </p>
+              </div>
+            )}
           </div>
         </div>
       </section>
