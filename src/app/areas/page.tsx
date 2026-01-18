@@ -8,11 +8,14 @@ export async function generateMetadata(): Promise<Metadata> {
   const pageData = await getPageBySlug('areas');
 
   return {
-    title: pageData?.metaTitle || 'Areas We Serve | Cash Home Buyers Near Fort Hood & Central Texas',
-    description: pageData?.metaDescription || 'We buy houses for cash near Fort Hood (Fort Cavazos) in Killeen, Temple, Harker Heights, Belton, Copperas Cove, Waco, and surrounding Central Texas communities. Get a fair cash offer today.',
+    title: pageData?.metaTitle || 'We Buy Houses Central Texas | Killeen, Temple, Waco | Sell to Josh',
+    description: pageData?.metaDescription || 'Cash home buyers serving Killeen, Temple, Harker Heights, Belton, Copperas Cove, Waco, Salado, Georgetown & surrounding Central Texas near Fort Hood (formerly Fort Cavazos). Get a fair cash offer today.',
     openGraph: {
-      title: pageData?.metaTitle || 'Areas We Serve | Cash Home Buyers Near Fort Hood & Central Texas',
-      description: pageData?.metaDescription || 'We buy houses for cash near Fort Hood (Fort Cavazos) in Killeen, Temple, Harker Heights, Belton, Copperas Cove, Waco, and surrounding areas.',
+      title: pageData?.metaTitle || 'We Buy Houses Central Texas | Killeen, Temple, Waco | Sell to Josh',
+      description: pageData?.metaDescription || 'Cash home buyers serving Killeen, Temple, Harker Heights, Belton, Copperas Cove, Waco & surrounding Central Texas near Fort Hood.',
+    },
+    alternates: {
+      canonical: `https://selltojosh.com/areas`,
     },
   };
 }

@@ -32,12 +32,20 @@ export async function generateMetadata({ params }: PageProps): Promise<Metadata>
   }
 
   const city = area.city;
-  const metaTitle = sanityArea?.metaTitle || `Sell My House Fast in ${city} TX | Cash Home Buyer | Sell to Josh`;
-  const metaDescription = sanityArea?.metaDescription || `Looking to sell your house fast in ${city}, Texas? We buy houses for cash in ${city} TX. No repairs, no fees, no hassle. Get a fair cash offer within 24 hours from a local buyer.`;
+  const metaTitle = sanityArea?.metaTitle || `Sell My House Fast ${city} TX | Cash Home Buyer Near Fort Hood | Sell to Josh`;
+  const metaDescription = sanityArea?.metaDescription || `We buy houses for cash in ${city}, Texas near Fort Hood (formerly Fort Cavazos). Sell your ${city} house fast - no repairs, no fees, close in 7-14 days. Get a fair cash offer within 24 hours from a local buyer you can trust.`;
 
   return {
     title: metaTitle,
     description: metaDescription,
+    keywords: [
+      `sell my house fast ${city}`,
+      `cash home buyer ${city}`,
+      `we buy houses ${city} TX`,
+      `sell house as-is ${city}`,
+      'Fort Hood home buyer',
+      'Central Texas cash buyer',
+    ],
     openGraph: {
       title: metaTitle,
       description: metaDescription,

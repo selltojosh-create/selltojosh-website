@@ -1,3 +1,4 @@
+import { Metadata } from 'next';
 import Link from 'next/link';
 import LeadForm from '@/components/LeadForm';
 import TestimonialCard from '@/components/TestimonialCard';
@@ -5,6 +6,18 @@ import { siteConfig } from '@/data/siteConfig';
 import { faqs as staticFaqs } from '@/data/faqs';
 import { getSiteSettings, getFeaturedTestimonials, getAllFaqs } from '../../sanity/lib/fetch';
 import { urlFor } from '../../sanity/lib/client';
+
+export const metadata: Metadata = {
+  title: 'Sell My House Fast Killeen TX | Cash Home Buyer | Sell to Josh',
+  description: 'Sell your house fast for cash in Killeen, Temple, Harker Heights & Central Texas. No repairs, no fees, close in 7-14 days. Get a fair cash offer from a local buyer. Call (254) 498-6025!',
+  openGraph: {
+    title: 'Sell My House Fast Killeen TX | Cash Home Buyer | Sell to Josh',
+    description: 'Sell your house fast for cash in Killeen, Temple, Harker Heights & Central Texas. No repairs, no fees, close in 7-14 days. Get a fair cash offer today!',
+  },
+  alternates: {
+    canonical: `https://${siteConfig.domain}`,
+  },
+};
 
 // Static fallback testimonials
 const fallbackTestimonials = [

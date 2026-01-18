@@ -2,8 +2,11 @@ import { Metadata } from 'next';
 import { siteConfig } from '@/data/siteConfig';
 
 export const metadata: Metadata = {
-  title: 'Privacy Policy',
-  description: `Privacy Policy for ${siteConfig.name}. Learn how we collect, use, and protect your personal information.`,
+  title: 'Privacy Policy | Sell to Josh',
+  description: `Privacy Policy for Sell to Josh. Learn how we collect, use, and protect your personal information when you inquire about selling your Central Texas home for cash.`,
+  alternates: {
+    canonical: `https://${siteConfig.domain}/privacy`,
+  },
 };
 
 export default function PrivacyPage() {

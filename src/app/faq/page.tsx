@@ -9,11 +9,14 @@ export async function generateMetadata(): Promise<Metadata> {
   const pageData = await getPageBySlug('faq');
 
   return {
-    title: pageData?.metaTitle || 'FAQ | Frequently Asked Questions About Selling Your House for Cash',
-    description: pageData?.metaDescription || 'Get answers to common questions about selling your Central Texas home for cash. Learn about our process, fees, timeline, and more.',
+    title: pageData?.metaTitle || 'FAQ | Selling Your House for Cash | Questions Answered | Sell to Josh',
+    description: pageData?.metaDescription || 'Get answers to common questions about selling your house for cash in Central Texas. Learn about our process, timeline, fees (none!), and what to expect when you sell to Josh.',
     openGraph: {
-      title: pageData?.metaTitle || 'FAQ | Frequently Asked Questions About Selling Your House for Cash',
-      description: pageData?.metaDescription || 'Get answers to common questions about selling your home for cash.',
+      title: pageData?.metaTitle || 'FAQ | Selling Your House for Cash | Questions Answered | Sell to Josh',
+      description: pageData?.metaDescription || 'Get answers to common questions about selling your house for cash in Central Texas. Learn about our process, timeline, and what to expect.',
+    },
+    alternates: {
+      canonical: `https://selltojosh.com/faq`,
     },
   };
 }

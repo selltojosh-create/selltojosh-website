@@ -4,11 +4,14 @@ import Image from 'next/image';
 import { siteConfig } from '@/data/siteConfig';
 
 export const metadata: Metadata = {
-  title: 'About Josh | Local Cash Home Buyer Near Fort Hood & Central Texas',
-  description: 'Meet Josh, a local Central Texas home buyer near Fort Hood (Fort Cavazos) committed to helping homeowners sell their properties quickly and fairly. No pressure, no games — just honest deals.',
+  title: 'About Josh | Local Cash Home Buyer Near Fort Hood TX | Sell to Josh',
+  description: 'Meet Josh, your local Central Texas cash home buyer near Fort Hood (formerly Fort Cavazos). Buying homes since 2009. Honest, fair cash offers for houses in any condition. No pressure, no games.',
   openGraph: {
-    title: 'About Josh | Local Cash Home Buyer Near Fort Hood & Central Texas',
-    description: 'Meet Josh, a local Central Texas home buyer near Fort Hood (Fort Cavazos) committed to helping homeowners sell their properties quickly and fairly.',
+    title: 'About Josh | Local Cash Home Buyer Near Fort Hood TX | Sell to Josh',
+    description: 'Meet Josh, your local Central Texas cash home buyer near Fort Hood. Buying homes since 2009. Honest, fair cash offers for houses in any condition.',
+  },
+  alternates: {
+    canonical: `https://${siteConfig.domain}/about`,
   },
 };
 
