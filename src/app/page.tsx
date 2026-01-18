@@ -113,8 +113,6 @@ export default async function HomePage() {
   const heroImage = settings?.heroImage
     ? urlFor(settings.heroImage).url()
     : siteConfig.heroImage;
-  const featuredVideoId = settings?.featuredVideoId || siteConfig.featuredVideoId;
-  const featuredVideoTitle = settings?.featuredVideoTitle || siteConfig.featuredVideoTitle;
   const phone = settings?.phone || siteConfig.phone;
   const phoneTel = settings?.phone
     ? `tel:+1${settings.phone.replace(/\D/g, '')}`
@@ -172,9 +170,24 @@ export default async function HomePage() {
                   Call {phone}
                 </a>
               </div>
-              <p className="text-gray-300 text-sm">
+              <p className="text-gray-300 text-sm mb-6">
                 Serving {serviceAreas.slice(0, -1).join(', ')}{serviceAreas.length > 1 ? ` & ${serviceAreas[serviceAreas.length - 1]}` : serviceAreas[0]} & surrounding areas
               </p>
+              {/* Credibility Indicators */}
+              <div className="flex flex-wrap gap-6 text-sm">
+                <div className="flex items-center gap-2">
+                  <svg className="w-5 h-5 text-orange" fill="currentColor" viewBox="0 0 20 20">
+                    <path fillRule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clipRule="evenodd" />
+                  </svg>
+                  <span className="text-white font-medium">Buying Central Texas homes since 2009</span>
+                </div>
+                <div className="flex items-center gap-2">
+                  <svg className="w-5 h-5 text-orange" fill="currentColor" viewBox="0 0 20 20">
+                    <path fillRule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clipRule="evenodd" />
+                  </svg>
+                  <span className="text-white font-medium">Hundreds of homes purchased</span>
+                </div>
+              </div>
             </div>
 
             {/* Lead Form in Semi-transparent Navy Box */}
@@ -182,32 +195,6 @@ export default async function HomePage() {
               <h2 className="text-2xl font-bold text-white mb-2">Get Your Free Cash Offer</h2>
               <p className="text-gray-300 mb-6">No obligation. We&apos;ll respond within 24 hours.</p>
               <LeadForm variant="compact" darkMode />
-            </div>
-          </div>
-        </div>
-      </section>
-
-      {/* Featured Video Section */}
-      <section className="section-padding bg-white">
-        <div className="container-custom mx-auto">
-          <div className="text-center mb-10">
-            <h2 className="text-3xl md:text-4xl font-bold text-navy mb-4">
-              {featuredVideoTitle}
-            </h2>
-            <p className="text-xl text-gray-600 max-w-2xl mx-auto">
-              Watch this short video to learn how we help Central Texas homeowners sell their houses fast.
-            </p>
-          </div>
-
-          <div className="max-w-4xl mx-auto">
-            <div className="relative aspect-video rounded-2xl overflow-hidden shadow-xl">
-              <iframe
-                src={`https://www.youtube.com/embed/${featuredVideoId}`}
-                title={featuredVideoTitle}
-                allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
-                allowFullScreen
-                className="absolute inset-0 w-full h-full"
-              />
             </div>
           </div>
         </div>
