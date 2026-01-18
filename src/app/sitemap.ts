@@ -1,10 +1,12 @@
 import { MetadataRoute } from 'next';
 import { siteConfig } from '@/data/siteConfig';
+import { serviceAreas } from '@/data/areas';
 
 export default function sitemap(): MetadataRoute.Sitemap {
   const baseUrl = `https://${siteConfig.domain}`;
 
-  return [
+  // Base pages
+  const staticPages: MetadataRoute.Sitemap = [
     {
       url: baseUrl,
       lastModified: new Date(),
@@ -60,4 +62,14 @@ export default function sitemap(): MetadataRoute.Sitemap {
       priority: 0.3,
     },
   ];
+
+  // Individual city pages for local SEO
+  const cityPages: MetadataRoute.Sitemap = serviceAreas.map((area) => ({
+    url: `${baseUrl}/areas/${area.slug}`,
+    lastModified: new Date(),
+    changeFrequency: 'weekly',
+    priority: 0.85,
+  }));
+
+  return [...staticPages, ...cityPages];
 }

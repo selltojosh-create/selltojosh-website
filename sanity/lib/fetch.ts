@@ -76,9 +76,15 @@ export interface SanityServiceArea {
   slug: string
   headline: string
   description: string
+  content?: string[]
   scenarios?: string[]
+  landmarks?: string[]
   metaTitle?: string
   metaDescription?: string
+  coordinates?: {
+    lat: number
+    lng: number
+  }
 }
 
 // Fetch functions with null returns for graceful fallbacks

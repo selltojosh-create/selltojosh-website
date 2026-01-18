@@ -94,9 +94,12 @@ export const allServiceAreasQuery = groq`
     "slug": slug.current,
     headline,
     description,
+    content,
     scenarios,
+    landmarks,
     metaTitle,
-    metaDescription
+    metaDescription,
+    coordinates
   }
 `
 
@@ -108,8 +111,11 @@ export const serviceAreaBySlugQuery = groq`
     "slug": slug.current,
     headline,
     description,
+    content,
     scenarios,
+    landmarks,
     metaTitle,
-    metaDescription
+    metaDescription,
+    coordinates
   }
 `

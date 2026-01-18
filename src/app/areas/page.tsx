@@ -48,9 +48,22 @@ export default async function AreasPage() {
           <h1 className="text-4xl md:text-5xl font-bold mb-6">
             We Buy Houses Across Central Texas
           </h1>
-          <p className="text-xl text-gray-300 max-w-2xl mx-auto">
+          <p className="text-xl text-gray-300 max-w-2xl mx-auto mb-8">
             Serving homeowners near Fort Hood (Fort Cavazos) in Killeen, Temple, Harker Heights, Belton, Copperas Cove, Waco, and surrounding communities with fair cash offers.
           </p>
+
+          {/* Quick Links to City Pages */}
+          <div className="flex flex-wrap justify-center gap-3">
+            {serviceAreas.map((area) => (
+              <Link
+                key={area.slug}
+                href={`/areas/${area.slug}`}
+                className="bg-white/10 hover:bg-white/20 px-5 py-2 rounded-lg font-medium transition-colors"
+              >
+                {area.city}
+              </Link>
+            ))}
+          </div>
         </div>
       </section>
 
@@ -101,12 +114,12 @@ export default async function AreasPage() {
                   </ul>
 
                   <div className="flex flex-col sm:flex-row gap-4">
-                    <Link href="/contact" className="btn-primary text-center">
-                      Get Cash Offer for {area.city} Property
+                    <Link href={`/areas/${area.slug}`} className="btn-primary text-center">
+                      Sell My {area.city} Home
                     </Link>
-                    <a href={phoneTel} className="btn-secondary text-center">
-                      Call {phone}
-                    </a>
+                    <Link href="/contact" className="btn-secondary text-center">
+                      Get Cash Offer
+                    </Link>
                   </div>
                 </div>
               </article>
