@@ -106,6 +106,36 @@ export const serviceAreas: ServiceArea[] = [
       "Tired of being a landlord in Waco",
       "Baylor-area properties needing updates"
     ]
+  },
+  {
+    slug: "salado",
+    city: "Salado",
+    state: "TX",
+    headline: "Sell Your Salado Home for Cash",
+    description: "Salado is a charming historic village nestled between Killeen and Temple along I-35. Whether you own a historic property in the village, a home near Salado Creek, or a property in the surrounding Bell County area, we buy houses in Salado for cash. No need to wait for the perfect buyer — get a fair offer today.",
+    scenarios: [
+      "Historic homes needing preservation or updates",
+      "Inherited properties from family members",
+      "Downsizing from larger properties",
+      "Vacation or second homes you no longer need",
+      "Properties needing major repairs",
+      "Relocating out of the area"
+    ]
+  },
+  {
+    slug: "georgetown",
+    city: "Georgetown",
+    state: "TX",
+    headline: "Cash Home Buyers in Georgetown",
+    description: "Georgetown is one of the fastest-growing cities in Texas, just north of Austin. Whether you're in Sun City, near the historic downtown square, or anywhere in Williamson County, we buy houses for cash in any condition. Skip the competitive Austin-area market and get a fair cash offer for your Georgetown home.",
+    scenarios: [
+      "Sun City residents ready to downsize",
+      "Homes that can't compete in the hot Austin market",
+      "Inherited properties in any condition",
+      "Houses needing repairs or updates",
+      "Relocating for work or retirement",
+      "Investment properties you want to exit"
+    ]
   }
 ];
 
@@ -219,6 +249,44 @@ export const cityData: Record<string, CityData> = {
     coordinates: {
       lat: 31.5493,
       lng: -97.1467
+    }
+  },
+  "salado": {
+    content: [
+      "Salado is a picturesque historic village in Bell County, perfectly situated between Killeen and Temple along I-35. Known for its antique shops, art galleries, and the beautiful Salado Creek, this charming community attracts both longtime residents and those seeking a quieter Texas lifestyle.",
+      "Whether you own a historic property in the village center, a home along Salado Creek, or a property in the surrounding countryside, we buy houses in Salado for cash in any condition. The unique character of Salado homes — from historic structures to newer builds — doesn't change our approach: fair offers, fast closings.",
+      "If you've inherited a family property in Salado, are relocating to be closer to Temple or Killeen, or simply need to sell your Salado home quickly, I'm here to help. With easy access to I-35 and proximity to both Temple and Killeen, Salado homeowners have options — and selling for cash is one of the fastest."
+    ],
+    landmarks: [
+      "Salado Creek",
+      "Historic Main Street",
+      "Stagecoach Inn",
+      "Tablerock Amphitheater",
+      "Salado Sculpture Garden",
+      "I-35 Corridor"
+    ],
+    coordinates: {
+      lat: 30.9471,
+      lng: -97.5386
+    }
+  },
+  "georgetown": {
+    content: [
+      "Georgetown has become one of the fastest-growing cities in Texas, attracting families, retirees, and professionals who want to be close to Austin while enjoying a more relaxed pace of life. From the award-winning Sun City retirement community to the historic downtown square, Georgetown offers diverse neighborhoods and property types.",
+      "The Austin-area real estate market is incredibly competitive, and not every home is ready to compete with fully renovated listings. If your Georgetown property needs work, you're dealing with an inherited home, or you simply want to avoid the stress of traditional selling, we offer a simpler solution with fair cash offers.",
+      "Whether you're a Sun City resident ready to downsize, a homeowner relocating for work, or dealing with a property that's been sitting vacant, I can help you sell your Georgetown home quickly. We buy houses throughout Williamson County in any condition — no repairs needed, no agent commissions, no waiting for buyers."
+    ],
+    landmarks: [
+      "Sun City Texas",
+      "Georgetown Square",
+      "Blue Hole Park",
+      "Southwestern University",
+      "San Gabriel River",
+      "Wolf Ranch Town Center"
+    ],
+    coordinates: {
+      lat: 30.6333,
+      lng: -97.6780
     }
   }
 };

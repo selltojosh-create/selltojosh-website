@@ -29,7 +29,9 @@ export const siteConfig = {
     "Temple",
     "Belton",
     "Copperas Cove",
-    "Waco"
+    "Waco",
+    "Salado",
+    "Georgetown"
   ],
 
   // Social Media
