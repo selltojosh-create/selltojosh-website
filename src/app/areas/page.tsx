@@ -132,7 +132,7 @@ export default async function AreasPage() {
               <div className="text-4xl mb-4">🏘️</div>
               <h3 className="text-xl font-bold text-navy mb-2">We Know the Area</h3>
               <p className="text-gray-600">
-                From Fort Hood (also known as Fort Cavazos) to downtown Waco, we understand Central Texas neighborhoods, values, and market conditions.
+                From Fort Hood (formerly Fort Cavazos) to downtown Waco, we understand Central Texas neighborhoods, values, and market conditions.
               </p>
             </div>
             <div className="bg-white p-6 rounded-xl shadow-sm">

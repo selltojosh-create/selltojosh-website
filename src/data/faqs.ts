@@ -46,7 +46,7 @@ export const faqs: FAQ[] = [
   },
   {
     question: "What areas do you serve?",
-    answer: "We buy houses near Fort Hood (also known as Fort Cavazos) and throughout Central Texas, including Killeen, Harker Heights, Temple, Belton, Copperas Cove, Waco, and surrounding communities. If you're in the area, reach out — we'd love to help."
+    answer: "We buy houses near Fort Hood (formerly Fort Cavazos) and throughout Central Texas, including Killeen, Harker Heights, Temple, Belton, Copperas Cove, Waco, and surrounding communities. If you're in the area, reach out — we'd love to help."
   },
   {
     question: "Why should I sell to you instead of listing with an agent?",

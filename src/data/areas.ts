@@ -13,7 +13,7 @@ export const serviceAreas: ServiceArea[] = [
     city: "Killeen",
     state: "TX",
     headline: "Sell Your Killeen Home Fast for Cash",
-    description: "We buy houses near Fort Hood (also known as Fort Cavazos) in Killeen, TX. As a military town, Killeen sees plenty of homeowners who need to sell quickly due to PCS orders, deployment, or life changes. Whether you're relocating, dealing with an inherited property, or simply need to sell your Killeen house fast, we're here to help with a fair cash offer.",
+    description: "We buy houses near Fort Hood (formerly Fort Cavazos) in Killeen, TX. As a military town, Killeen sees plenty of homeowners who need to sell quickly due to PCS orders, deployment, or life changes. Whether you're relocating, dealing with an inherited property, or simply need to sell your Killeen house fast, we're here to help with a fair cash offer.",
     scenarios: [
       "PCS orders requiring a quick sale",
       "Inherited properties from family members",
