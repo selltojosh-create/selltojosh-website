@@ -2,10 +2,14 @@
 
 import { useState } from 'react';
 import Image from 'next/image';
-import { reels } from '@/data/reels';
+import { reels as staticReels, Reel } from '@/data/reels';
 import YouTubeEmbed from './YouTubeEmbed';
 
-export default function ReelsCarousel() {
+interface ReelsCarouselProps {
+  reels?: Reel[];
+}
+
+export default function ReelsCarousel({ reels = staticReels }: ReelsCarouselProps) {
   const [currentIndex, setCurrentIndex] = useState(0);
 
   const goToPrevious = () => {
@@ -17,6 +21,10 @@ export default function ReelsCarousel() {
   };
 
   const currentReel = reels[currentIndex];
+
+  if (!reels.length) {
+    return null;
+  }
 
   return (
     <div className="w-full">

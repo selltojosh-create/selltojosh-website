@@ -2,9 +2,12 @@ import Link from 'next/link';
 import LeadForm from '@/components/LeadForm';
 import TestimonialCard from '@/components/TestimonialCard';
 import { siteConfig } from '@/data/siteConfig';
-import { faqs } from '@/data/faqs';
+import { faqs as staticFaqs } from '@/data/faqs';
+import { getSiteSettings, getFeaturedTestimonials, getAllFaqs } from '../../sanity/lib/fetch';
+import { urlFor } from '../../sanity/lib/client';
 
-const testimonials = [
+// Static fallback testimonials
+const fallbackTestimonials = [
   {
     quote: "Josh made selling our inherited property so easy. We closed in just 12 days and didn't have to worry about repairs or cleaning out the house.",
     name: "Maria G.",
@@ -98,14 +101,47 @@ const steps = [
   }
 ];
 
-export default function HomePage() {
+export default async function HomePage() {
+  // Fetch data from Sanity with fallbacks
+  const [settings, sanityTestimonials, sanityFaqs] = await Promise.all([
+    getSiteSettings(),
+    getFeaturedTestimonials(),
+    getAllFaqs(),
+  ]);
+
+  // Use Sanity data or fall back to static data
+  const heroImage = settings?.heroImage
+    ? urlFor(settings.heroImage).url()
+    : siteConfig.heroImage;
+  const featuredVideoId = settings?.featuredVideoId || siteConfig.featuredVideoId;
+  const featuredVideoTitle = settings?.featuredVideoTitle || siteConfig.featuredVideoTitle;
+  const phone = settings?.phone || siteConfig.phone;
+  const phoneTel = settings?.phone
+    ? `tel:+1${settings.phone.replace(/\D/g, '')}`
+    : siteConfig.phoneTel;
+  const serviceAreas = settings?.serviceAreas || siteConfig.serviceAreas;
+
+  // Transform Sanity testimonials or use fallback
+  const testimonials = sanityTestimonials.length > 0
+    ? sanityTestimonials.map(t => ({
+        quote: t.quote,
+        name: t.name,
+        location: t.location,
+      }))
+    : fallbackTestimonials;
+
+  // Use Sanity FAQs or fall back to static
+  const faqs = sanityFaqs.length > 0
+    ? sanityFaqs.map(f => ({ question: f.question, answer: f.answer }))
+    : staticFaqs;
+
   return (
     <>
       {/* Hero Section with Background Image */}
       <section
         className="relative min-h-[600px] md:min-h-[700px] flex items-center"
         style={{
-          backgroundImage: `url(${siteConfig.heroImage})`,
+          backgroundImage: `url(${heroImage})`,
           backgroundSize: 'cover',
           backgroundPosition: 'center',
         }}
@@ -118,24 +154,26 @@ export default function HomePage() {
             {/* Hero Text */}
             <div className="text-white">
               <h1 className="text-4xl md:text-5xl lg:text-6xl font-bold mb-6 leading-tight">
-                Sell Your Central Texas Home <span className="text-orange">Fast for Cash</span>
+                {settings?.heroHeadline || (
+                  <>Sell Your Central Texas Home <span className="text-orange">Fast for Cash</span></>
+                )}
               </h1>
               <p className="text-xl md:text-2xl text-gray-200 mb-8">
-                No repairs. No fees. No hassle. Get a fair cash offer from a local buyer you can trust.
+                {settings?.heroSubheadline || "No repairs. No fees. No hassle. Get a fair cash offer from a local buyer you can trust."}
               </p>
               <div className="flex flex-col sm:flex-row gap-4 mb-8">
                 <a
-                  href={siteConfig.phoneTel}
+                  href={phoneTel}
                   className="bg-white hover:bg-gray-100 text-navy font-bold py-3 px-6 rounded-lg transition-colors text-lg flex items-center justify-center gap-2"
                 >
                   <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                     <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M3 5a2 2 0 012-2h3.28a1 1 0 01.948.684l1.498 4.493a1 1 0 01-.502 1.21l-2.257 1.13a11.042 11.042 0 005.516 5.516l1.13-2.257a1 1 0 011.21-.502l4.493 1.498a1 1 0 01.684.949V19a2 2 0 01-2 2h-1C9.716 21 3 14.284 3 6V5z" />
                   </svg>
-                  Call {siteConfig.phone}
+                  Call {phone}
                 </a>
               </div>
               <p className="text-gray-300 text-sm">
-                Serving Killeen, Temple, Harker Heights, Belton, Copperas Cove, Waco & surrounding areas
+                Serving {serviceAreas.slice(0, -1).join(', ')}{serviceAreas.length > 1 ? ` & ${serviceAreas[serviceAreas.length - 1]}` : serviceAreas[0]} & surrounding areas
               </p>
             </div>
 
@@ -154,7 +192,7 @@ export default function HomePage() {
         <div className="container-custom mx-auto">
           <div className="text-center mb-10">
             <h2 className="text-3xl md:text-4xl font-bold text-navy mb-4">
-              {siteConfig.featuredVideoTitle}
+              {featuredVideoTitle}
             </h2>
             <p className="text-xl text-gray-600 max-w-2xl mx-auto">
               Watch this short video to learn how we help Central Texas homeowners sell their houses fast.
@@ -164,8 +202,8 @@ export default function HomePage() {
           <div className="max-w-4xl mx-auto">
             <div className="relative aspect-video rounded-2xl overflow-hidden shadow-xl">
               <iframe
-                src={`https://www.youtube.com/embed/${siteConfig.featuredVideoId}`}
-                title={siteConfig.featuredVideoTitle}
+                src={`https://www.youtube.com/embed/${featuredVideoId}`}
+                title={featuredVideoTitle}
                 allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
                 allowFullScreen
                 className="absolute inset-0 w-full h-full"
@@ -244,7 +282,7 @@ export default function HomePage() {
           </div>
 
           <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-6 gap-4 mb-8">
-            {siteConfig.serviceAreas.map((city) => (
+            {serviceAreas.map((city) => (
               <div key={city} className="bg-white/10 backdrop-blur-sm p-4 rounded-lg text-center hover:bg-white/20 transition-colors">
                 <span className="font-semibold">{city}, TX</span>
               </div>
@@ -319,13 +357,13 @@ export default function HomePage() {
               Get My Cash Offer
             </Link>
             <a
-              href={siteConfig.phoneTel}
+              href={phoneTel}
               className="bg-white hover:bg-gray-100 text-navy font-bold py-3 px-8 rounded-lg transition-colors text-lg flex items-center justify-center gap-2"
             >
               <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                 <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M3 5a2 2 0 012-2h3.28a1 1 0 01.948.684l1.498 4.493a1 1 0 01-.502 1.21l-2.257 1.13a11.042 11.042 0 005.516 5.516l1.13-2.257a1 1 0 011.21-.502l4.493 1.498a1 1 0 01.684.949V19a2 2 0 01-2 2h-1C9.716 21 3 14.284 3 6V5z" />
               </svg>
-              Call {siteConfig.phone}
+              Call {phone}
             </a>
           </div>
         </div>

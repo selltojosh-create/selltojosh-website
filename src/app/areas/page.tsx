@@ -1,18 +1,45 @@
 import { Metadata } from 'next';
 import Link from 'next/link';
 import { siteConfig } from '@/data/siteConfig';
-import { serviceAreas } from '@/data/areas';
+import { serviceAreas as staticServiceAreas } from '@/data/areas';
+import { getAllServiceAreas, getPageBySlug, getSiteSettings } from '../../../sanity/lib/fetch';
 
-export const metadata: Metadata = {
-  title: 'Areas We Serve | Cash Home Buyers in Central Texas',
-  description: 'We buy houses for cash in Killeen, Temple, Harker Heights, Belton, Copperas Cove, Waco, and surrounding Central Texas communities. Get a fair cash offer today.',
-  openGraph: {
-    title: 'Areas We Serve | Cash Home Buyers in Central Texas',
-    description: 'We buy houses for cash in Killeen, Temple, Harker Heights, Belton, Copperas Cove, Waco, and surrounding areas.',
-  },
-};
+export async function generateMetadata(): Promise<Metadata> {
+  const pageData = await getPageBySlug('areas');
 
-export default function AreasPage() {
+  return {
+    title: pageData?.metaTitle || 'Areas We Serve | Cash Home Buyers in Central Texas',
+    description: pageData?.metaDescription || 'We buy houses for cash in Killeen, Temple, Harker Heights, Belton, Copperas Cove, Waco, and surrounding Central Texas communities. Get a fair cash offer today.',
+    openGraph: {
+      title: pageData?.metaTitle || 'Areas We Serve | Cash Home Buyers in Central Texas',
+      description: pageData?.metaDescription || 'We buy houses for cash in Killeen, Temple, Harker Heights, Belton, Copperas Cove, Waco, and surrounding areas.',
+    },
+  };
+}
+
+export default async function AreasPage() {
+  const [sanityAreas, settings] = await Promise.all([
+    getAllServiceAreas(),
+    getSiteSettings(),
+  ]);
+
+  // Use Sanity service areas or fall back to static
+  const serviceAreas = sanityAreas.length > 0
+    ? sanityAreas.map(a => ({
+        slug: a.slug,
+        city: a.city,
+        state: a.state,
+        headline: a.headline,
+        description: a.description,
+        scenarios: a.scenarios || [],
+      }))
+    : staticServiceAreas;
+
+  const phone = settings?.phone || siteConfig.phone;
+  const phoneTel = settings?.phone
+    ? `tel:+1${settings.phone.replace(/\D/g, '')}`
+    : siteConfig.phoneTel;
+
   return (
     <>
       {/* Hero */}
@@ -77,8 +104,8 @@ export default function AreasPage() {
                     <Link href="/contact" className="btn-primary text-center">
                       Get Cash Offer for {area.city} Property
                     </Link>
-                    <a href={siteConfig.phoneTel} className="btn-secondary text-center">
-                      Call {siteConfig.phone}
+                    <a href={phoneTel} className="btn-secondary text-center">
+                      Call {phone}
                     </a>
                   </div>
                 </div>
@@ -139,8 +166,8 @@ export default function AreasPage() {
             <Link href="/contact" className="btn-primary">
               Contact Us About Your Property
             </Link>
-            <a href={siteConfig.phoneTel} className="btn-secondary">
-              Call {siteConfig.phone}
+            <a href={phoneTel} className="btn-secondary">
+              Call {phone}
             </a>
           </div>
         </div>

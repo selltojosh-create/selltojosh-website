@@ -1,18 +1,35 @@
 import { Metadata } from 'next';
 import Link from 'next/link';
 import ReelsCarousel from '@/components/ReelsCarousel';
-import { reels } from '@/data/reels';
+import { reels as staticReels } from '@/data/reels';
+import { getAllReels, getPageBySlug } from '../../../sanity/lib/fetch';
 
-export const metadata: Metadata = {
-  title: 'Video Reels | Learn About Selling Your House for Cash',
-  description: 'Watch our videos to learn about selling your Central Texas home for cash. Tips on inherited properties, foreclosure, selling as-is, and more.',
-  openGraph: {
-    title: 'Video Reels | Learn About Selling Your House for Cash',
-    description: 'Watch our videos to learn about selling your Central Texas home for cash.',
-  },
-};
+export async function generateMetadata(): Promise<Metadata> {
+  const pageData = await getPageBySlug('reels');
 
-export default function ReelsPage() {
+  return {
+    title: pageData?.metaTitle || 'Video Reels | Learn About Selling Your House for Cash',
+    description: pageData?.metaDescription || 'Watch our videos to learn about selling your Central Texas home for cash. Tips on inherited properties, foreclosure, selling as-is, and more.',
+    openGraph: {
+      title: pageData?.metaTitle || 'Video Reels | Learn About Selling Your House for Cash',
+      description: pageData?.metaDescription || 'Watch our videos to learn about selling your Central Texas home for cash.',
+    },
+  };
+}
+
+export default async function ReelsPage() {
+  const sanityReels = await getAllReels();
+
+  // Use Sanity reels or fall back to static
+  const reels = sanityReels.length > 0
+    ? sanityReels.map((r, index) => ({
+        id: r._id || String(index + 1),
+        title: r.title,
+        description: r.description || '',
+        youtubeId: r.youtubeId,
+      }))
+    : staticReels;
+
   return (
     <>
       {/* Hero */}
@@ -30,7 +47,7 @@ export default function ReelsPage() {
       {/* Carousel Section */}
       <section className="section-padding">
         <div className="container-custom mx-auto">
-          <ReelsCarousel />
+          <ReelsCarousel reels={reels} />
         </div>
       </section>
 

@@ -17,6 +17,13 @@ export default function PrivacyPage() {
             Last updated: January 2025
           </p>
 
+          <h2 className="text-xl font-bold text-navy mt-8 mb-4">About Us</h2>
+          <p className="text-gray-600 mb-6">
+            This website ({siteConfig.domain}) is operated by <strong>{siteConfig.legalEntityMarketing}</strong> for marketing purposes.
+            Home purchases are conducted by <strong>{siteConfig.legalEntityPurchasing}</strong>.
+            Both entities are owned by {siteConfig.ownerName}.
+          </p>
+
           <h2 className="text-xl font-bold text-navy mt-8 mb-4">Information We Collect</h2>
           <p className="text-gray-600 mb-4">
             When you submit a form on our website or contact us, we collect:
@@ -24,6 +31,7 @@ export default function PrivacyPage() {
           <ul className="list-disc pl-6 text-gray-600 mb-6">
             <li>Your name</li>
             <li>Phone number</li>
+            <li>Email address</li>
             <li>Property address</li>
             <li>Any additional information you choose to provide</li>
           </ul>
@@ -36,6 +44,7 @@ export default function PrivacyPage() {
             <li>Respond to your inquiry about selling your property</li>
             <li>Evaluate your property and prepare a cash offer</li>
             <li>Contact you regarding your submission</li>
+            <li>Complete real estate transactions</li>
             <li>Improve our services</li>
           </ul>
 
@@ -64,7 +73,7 @@ export default function PrivacyPage() {
             If you have questions about this Privacy Policy, please contact us at:
           </p>
           <p className="text-gray-600">
-            {siteConfig.name}<br />
+            {siteConfig.legalEntityMarketing}<br />
             Phone: {siteConfig.phoneFormatted}<br />
             Email: {siteConfig.email}
           </p>

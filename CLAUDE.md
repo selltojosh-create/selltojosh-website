@@ -73,7 +73,7 @@ The `/api/leads/route.ts` endpoint is ready for integration:
 
 ## Adding New Videos
 
-Edit `src/data/reels.ts`:
+Edit `src/data/reels.ts` (or use Sanity CMS):
 ```typescript
 {
   id: "7",
@@ -82,3 +82,62 @@ Edit `src/data/reels.ts`:
   youtubeId: "YOUTUBE_VIDEO_ID"  // Just the ID, not full URL
 }
 ```
+
+## Sanity CMS Integration
+
+The site is integrated with Sanity CMS for content management. Access the admin dashboard at `/studio`.
+
+### Environment Variables
+
+Copy `.env.local.example` to `.env.local` and add your Sanity credentials:
+```bash
+NEXT_PUBLIC_SANITY_PROJECT_ID=your-project-id
+NEXT_PUBLIC_SANITY_DATASET=production
+NEXT_PUBLIC_SANITY_API_VERSION=2024-01-01
+```
+
+### Sanity Structure
+
+```
+sanity/
+├── schemas/           # Content type definitions
+│   ├── siteSettings.ts   # Global site settings (singleton)
+│   ├── page.ts           # SEO metadata per page
+│   ├── testimonial.ts    # Customer testimonials
+│   ├── faq.ts            # FAQ questions/answers
+│   ├── reel.ts           # Video reels
+│   ├── serviceArea.ts    # Service area pages
+│   └── index.ts          # Schema exports
+└── lib/
+    ├── client.ts         # Sanity client configuration
+    ├── queries.ts        # GROQ queries
+    └── fetch.ts          # Data fetching functions
+```
+
+### Content Types
+
+| Type | Description | Managed In |
+|------|-------------|------------|
+| Site Settings | Business name, phone, email, hero content | Singleton document |
+| Pages | SEO title/description per page | Document list |
+| Testimonials | Customer reviews with ratings | Document list |
+| FAQs | Questions and answers | Document list |
+| Reels | YouTube video content | Document list |
+| Service Areas | City-specific landing pages | Document list |
+
+### Fallback Behavior
+
+The site uses static data from `src/data/` when:
+- Sanity is not configured (no project ID)
+- Sanity returns empty results
+- Sanity fetch fails
+
+This ensures the site always works, even without CMS setup.
+
+### Setting Up a New Sanity Project
+
+1. Create account at [sanity.io](https://sanity.io)
+2. Create new project named "selltojosh"
+3. Copy Project ID to `.env.local`
+4. Run `npm run dev` and visit `/studio`
+5. Add content via the studio interface
