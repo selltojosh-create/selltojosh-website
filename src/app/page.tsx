@@ -312,10 +312,10 @@ export default async function HomePage() {
             </p>
           </div>
 
-          <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-6 gap-4 mb-8">
+          <div className="max-w-4xl mx-auto grid grid-cols-2 md:grid-cols-4 gap-4 mb-8">
             {serviceAreas.map((city) => (
-              <div key={city} className="bg-white/10 backdrop-blur-sm p-4 rounded-lg text-center hover:bg-white/20 transition-colors">
-                <span className="font-semibold">{city}, TX</span>
+              <div key={city} className="bg-white/10 backdrop-blur-sm py-4 px-3 rounded-lg text-center hover:bg-white/20 transition-colors">
+                <span className="font-semibold text-sm md:text-base">{city}, TX</span>
               </div>
             ))}
           </div>
