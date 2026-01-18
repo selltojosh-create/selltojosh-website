@@ -13,7 +13,7 @@ export const serviceAreas: ServiceArea[] = [
     city: "Killeen",
     state: "TX",
     headline: "Sell Your Killeen Home Fast for Cash",
-    description: "As a military town with Fort Hood nearby, Killeen sees plenty of homeowners who need to sell quickly due to PCS orders, deployment, or life changes. Whether you're relocating, dealing with an inherited property, or simply need to sell your Killeen house fast, we're here to help with a fair cash offer.",
+    description: "We buy houses near Fort Hood (also known as Fort Cavazos) in Killeen, TX. As a military town, Killeen sees plenty of homeowners who need to sell quickly due to PCS orders, deployment, or life changes. Whether you're relocating, dealing with an inherited property, or simply need to sell your Killeen house fast, we're here to help with a fair cash offer.",
     scenarios: [
       "PCS orders requiring a quick sale",
       "Inherited properties from family members",
@@ -27,7 +27,7 @@ export const serviceAreas: ServiceArea[] = [
     city: "Harker Heights",
     state: "TX",
     headline: "Cash Home Buyers in Harker Heights",
-    description: "Harker Heights homeowners trust us for straightforward, hassle-free home sales. If your property needs work, you're dealing with a difficult situation, or you just want to skip the traditional listing process, we provide a simple solution. Get a cash offer for your Harker Heights home today.",
+    description: "Harker Heights homeowners near Fort Hood (Fort Cavazos) trust us for straightforward, hassle-free home sales. If your property needs work, you're dealing with a difficult situation, or you just want to skip the traditional listing process, we provide a simple solution. Get a cash offer for your Harker Heights home today.",
     scenarios: [
       "Homes with deferred maintenance",
       "Properties with foundation or roof issues",
@@ -69,7 +69,7 @@ export const serviceAreas: ServiceArea[] = [
     city: "Copperas Cove",
     state: "TX",
     headline: "Cash Home Buyers in Copperas Cove",
-    description: "Copperas Cove homeowners, especially those connected to Fort Hood, often need flexible, fast solutions when selling. We understand the unique needs of military families and local residents alike. Sell your Copperas Cove house for cash without the stress of a traditional sale.",
+    description: "Copperas Cove homeowners, especially those connected to Fort Hood (formerly Fort Cavazos), often need flexible, fast solutions when selling. We understand the unique needs of military families and local residents alike. Sell your Copperas Cove house for cash without the stress of a traditional sale.",
     scenarios: [
       "Military families with PCS orders",
       "Homes purchased with VA loans needing quick sales",

@@ -6,7 +6,7 @@ export const siteConfig = {
   email: "SelltoJosh@gmail.com",
   domain: "selltojosh.com",
   tagline: "Central Texas Cash Home Buyer",
-  description: "Sell your Central Texas home fast for cash. No repairs, no fees, no hassle. Get a fair cash offer from a local buyer you can trust.",
+  description: "Sell your Central Texas home fast for cash near Fort Hood (Fort Cavazos). No repairs, no fees, no hassle. Get a fair cash offer from a local buyer you can trust.",
 
   // Legal Entity Information
   businessName: "Sell to Josh",

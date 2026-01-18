@@ -8,11 +8,11 @@ export async function generateMetadata(): Promise<Metadata> {
   const pageData = await getPageBySlug('areas');
 
   return {
-    title: pageData?.metaTitle || 'Areas We Serve | Cash Home Buyers in Central Texas',
-    description: pageData?.metaDescription || 'We buy houses for cash in Killeen, Temple, Harker Heights, Belton, Copperas Cove, Waco, and surrounding Central Texas communities. Get a fair cash offer today.',
+    title: pageData?.metaTitle || 'Areas We Serve | Cash Home Buyers Near Fort Hood & Central Texas',
+    description: pageData?.metaDescription || 'We buy houses for cash near Fort Hood (Fort Cavazos) in Killeen, Temple, Harker Heights, Belton, Copperas Cove, Waco, and surrounding Central Texas communities. Get a fair cash offer today.',
     openGraph: {
-      title: pageData?.metaTitle || 'Areas We Serve | Cash Home Buyers in Central Texas',
-      description: pageData?.metaDescription || 'We buy houses for cash in Killeen, Temple, Harker Heights, Belton, Copperas Cove, Waco, and surrounding areas.',
+      title: pageData?.metaTitle || 'Areas We Serve | Cash Home Buyers Near Fort Hood & Central Texas',
+      description: pageData?.metaDescription || 'We buy houses for cash near Fort Hood (Fort Cavazos) in Killeen, Temple, Harker Heights, Belton, Copperas Cove, Waco, and surrounding areas.',
     },
   };
 }
@@ -49,7 +49,7 @@ export default async function AreasPage() {
             We Buy Houses Across Central Texas
           </h1>
           <p className="text-xl text-gray-300 max-w-2xl mx-auto">
-            Serving homeowners in Killeen, Temple, Harker Heights, Belton, Copperas Cove, Waco, and surrounding communities with fair cash offers.
+            Serving homeowners near Fort Hood (Fort Cavazos) in Killeen, Temple, Harker Heights, Belton, Copperas Cove, Waco, and surrounding communities with fair cash offers.
           </p>
         </div>
       </section>
@@ -132,7 +132,7 @@ export default async function AreasPage() {
               <div className="text-4xl mb-4">🏘️</div>
               <h3 className="text-xl font-bold text-navy mb-2">We Know the Area</h3>
               <p className="text-gray-600">
-                From Fort Hood to downtown Waco, we understand Central Texas neighborhoods, values, and market conditions.
+                From Fort Hood (also known as Fort Cavazos) to downtown Waco, we understand Central Texas neighborhoods, values, and market conditions.
               </p>
             </div>
             <div className="bg-white p-6 rounded-xl shadow-sm">

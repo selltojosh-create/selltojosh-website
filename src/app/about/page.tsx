@@ -4,11 +4,11 @@ import Image from 'next/image';
 import { siteConfig } from '@/data/siteConfig';
 
 export const metadata: Metadata = {
-  title: 'About Josh | Local Central Texas Cash Home Buyer',
-  description: 'Meet Josh, a local Central Texas home buyer committed to helping homeowners sell their properties quickly and fairly. No pressure, no games — just honest deals.',
+  title: 'About Josh | Local Cash Home Buyer Near Fort Hood & Central Texas',
+  description: 'Meet Josh, a local Central Texas home buyer near Fort Hood (Fort Cavazos) committed to helping homeowners sell their properties quickly and fairly. No pressure, no games — just honest deals.',
   openGraph: {
-    title: 'About Josh | Local Central Texas Cash Home Buyer',
-    description: 'Meet Josh, a local Central Texas home buyer committed to helping homeowners sell their properties quickly and fairly.',
+    title: 'About Josh | Local Cash Home Buyer Near Fort Hood & Central Texas',
+    description: 'Meet Josh, a local Central Texas home buyer near Fort Hood (Fort Cavazos) committed to helping homeowners sell their properties quickly and fairly.',
   },
 };
 
@@ -78,7 +78,7 @@ export default function AboutPage() {
                 I started buying houses in Central Texas because I saw too many homeowners struggling with situations where a traditional sale just didn&apos;t make sense. Maybe the house needed too many repairs to list. Maybe the timing was urgent. Maybe dealing with agents and showings was just too overwhelming.
               </p>
               <p>
-                Having lived in the Central Texas area for years, I understand this community. I know the neighborhoods, I know the challenges local homeowners face — whether it&apos;s a military family with sudden PCS orders, someone dealing with an inherited property, or a landlord tired of managing a rental.
+                Having lived in the Central Texas area for years, I understand this community. I know the neighborhoods near Fort Hood (also known as Fort Cavazos), I know the challenges local homeowners face — whether it&apos;s a military family with sudden PCS orders, someone dealing with an inherited property, or a landlord tired of managing a rental.
               </p>
               <p>
                 My goal is simple: provide an honest, straightforward alternative to selling your home. No pressure. No games. Just a fair offer and a process that works on your timeline.
