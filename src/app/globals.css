@@ -1,0 +1,56 @@
+@import "tailwindcss";
+
+:root {
+  /* CVG Home Buyers Color Palette */
+  --navy: #2d3367;
+  --navy-dark: #232952;
+  --orange: #fbaf40;
+  --orange-hover: #f47920;
+  --coral: #f36939;
+  --red: #ef4236;
+  --gray-light: #f7f7f7;
+  --gray-medium: #eaeaea;
+  --foreground: #000000;
+  --foreground-muted: #4a4a4a;
+  --background: #ffffff;
+}
+
+@theme inline {
+  --color-navy: var(--navy);
+  --color-navy-dark: var(--navy-dark);
+  --color-orange: var(--orange);
+  --color-orange-hover: var(--orange-hover);
+  --color-coral: var(--coral);
+  --color-red: var(--red);
+  --color-gray-light: var(--gray-light);
+  --color-gray-medium: var(--gray-medium);
+  --color-background: var(--background);
+  --color-foreground: var(--foreground);
+  --color-foreground-muted: var(--foreground-muted);
+}
+
+body {
+  background: var(--background);
+  color: var(--foreground);
+  font-family: system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
+.btn-primary {
+  @apply bg-orange hover:bg-orange-hover text-navy font-bold py-3 px-6 rounded-lg transition-all duration-200 inline-block text-center shadow-md hover:shadow-lg;
+}
+
+.btn-secondary {
+  @apply bg-navy hover:bg-navy-dark text-white font-bold py-3 px-6 rounded-lg transition-all duration-200 inline-block text-center;
+}
+
+.section-padding {
+  @apply py-16 md:py-24 px-4;
+}
+
+.container-custom {
+  @apply max-w-6xl mx-auto;
+}
