@@ -62,7 +62,7 @@ export default function Footer() {
               {siteConfig.serviceAreas.map((area) => (
                 <li key={area}>
                   <Link
-                    href={`/areas#${area.toLowerCase().replace(' ', '-')}`}
+                    href={`/areas/${area.toLowerCase().replace(/\s+/g, '-')}`}
                     className="text-gray-300 hover:text-white transition-colors"
                   >
                     {area}, TX
