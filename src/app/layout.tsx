@@ -13,6 +13,9 @@ export const metadata: Metadata = {
     template: `%s | ${siteConfig.name}`,
   },
   description: siteConfig.description,
+  verification: {
+    google: 'hB_6Vm469HYHqzXw_g2bAGlTKtrH1hwVwwVx5as3X7I',
+  },
   keywords: [
     "sell my house fast",
     "cash home buyers",
