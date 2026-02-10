@@ -4,7 +4,7 @@ export const siteConfig = {
   phoneFormatted: "(254) 498-6025",
   phoneTel: "tel:+12544986025",
   email: "SelltoJosh@gmail.com",
-  domain: "selltojosh.com",
+  domain: "www.selltojosh.com",
   tagline: "Central Texas Cash Home Buyer",
   description: "Sell your Central Texas home fast for cash near Fort Hood (Fort Cavazos). No repairs, no fees, no hassle. Get a fair cash offer from a local buyer you can trust.",
 
