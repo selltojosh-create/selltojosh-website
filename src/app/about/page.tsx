@@ -1,156 +1,204 @@
-import type { Metadata } from "next";
-import Link from "next/link";
-import {
-  Shield,
-  Clock,
-  Handshake,
-  Home,
-  MapPin,
-  Phone,
-} from "lucide-react";
+import { Metadata } from 'next';
+import Link from 'next/link';
+import Image from 'next/image';
+import { siteConfig } from '@/data/siteConfig';
 
 export const metadata: Metadata = {
-  title: "About",
-  description:
-    "Learn about Josh Isbell and the Sell to Josh team — local Central Texas cash home buyers serving Killeen, Temple, Belton, and Waco.",
+  title: 'About Josh | Local Cash Home Buyer Near Fort Hood TX | Sell to Josh',
+  description: 'Meet Josh, your local Central Texas cash home buyer near Fort Hood (formerly Fort Cavazos). Buying homes since 2009. Honest, fair cash offers for houses in any condition. No pressure, no games.',
+  openGraph: {
+    title: 'About Josh | Local Cash Home Buyer Near Fort Hood TX | Sell to Josh',
+    description: 'Meet Josh, your local Central Texas cash home buyer near Fort Hood. Buying homes since 2009. Honest, fair cash offers for houses in any condition.',
+  },
+  alternates: {
+    canonical: `https://${siteConfig.domain}/about`,
+  },
 };
 
 const values = [
   {
-    icon: Shield,
-    title: "Trust & Transparency",
-    body: "No hidden fees, no surprises. We present clear numbers so you can make an informed decision.",
+    title: "Honesty",
+    description: "I tell you exactly what I can offer and why. No hidden fees, no last-minute changes to the deal."
   },
   {
-    icon: Clock,
-    title: "Speed When You Need It",
-    body: "Close in as little as 7 days, or on whatever timeline works for your situation.",
+    title: "Fairness",
+    description: "I make offers based on real market values. You might not get top retail price, but you'll get a fair price for the convenience."
   },
   {
-    icon: Handshake,
-    title: "Fair Cash Offers",
-    body: "We evaluate every property honestly and present offers that reflect real market value.",
+    title: "Respect",
+    description: "Selling a home is personal. I treat every homeowner with dignity, no matter the situation."
   },
   {
-    icon: Home,
-    title: "Buy As-Is",
-    body: "No repairs, no cleaning, no staging. We purchase your home in its current condition.",
-  },
-];
-
-const serviceAreas = [
-  "Killeen",
-  "Temple",
-  "Belton",
-  "Waco",
-  "Copperas Cove",
-  "Harker Heights",
-  "Nolanville",
-  "Salado",
+    title: "Simplicity",
+    description: "I handle the complicated stuff — paperwork, title, closing — so you don't have to stress."
+  }
 ];
 
 export default function AboutPage() {
   return (
     <>
       {/* Hero */}
-      <section className="bg-gradient-to-b from-blue-900 to-blue-700 text-white py-16">
-        <div className="container mx-auto px-4 max-w-3xl text-center">
-          <h1 className="text-3xl md:text-5xl font-bold">About Sell to Josh</h1>
-          <p className="mt-4 text-lg text-white/90">
-            Local Central Texas cash home buyer — making it simple to sell your
-            house fast, on your terms.
-          </p>
+      <section className="bg-gradient-to-br from-navy to-navy-dark text-white py-16 md:py-20">
+        <div className="container-custom mx-auto px-4">
+          <div className="grid md:grid-cols-2 gap-12 items-center">
+            <div>
+              <h1 className="text-4xl md:text-5xl font-bold mb-6">
+                Hi, I&apos;m Josh
+              </h1>
+              <p className="text-xl text-gray-300 mb-6">
+                I&apos;m a local Central Texas home buyer. I help homeowners like you sell their properties quickly, fairly, and without the stress of traditional listings.
+              </p>
+              <p className="text-gray-400">
+                Whether you&apos;re facing foreclosure, dealing with an inherited property, or just need to sell fast, I&apos;m here to help you find a simple solution.
+              </p>
+            </div>
+            <div className="bg-white/10 backdrop-blur-sm rounded-2xl p-8 text-center">
+              <div className="w-48 h-48 rounded-full mx-auto mb-6 overflow-hidden relative">
+                <Image
+                  src={siteConfig.ownerImage}
+                  alt="Josh - Founder of Sell to Josh"
+                  fill
+                  className="object-cover"
+                  priority
+                />
+              </div>
+              <p className="text-lg font-semibold">Josh</p>
+              <p className="text-gray-300">Founder, {siteConfig.name}</p>
+            </div>
+          </div>
         </div>
       </section>
 
-      {/* Bio */}
-      <section className="py-12">
-        <div className="container mx-auto px-4 max-w-3xl">
-          <h2 className="text-2xl font-bold text-gray-900">
-            Meet Josh Isbell
-          </h2>
-          <p className="mt-4 text-gray-700 leading-relaxed">
-            Josh Isbell is a licensed Texas real estate broker and experienced
-            property investor based in Central Texas. Through TrippCo Holdings
-            and Red Belly Holdings, he helps homeowners sell their houses
-            quickly for cash — without the hassle of repairs, showings, or agent
-            commissions.
-          </p>
-          <p className="mt-3 text-gray-700 leading-relaxed">
-            With deep roots in Bell County and the surrounding communities, Josh
-            understands the local market and is committed to offering fair,
-            honest deals to every homeowner he works with.
-          </p>
+      {/* Story */}
+      <section className="section-padding">
+        <div className="container-custom mx-auto">
+          <div className="max-w-3xl mx-auto">
+            <h2 className="text-3xl md:text-4xl font-bold text-navy mb-6 text-center">
+              Why I Do This
+            </h2>
+            <div className="prose prose-lg max-w-none text-gray-600">
+              <p>
+                I started buying houses in Central Texas because I saw too many homeowners struggling with situations where a traditional sale just didn&apos;t make sense. Maybe the house needed too many repairs to list. Maybe the timing was urgent. Maybe dealing with agents and showings was just too overwhelming.
+              </p>
+              <p>
+                Having lived in the Central Texas area for years, I understand this community. I know the neighborhoods near Fort Hood (formerly Fort Cavazos), I know the challenges local homeowners face — whether it&apos;s a military family with sudden PCS orders, someone dealing with an inherited property, or a landlord tired of managing a rental.
+              </p>
+              <p>
+                My goal is simple: provide an honest, straightforward alternative to selling your home. No pressure. No games. Just a fair offer and a process that works on your timeline.
+              </p>
+              <p>
+                When you work with me, you&apos;re working directly with the buyer — not a call center, not a chain of middlemen. I answer my own phone. I visit properties myself. I make decisions quickly because I don&apos;t need corporate approval.
+              </p>
+            </div>
+          </div>
         </div>
       </section>
 
       {/* Values */}
-      <section className="bg-gray-50 py-12">
-        <div className="container mx-auto px-4 max-w-4xl">
-          <h2 className="text-2xl font-bold text-gray-900 text-center">
-            What We Stand For
-          </h2>
-          <div className="mt-8 grid gap-6 sm:grid-cols-2">
-            {values.map((v) => (
-              <div
-                key={v.title}
-                className="flex gap-4 rounded-xl border border-gray-200 bg-white p-5 shadow-sm"
-              >
-                <div className="flex h-10 w-10 shrink-0 items-center justify-center rounded-lg bg-blue-100 text-blue-700">
-                  <v.icon className="h-5 w-5" aria-hidden="true" />
-                </div>
-                <div>
-                  <h3 className="font-semibold text-gray-900">{v.title}</h3>
-                  <p className="mt-1 text-sm text-gray-600">{v.body}</p>
-                </div>
+      <section className="section-padding bg-gray-light">
+        <div className="container-custom mx-auto">
+          <div className="text-center mb-12">
+            <h2 className="text-3xl md:text-4xl font-bold text-navy mb-4">
+              How I Work
+            </h2>
+            <p className="text-xl text-gray-600 max-w-2xl mx-auto">
+              These aren&apos;t just words — they&apos;re how I run my business every day.
+            </p>
+          </div>
+
+          <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-6">
+            {values.map((value, index) => (
+              <div key={index} className="bg-white p-6 rounded-xl shadow-sm">
+                <h3 className="text-xl font-bold text-navy mb-3">{value.title}</h3>
+                <p className="text-gray-600">{value.description}</p>
               </div>
             ))}
           </div>
         </div>
       </section>
 
-      {/* Service Area */}
-      <section className="py-12">
-        <div className="container mx-auto px-4 max-w-3xl text-center">
-          <div className="flex items-center justify-center gap-2 text-blue-700 mb-4">
-            <MapPin className="h-6 w-6" aria-hidden="true" />
-            <h2 className="text-2xl font-bold text-gray-900">
-              Areas We Serve
-            </h2>
+      {/* Local Focus */}
+      <section className="section-padding">
+        <div className="container-custom mx-auto">
+          <div className="grid md:grid-cols-2 gap-12 items-center">
+            <div>
+              <h2 className="text-3xl md:text-4xl font-bold text-navy mb-6">
+                Proudly Serving Central Texas
+              </h2>
+              <p className="text-lg text-gray-600 mb-6">
+                I focus on Central Texas because this is my home. I buy houses in:
+              </p>
+              <ul className="grid grid-cols-2 gap-3 mb-8">
+                {siteConfig.serviceAreas.map((city) => (
+                  <li key={city} className="flex items-center gap-2">
+                    <svg className="w-5 h-5 text-orange flex-shrink-0" fill="currentColor" viewBox="0 0 20 20">
+                      <path fillRule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clipRule="evenodd" />
+                    </svg>
+                    <span className="text-gray-700">{city}, TX</span>
+                  </li>
+                ))}
+              </ul>
+              <p className="text-gray-600">
+                And the surrounding communities. If you&apos;re nearby, reach out — I&apos;d be happy to talk.
+              </p>
+            </div>
+            <div className="bg-gray-light rounded-2xl p-8">
+              <div className="text-center">
+                <div className="text-6xl mb-4">🏠</div>
+                <p className="text-2xl font-bold text-navy mb-2">Local Buyer</p>
+                <p className="text-gray-600">
+                  I live and work in Central Texas. When you sell to me, you&apos;re working with a neighbor who understands this area.
+                </p>
+              </div>
+            </div>
           </div>
-          <div className="flex flex-wrap justify-center gap-3">
-            {serviceAreas.map((area) => (
-              <span
-                key={area}
-                className="rounded-full bg-blue-50 px-4 py-1.5 text-sm font-medium text-blue-800"
-              >
-                {area}
-              </span>
-            ))}
+        </div>
+      </section>
+
+      {/* Trust Signals */}
+      <section className="section-padding bg-navy text-white">
+        <div className="container-custom mx-auto text-center">
+          <h2 className="text-3xl md:text-4xl font-bold mb-8">
+            You Can Trust the Process
+          </h2>
+          <div className="grid md:grid-cols-3 gap-8 max-w-4xl mx-auto">
+            <div>
+              <div className="text-4xl mb-4">📞</div>
+              <h3 className="font-bold mb-2">Direct Communication</h3>
+              <p className="text-gray-300">You talk to me directly — not a call center or sales team.</p>
+            </div>
+            <div>
+              <div className="text-4xl mb-4">📋</div>
+              <h3 className="font-bold mb-2">Clear Contracts</h3>
+              <p className="text-gray-300">Simple, straightforward paperwork with no hidden clauses.</p>
+            </div>
+            <div>
+              <div className="text-4xl mb-4">🏛️</div>
+              <h3 className="font-bold mb-2">Reputable Title Companies</h3>
+              <p className="text-gray-300">We close through established, local title companies.</p>
+            </div>
           </div>
         </div>
       </section>
 
       {/* CTA */}
-      <section className="bg-blue-800 text-white py-12">
-        <div className="container mx-auto px-4 text-center">
-          <h2 className="text-2xl font-bold">Ready to Sell Your House?</h2>
-          <p className="mt-2 text-white/90">
-            Get a fair cash offer with no obligation.
+      <section className="section-padding bg-gradient-to-r from-orange to-coral text-navy">
+        <div className="container-custom mx-auto text-center">
+          <h2 className="text-3xl md:text-4xl font-bold mb-4">
+            Let&apos;s Talk About Your Property
+          </h2>
+          <p className="text-xl mb-8 text-navy/80">
+            No pressure, no obligation. Just an honest conversation about your options.
           </p>
-          <div className="mt-6 flex flex-col sm:flex-row items-center justify-center gap-4">
-            <Link
-              href="/#lead-form"
-              className="rounded-lg bg-white px-6 py-2.5 font-semibold text-blue-800 hover:bg-gray-100 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-white"
-            >
+          <div className="flex flex-col sm:flex-row gap-4 justify-center">
+            <Link href="/contact" className="bg-navy hover:bg-navy-dark text-white font-bold py-3 px-8 rounded-lg transition-colors text-lg">
               Get My Cash Offer
             </Link>
             <a
-              href="tel:+1"
-              className="flex items-center gap-2 text-white/90 hover:text-white"
+              href={siteConfig.phoneTel}
+              className="bg-white hover:bg-gray-100 text-navy font-bold py-3 px-8 rounded-lg transition-colors text-lg"
             >
-              <Phone className="h-4 w-4" aria-hidden="true" />
-              Call Us
+              Call {siteConfig.phone}
             </a>
           </div>
         </div>

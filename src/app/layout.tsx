@@ -1,49 +1,81 @@
-import "./globals.css";
 import type { Metadata } from "next";
-import Script from "next/script";
-import { Analytics } from "@vercel/analytics/react";
+import "./globals.css";
 import Header from "@/components/Header";
 import Footer from "@/components/Footer";
-
-const recaptchaSiteKey = process.env.NEXT_PUBLIC_RECAPTCHA_SITE_KEY;
+import StickyMobileCTA from "@/components/StickyMobileCTA";
+import LocalBusinessSchema from "@/components/LocalBusinessSchema";
+import { siteConfig } from "@/data/siteConfig";
 
 export const metadata: Metadata = {
+  metadataBase: new URL(`https://${siteConfig.domain}`),
   title: {
-    default: "Sell to Josh | Cash Home Buyers in Central Texas",
-    template: "%s | Sell to Josh",
+    default: `${siteConfig.name} | Sell Your Central Texas Home Fast for Cash`,
+    template: `%s | ${siteConfig.name}`,
   },
-  description:
-    "We buy houses in Central Texas (Killeen, Copperas Cove, Temple, Belton, Waco). Get a fast, fair cash offer today.",
-  metadataBase: new URL("https://www.selltojosh.com"),
+  description: siteConfig.description,
+  keywords: [
+    "sell my house fast",
+    "cash home buyers",
+    "we buy houses",
+    "sell house as-is",
+    "Central Texas home buyers",
+    "Killeen house buyer",
+    "Temple TX cash buyer",
+    "sell inherited house",
+    "avoid foreclosure Texas",
+  ],
+  authors: [{ name: siteConfig.name }],
+  creator: siteConfig.name,
   openGraph: {
-    title: "Sell to Josh",
-    description:
-      "Trusted local cash home buyer in Central Texas. Sell your house as-is, fast and hassle-free.",
-    url: "https://www.selltojosh.com",
-    siteName: "Sell to Josh",
-    images: ["/og-default.jpg"],
     type: "website",
+    locale: "en_US",
+    url: `https://${siteConfig.domain}`,
+    siteName: siteConfig.name,
+    title: `${siteConfig.name} | Cash Home Buyers in Central Texas`,
+    description: siteConfig.description,
+    images: [
+      {
+        url: "/og-image.jpg",
+        width: 1200,
+        height: 630,
+        alt: `${siteConfig.name} - Central Texas Cash Home Buyer`,
+      },
+    ],
+  },
+  twitter: {
+    card: "summary_large_image",
+    title: `${siteConfig.name} | Cash Home Buyers in Central Texas`,
+    description: siteConfig.description,
+    images: ["/og-image.jpg"],
+  },
+  robots: {
+    index: true,
+    follow: true,
+    googleBot: {
+      index: true,
+      follow: true,
+      "max-video-preview": -1,
+      "max-image-preview": "large",
+      "max-snippet": -1,
+    },
   },
 };
 
 export default function RootLayout({
   children,
-}: {
+}: Readonly<{
   children: React.ReactNode;
-}) {
+}>) {
   return (
     <html lang="en">
-      <body className="min-h-screen flex flex-col font-sans">
+      <head>
+        <LocalBusinessSchema />
+      </head>
+      <body className="antialiased flex flex-col min-h-screen">
         <Header />
-        <main id="main-content" className="flex-1">{children}</main>
+        <main className="flex-grow pb-16 md:pb-0">{children}</main>
         <Footer />
-        <Analytics />
-        {recaptchaSiteKey && (
-          <Script
-            src={`https://www.google.com/recaptcha/api.js?render=${recaptchaSiteKey}`}
-            strategy="lazyOnload"
-          />
-        )}
+        <StickyMobileCTA />
       </body>
     </html>
   );
