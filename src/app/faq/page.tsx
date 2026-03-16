@@ -37,8 +37,25 @@ export default async function FAQPage() {
     ? `tel:+1${settings.phone.replace(/\D/g, '')}`
     : siteConfig.phoneTel;
 
+  const faqPageJsonLd = {
+    '@context': 'https://schema.org',
+    '@type': 'FAQPage',
+    mainEntity: faqs.map((f) => ({
+      '@type': 'Question',
+      name: f.question,
+      acceptedAnswer: {
+        '@type': 'Answer',
+        text: f.answer,
+      },
+    })),
+  };
+
   return (
     <>
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{ __html: JSON.stringify(faqPageJsonLd) }}
+      />
       {/* Hero */}
       <section className="bg-gradient-to-br from-navy to-navy-dark text-white py-16 md:py-20">
         <div className="container-custom mx-auto px-4 text-center">

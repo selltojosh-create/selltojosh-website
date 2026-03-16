@@ -1,10 +1,13 @@
 import type { Metadata } from "next";
+import Script from "next/script";
 import "./globals.css";
 import Header from "@/components/Header";
 import Footer from "@/components/Footer";
 import StickyMobileCTA from "@/components/StickyMobileCTA";
 import LocalBusinessSchema from "@/components/LocalBusinessSchema";
 import { siteConfig } from "@/data/siteConfig";
+
+const recaptchaSiteKey = process.env.NEXT_PUBLIC_RECAPTCHA_SITE_KEY;
 
 export const metadata: Metadata = {
   metadataBase: new URL(`https://${siteConfig.domain}`),
@@ -73,9 +76,15 @@ export default function RootLayout({
       </head>
       <body className="antialiased flex flex-col min-h-screen">
         <Header />
-        <main className="flex-grow pb-16 md:pb-0">{children}</main>
+        <main id="main-content" className="flex-grow pb-16 md:pb-0">{children}</main>
         <Footer />
         <StickyMobileCTA />
+        {recaptchaSiteKey && (
+          <Script
+            src={`https://www.google.com/recaptcha/api.js?render=${recaptchaSiteKey}`}
+            strategy="lazyOnload"
+          />
+        )}
       </body>
     </html>
   );

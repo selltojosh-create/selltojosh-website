@@ -17,8 +17,15 @@ export default function Header() {
   ];
 
   return (
+    <>
+      <a
+        href="#main-content"
+        className="sr-only focus:not-sr-only focus:absolute focus:top-2 focus:left-2 focus:z-[60] focus:rounded-md focus:bg-navy focus:px-4 focus:py-2 focus:text-white focus:font-semibold focus:shadow-lg"
+      >
+        Skip to main content
+      </a>
     <header className="bg-white shadow-md sticky top-0 z-50">
-      <nav className="container-custom mx-auto px-4">
+      <nav aria-label="Main navigation" className="container-custom mx-auto px-4">
         <div className="flex justify-between items-center py-4">
           {/* Logo */}
           <Link href="/" className="text-2xl font-bold text-navy">
@@ -98,5 +105,6 @@ export default function Header() {
         )}
       </nav>
     </header>
+    </>
   );
 }

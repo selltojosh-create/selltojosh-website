@@ -16,40 +16,58 @@ export default function FAQAccordion({ faqs }: FAQAccordionProps) {
 
   return (
     <div className="space-y-4">
-      {faqs.map((faq, index) => (
-        <div
-          key={index}
-          className="border border-gray-200 rounded-lg overflow-hidden"
-        >
-          <button
-            onClick={() => toggleFAQ(index)}
-            className="w-full flex items-center justify-between p-5 text-left bg-white hover:bg-gray-50 transition-colors"
-            aria-expanded={openIndex === index}
+      {faqs.map((faq, index) => {
+        const isOpen = openIndex === index;
+        const buttonId = `faq-button-${index}`;
+        const panelId = `faq-panel-${index}`;
+
+        return (
+          <div
+            key={index}
+            className="border border-gray-200 rounded-lg overflow-hidden"
           >
-            <span className="font-semibold text-navy pr-4">{faq.question}</span>
-            <svg
-              className={`w-5 h-5 text-orange flex-shrink-0 transition-transform ${
-                openIndex === index ? 'rotate-180' : ''
-              }`}
-              fill="none"
-              stroke="currentColor"
-              viewBox="0 0 24 24"
+            <h3>
+              <button
+                id={buttonId}
+                onClick={() => toggleFAQ(index)}
+                className="w-full flex items-center justify-between p-5 text-left bg-white hover:bg-gray-50 transition-colors"
+                aria-expanded={isOpen}
+                aria-controls={panelId}
+              >
+                <span className="font-semibold text-navy pr-4">{faq.question}</span>
+                <svg
+                  className={`w-5 h-5 text-orange flex-shrink-0 transition-transform ${
+                    isOpen ? 'rotate-180' : ''
+                  }`}
+                  fill="none"
+                  stroke="currentColor"
+                  viewBox="0 0 24 24"
+                  aria-hidden="true"
+                >
+                  <path
+                    strokeLinecap="round"
+                    strokeLinejoin="round"
+                    strokeWidth={2}
+                    d="M19 9l-7 7-7-7"
+                  />
+                </svg>
+              </button>
+            </h3>
+            <div
+              id={panelId}
+              role="region"
+              aria-labelledby={buttonId}
+              hidden={!isOpen}
             >
-              <path
-                strokeLinecap="round"
-                strokeLinejoin="round"
-                strokeWidth={2}
-                d="M19 9l-7 7-7-7"
-              />
-            </svg>
-          </button>
-          {openIndex === index && (
-            <div className="px-5 pb-5 bg-gray-50">
-              <p className="text-gray-700 leading-relaxed">{faq.answer}</p>
+              {isOpen && (
+                <div className="px-5 pb-5 bg-gray-50">
+                  <p className="text-gray-700 leading-relaxed">{faq.answer}</p>
+                </div>
+              )}
             </div>
-          )}
-        </div>
-      ))}
+          </div>
+        );
+      })}
     </div>
   );
 }

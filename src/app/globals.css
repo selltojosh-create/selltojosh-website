@@ -54,3 +54,9 @@ html {
 .container-custom {
   @apply max-w-6xl mx-auto;
 }
+
+/* Visible focus indicators for keyboard navigation */
+*:focus-visible {
+  outline: 2px solid var(--navy);
+  outline-offset: 2px;
+}

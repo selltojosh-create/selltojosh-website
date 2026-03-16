@@ -8,6 +8,25 @@ interface LeadData {
   phone: string;
   address: string;
   message?: string;
+  recaptchaToken?: string;
+}
+
+async function verifyRecaptcha(token: string): Promise<boolean> {
+  const secret = process.env.RECAPTCHA_SECRET_KEY;
+  if (!secret) {
+    console.log('[DEV] reCAPTCHA secret not configured — skipping verification');
+    return true;
+  }
+
+  const res = await fetch('https://www.google.com/recaptcha/api/siteverify', {
+    method: 'POST',
+    headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
+    body: new URLSearchParams({ secret, response: token }),
+  });
+
+  const data = await res.json();
+  console.log('reCAPTCHA verify:', { score: data.score, success: data.success });
+  return data.success && (data.score ?? 0) >= 0.5;
 }
 
 export async function POST(request: NextRequest) {
@@ -19,6 +38,17 @@ export async function POST(request: NextRequest) {
 
     const data: LeadData = await request.json();
     console.log('Received form data:', JSON.stringify(data, null, 2));
+
+    // Verify reCAPTCHA if token provided
+    if (data.recaptchaToken) {
+      const valid = await verifyRecaptcha(data.recaptchaToken);
+      if (!valid) {
+        return NextResponse.json(
+          { error: 'Spam detection failed. Please try again.' },
+          { status: 403 }
+        );
+      }
+    }
 
     // Validate required fields
     if (!data.name || !data.phone || !data.address) {

@@ -1,6 +1,7 @@
 'use client';
 
 import { useState, FormEvent } from 'react';
+import { useRouter } from 'next/navigation';
 
 interface LeadFormProps {
   variant?: 'default' | 'compact' | 'full';
@@ -9,6 +10,7 @@ interface LeadFormProps {
 }
 
 export default function LeadForm({ variant = 'default', darkMode = false, className = '' }: LeadFormProps) {
+  const router = useRouter();
   const [formData, setFormData] = useState({
     name: '',
     phone: '',
@@ -25,15 +27,30 @@ export default function LeadForm({ variant = 'default', darkMode = false, classN
     setError('');
 
     try {
+      let recaptchaToken: string | undefined;
+      try {
+        const grecaptcha = (window as unknown as { grecaptcha?: { ready: (cb: () => void) => void; execute: (key: string, opts: { action: string }) => Promise<string> } }).grecaptcha;
+        if (grecaptcha && process.env.NEXT_PUBLIC_RECAPTCHA_SITE_KEY) {
+          recaptchaToken = await new Promise<string>((resolve) => {
+            grecaptcha.ready(() => {
+              grecaptcha.execute(process.env.NEXT_PUBLIC_RECAPTCHA_SITE_KEY!, { action: 'submit_lead' }).then(resolve);
+            });
+          });
+        }
+      } catch {
+        // reCAPTCHA not loaded — proceed without token
+      }
+
       const response = await fetch('/api/leads', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify(formData),
+        body: JSON.stringify({ ...formData, recaptchaToken }),
       });
 
       if (response.ok) {
-        setIsSubmitted(true);
         setFormData({ name: '', phone: '', address: '', message: '' });
+        router.push('/thank-you');
+        return;
       } else {
         throw new Error('Failed to submit');
       }
@@ -140,9 +157,11 @@ export default function LeadForm({ variant = 'default', darkMode = false, classN
         </div>
       )}
 
-      {error && (
-        <p className="text-red-400 text-sm">{error}</p>
-      )}
+      <div aria-live="polite" aria-atomic="true">
+        {error && (
+          <p className="text-red-400 text-sm" role="alert">{error}</p>
+        )}
+      </div>
 
       <button
         type="submit"
