@@ -11,6 +11,7 @@ const cspDirectives = [
 ];
 
 const nextConfig: NextConfig = {
+  serverExternalPackages: ["resend"],
   async headers() {
     return [
       {
