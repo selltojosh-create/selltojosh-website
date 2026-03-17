@@ -76,18 +76,23 @@ export default function Footer() {
         {/* Bottom Bar */}
         <div className="border-t border-gray-600 mt-8 pt-8">
           <div className="flex flex-col md:flex-row justify-between items-center gap-4">
-            <p className="text-gray-400 text-sm">
+            <p className="text-gray-300 text-sm">
               &copy; {currentYear} {siteConfig.name}. All rights reserved.
             </p>
             <div className="flex gap-6 text-sm">
-              <Link href="/privacy" className="text-gray-400 hover:text-white transition-colors">
+              <Link href="/privacy" className="text-gray-300 hover:text-white transition-colors">
                 Privacy Policy
               </Link>
-              <Link href="/terms" className="text-gray-400 hover:text-white transition-colors">
+              <Link href="/terms" className="text-gray-300 hover:text-white transition-colors">
                 Terms of Service
               </Link>
             </div>
           </div>
+          <p className="text-gray-300 text-xs text-center mt-4">
+            This site is protected by reCAPTCHA and the Google{' '}
+            <a href="https://policies.google.com/privacy" className="underline hover:text-white" target="_blank" rel="noopener noreferrer">Privacy Policy</a> and{' '}
+            <a href="https://policies.google.com/terms" className="underline hover:text-white" target="_blank" rel="noopener noreferrer">Terms of Service</a> apply.
+          </p>
         </div>
       </div>
     </footer>

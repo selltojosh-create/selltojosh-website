@@ -2,13 +2,14 @@
 
 import Link from 'next/link';
 import { useState } from 'react';
+import { usePathname } from 'next/navigation';
 import { siteConfig } from '@/data/siteConfig';
 
 export default function Header() {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
+  const pathname = usePathname();
 
   const navLinks = [
-    { href: '/', label: 'Home' },
     { href: '/how-it-works', label: 'How It Works' },
     { href: '/about', label: 'About' },
     { href: '/areas', label: 'Areas We Serve' },
@@ -34,15 +35,19 @@ export default function Header() {
 
           {/* Desktop Navigation */}
           <div className="hidden lg:flex items-center gap-6">
-            {navLinks.map((link) => (
-              <Link
-                key={link.href}
-                href={link.href}
-                className="text-gray-700 hover:text-navy font-medium transition-colors"
-              >
-                {link.label}
-              </Link>
-            ))}
+            {navLinks.map((link) => {
+              const isActive = pathname === link.href || (link.href !== '/' && pathname.startsWith(link.href));
+              return (
+                <Link
+                  key={link.href}
+                  href={link.href}
+                  className={`font-medium transition-colors ${isActive ? 'text-navy border-b-2 border-orange pb-1' : 'text-gray-700 hover:text-navy'}`}
+                  aria-current={isActive ? 'page' : undefined}
+                >
+                  {link.label}
+                </Link>
+              );
+            })}
             <Link href="/contact" className="btn-primary">
               Get My Cash Offer
             </Link>
@@ -83,16 +88,20 @@ export default function Header() {
         {isMenuOpen && (
           <div className="lg:hidden pb-4">
             <div className="flex flex-col gap-3">
-              {navLinks.map((link) => (
-                <Link
-                  key={link.href}
-                  href={link.href}
-                  className="text-gray-700 hover:text-navy font-medium py-2 transition-colors"
-                  onClick={() => setIsMenuOpen(false)}
-                >
-                  {link.label}
-                </Link>
-              ))}
+              {navLinks.map((link) => {
+                const isActive = pathname === link.href || (link.href !== '/' && pathname.startsWith(link.href));
+                return (
+                  <Link
+                    key={link.href}
+                    href={link.href}
+                    className={`font-medium py-2 transition-colors ${isActive ? 'text-navy font-bold border-l-4 border-orange pl-3' : 'text-gray-700 hover:text-navy'}`}
+                    aria-current={isActive ? 'page' : undefined}
+                    onClick={() => setIsMenuOpen(false)}
+                  >
+                    {link.label}
+                  </Link>
+                );
+              })}
               <Link
                 href="/contact"
                 className="btn-primary text-center mt-2"

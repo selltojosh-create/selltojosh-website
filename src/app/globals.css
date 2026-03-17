@@ -60,3 +60,8 @@ html {
   outline: 2px solid var(--navy);
   outline-offset: 2px;
 }
+
+/* Hide reCAPTCHA badge (attribution text added in Footer per Google TOS) */
+.grecaptcha-badge {
+  visibility: hidden !important;
+}
