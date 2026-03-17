@@ -173,7 +173,7 @@ export default async function CityPage({ params }: PageProps) {
         <div className="container-custom mx-auto px-4">
           <div className="grid lg:grid-cols-2 gap-12 items-center">
             <div>
-              <nav className="text-sm text-gray-400 mb-4">
+              <nav className="text-sm text-gray-300 mb-4">
                 <Link href="/" className="hover:text-white">Home</Link>
                 <span className="mx-2">/</span>
                 <Link href="/areas" className="hover:text-white">Areas We Serve</Link>
@@ -438,7 +438,7 @@ export default async function CityPage({ params }: PageProps) {
           <h2 className="text-3xl md:text-4xl font-bold mb-4">
             Ready to Sell Your {area.city} Home?
           </h2>
-          <p className="text-xl mb-8 text-navy/80">
+          <p className="text-xl mb-8 text-navy">
             Get your free, no-obligation cash offer today. We buy houses in any condition.
           </p>
           <div className="flex flex-col sm:flex-row gap-4 justify-center">

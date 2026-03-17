@@ -195,7 +195,7 @@ export default async function AreasPage() {
           <h2 className="text-3xl md:text-4xl font-bold mb-4">
             Ready to Sell Your Central Texas Home?
           </h2>
-          <p className="text-xl mb-8 text-navy/80">
+          <p className="text-xl mb-8 text-navy">
             Get your free, no-obligation cash offer today. We buy houses in any condition.
           </p>
           <Link href="/contact" className="bg-navy hover:bg-navy-dark text-white font-bold py-3 px-8 rounded-lg transition-colors text-lg inline-block">

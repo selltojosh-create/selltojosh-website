@@ -48,7 +48,7 @@ export default function AboutPage() {
               <p className="text-xl text-gray-300 mb-6">
                 I&apos;m a local Central Texas home buyer. I help homeowners like you sell their properties quickly, fairly, and without the stress of traditional listings.
               </p>
-              <p className="text-gray-400">
+              <p className="text-gray-300">
                 Whether you&apos;re facing foreclosure, dealing with an inherited property, or just need to sell fast, I&apos;m here to help you find a simple solution.
               </p>
             </div>
@@ -187,7 +187,7 @@ export default function AboutPage() {
           <h2 className="text-3xl md:text-4xl font-bold mb-4">
             Let&apos;s Talk About Your Property
           </h2>
-          <p className="text-xl mb-8 text-navy/80">
+          <p className="text-xl mb-8 text-navy">
             No pressure, no obligation. Just an honest conversation about your options.
           </p>
           <div className="flex flex-col sm:flex-row gap-4 justify-center">

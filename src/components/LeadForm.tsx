@@ -159,7 +159,7 @@ export default function LeadForm({ variant = 'default', darkMode = false, classN
 
       <div aria-live="polite" aria-atomic="true">
         {error && (
-          <p className="text-red-400 text-sm" role="alert">{error}</p>
+          <p className={`${darkMode ? 'text-red-300' : 'text-red-600'} text-sm`} role="alert">{error}</p>
         )}
       </div>
 

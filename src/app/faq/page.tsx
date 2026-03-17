@@ -103,7 +103,7 @@ export default async function FAQPage() {
           <h2 className="text-3xl md:text-4xl font-bold mb-4">
             Ready to Get Your Cash Offer?
           </h2>
-          <p className="text-xl mb-8 text-navy/80">
+          <p className="text-xl mb-8 text-navy">
             No obligation. No pressure. Just a fair offer for your Central Texas home.
           </p>
           <Link href="/contact" className="bg-navy hover:bg-navy-dark text-white font-bold py-3 px-8 rounded-lg transition-colors text-lg inline-block">

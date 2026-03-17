@@ -160,7 +160,7 @@ export default async function HomePage() {
         }}
       >
         {/* Dark overlay for readability */}
-        <div className="absolute inset-0 bg-navy/60" />
+        <div className="absolute inset-0 bg-navy/75" />
 
         <div className="relative z-10 container-custom mx-auto px-4 py-16 md:py-24">
           <div className="grid lg:grid-cols-2 gap-12 items-center">
@@ -393,7 +393,7 @@ export default async function HomePage() {
           <h2 className="text-3xl md:text-4xl font-bold mb-4">
             Ready to Sell Your House?
           </h2>
-          <p className="text-xl mb-8 text-navy/80">
+          <p className="text-xl mb-8 text-navy">
             Get your free, no-obligation cash offer today. No pressure, no games.
           </p>
           <div className="flex flex-col sm:flex-row gap-4 justify-center">

@@ -92,7 +92,7 @@ export default function HowItWorksPage() {
               <div key={step.number} className={`grid md:grid-cols-2 gap-8 md:gap-12 items-center ${index % 2 === 1 ? 'md:flex-row-reverse' : ''}`}>
                 <div className={index % 2 === 1 ? 'md:order-2' : ''}>
                   <div className="flex items-center gap-4 mb-4">
-                    <div className="w-14 h-14 bg-orange text-white rounded-full flex items-center justify-center text-2xl font-bold flex-shrink-0">
+                    <div className="w-14 h-14 bg-orange text-navy rounded-full flex items-center justify-center text-2xl font-bold flex-shrink-0">
                       {step.number}
                     </div>
                     <h2 className="text-2xl md:text-3xl font-bold text-navy">
@@ -215,7 +215,7 @@ export default function HowItWorksPage() {
           <h2 className="text-3xl md:text-4xl font-bold mb-4">
             Ready to Get Started?
           </h2>
-          <p className="text-xl mb-8 text-navy/80">
+          <p className="text-xl mb-8 text-navy">
             Take the first step. Get your free, no-obligation cash offer today.
           </p>
           <div className="flex flex-col sm:flex-row gap-4 justify-center">

@@ -30,7 +30,7 @@ function VideoPlaceholder({ title }: { title: string }) {
         </svg>
       </div>
       <p className="text-lg font-semibold mb-1">Video Coming Soon</p>
-      <p className="text-gray-400 text-sm text-center px-4">{title}</p>
+      <p className="text-gray-300 text-sm text-center px-4">{title}</p>
     </div>
   );
 }
@@ -129,7 +129,7 @@ export default async function ReelsPage() {
           <h2 className="text-3xl md:text-4xl font-bold mb-4">
             {hasRealVideos ? "Have Questions After Watching?" : "Can't Wait for the Videos?"}
           </h2>
-          <p className="text-xl mb-8 text-navy/80">
+          <p className="text-xl mb-8 text-navy">
             {hasRealVideos
               ? "Get in touch. We're happy to answer any questions about selling your home."
               : "No need to wait — reach out now and we'll walk you through everything personally."}

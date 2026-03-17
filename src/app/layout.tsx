@@ -80,10 +80,15 @@ export default function RootLayout({
         <Footer />
         <StickyMobileCTA />
         {recaptchaSiteKey && (
-          <Script
-            src={`https://www.google.com/recaptcha/api.js?render=${recaptchaSiteKey}`}
-            strategy="lazyOnload"
-          />
+          <>
+            <Script
+              src={`https://www.google.com/recaptcha/api.js?render=${recaptchaSiteKey}`}
+              strategy="lazyOnload"
+            />
+            <Script id="recaptcha-a11y" strategy="lazyOnload">
+              {`(function(){var o=new MutationObserver(function(){var t=document.querySelector('.g-recaptcha-response');if(t){t.setAttribute('aria-label','reCAPTCHA verification');t.setAttribute('aria-hidden','true');t.setAttribute('tabindex','-1');o.disconnect()}});o.observe(document.body,{childList:true,subtree:true})})();`}
+            </Script>
+          </>
         )}
       </body>
     </html>
