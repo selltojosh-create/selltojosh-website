@@ -160,7 +160,7 @@ export default async function HomePage() {
         }}
       >
         {/* Dark overlay for readability */}
-        <div className="absolute inset-0 bg-navy/75" />
+        <div className="absolute inset-0 bg-navy/85" />
 
         <div className="relative z-10 container-custom mx-auto px-4 py-16 md:py-24">
           <div className="grid lg:grid-cols-2 gap-12 items-center">
