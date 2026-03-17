@@ -166,7 +166,7 @@ export default async function HomePage() {
           <div className="grid lg:grid-cols-2 gap-12 items-center">
             {/* Hero Text */}
             <div className="text-white">
-              <h1 className="text-4xl md:text-5xl lg:text-6xl font-bold mb-6 leading-tight">
+              <h1 className="text-4xl md:text-5xl lg:text-6xl font-bold mb-6 leading-tight" style={{ backgroundColor: 'transparent' }}>
                 {settings?.heroHeadline || (
                   <>Sell Your Central Texas Home <span className="text-white underline decoration-orange decoration-4 underline-offset-4">Fast for Cash</span></>
                 )}
