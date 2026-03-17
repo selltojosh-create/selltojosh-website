@@ -182,7 +182,7 @@ export default async function CityPage({ params }: PageProps) {
               </nav>
 
               <h1 className="text-4xl md:text-5xl font-bold mb-6 leading-tight">
-                Sell Your {area.city} Home <span className="text-orange">Fast for Cash</span>
+                Sell Your {area.city} Home <span className="text-white underline decoration-orange decoration-4 underline-offset-4">Fast for Cash</span>
               </h1>
 
               <p className="text-xl text-gray-300 mb-6">

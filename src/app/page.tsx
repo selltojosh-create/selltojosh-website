@@ -168,7 +168,7 @@ export default async function HomePage() {
             <div className="text-white">
               <h1 className="text-4xl md:text-5xl lg:text-6xl font-bold mb-6 leading-tight">
                 {settings?.heroHeadline || (
-                  <>Sell Your Central Texas Home <span className="text-orange">Fast for Cash</span></>
+                  <>Sell Your Central Texas Home <span className="text-white underline decoration-orange decoration-4 underline-offset-4">Fast for Cash</span></>
                 )}
               </h1>
               <p className="text-xl md:text-2xl text-gray-200 mb-8">
@@ -185,18 +185,18 @@ export default async function HomePage() {
                   Call {phone}
                 </a>
               </div>
-              <p className="text-gray-300 text-sm mb-6">
+              <p className="text-gray-200 text-sm mb-6">
                 Serving {serviceAreas.slice(0, -1).join(', ')}{serviceAreas.length > 1 ? ` & ${serviceAreas[serviceAreas.length - 1]}` : serviceAreas[0]} & surrounding areas
               </p>
               {/* Credibility Indicators */}
-              <div className="flex flex-wrap gap-6 text-sm">
-                <div className="flex items-center gap-2">
+              <div className="flex flex-wrap gap-4 text-sm">
+                <div className="flex items-center gap-2 bg-navy/80 rounded-full px-3 py-1.5">
                   <svg className="w-5 h-5 text-orange" fill="currentColor" viewBox="0 0 20 20">
                     <path fillRule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clipRule="evenodd" />
                   </svg>
                   <span className="text-white font-medium">Buying Central Texas homes since 2009</span>
                 </div>
-                <div className="flex items-center gap-2">
+                <div className="flex items-center gap-2 bg-navy/80 rounded-full px-3 py-1.5">
                   <svg className="w-5 h-5 text-orange" fill="currentColor" viewBox="0 0 20 20">
                     <path fillRule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clipRule="evenodd" />
                   </svg>
