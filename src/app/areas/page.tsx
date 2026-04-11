@@ -52,7 +52,7 @@ export default async function AreasPage() {
             We Buy Houses Across Central Texas
           </h1>
           <p className="text-xl text-gray-300 max-w-2xl mx-auto mb-8">
-            Serving homeowners near Fort Hood (Fort Cavazos) in Killeen, Temple, Harker Heights, Belton, Copperas Cove, Waco, and surrounding communities with fair cash offers.
+            Serving homeowners near Fort Hood (formerly Fort Cavazos) in Killeen, Temple, Harker Heights, Belton, Copperas Cove, Waco, and surrounding communities with fair cash offers.
           </p>
 
           {/* Quick Links to City Pages */}

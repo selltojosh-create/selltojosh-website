@@ -148,7 +148,7 @@ export const cityData: Record<string, CityData> = {
       "If you're a military family facing a PCS move, dealing with an inherited property, going through a divorce, or simply need to sell your Killeen home fast for any reason, I'm here to help. We can close in as little as 7 days, or work with your timeline."
     ],
     landmarks: [
-      "Fort Hood (Fort Cavazos)",
+      "Fort Hood (formerly Fort Cavazos)",
       "Clear Creek",
       "Rancier Avenue",
       "Skylark Field",
@@ -221,7 +221,7 @@ export const cityData: Record<string, CityData> = {
       "I understand the unique needs of Copperas Cove homeowners. From properties purchased with VA loans to homes that have been rental properties, we can handle any situation. Get a fair cash offer and close on your schedule — often in as little as 7-14 days."
     ],
     landmarks: [
-      "Fort Hood (Fort Cavazos) West Gate",
+      "Fort Hood (formerly Fort Cavazos) West Gate",
       "Copperas Cove Town Center",
       "City Park",
       "Ogletree Gap",
