@@ -35,11 +35,6 @@ export default function LocalBusinessSchema() {
       opens: '08:00',
       closes: '20:00',
     },
-    sameAs: [
-      siteConfig.social.facebook,
-      siteConfig.social.instagram,
-      siteConfig.social.youtube,
-    ],
   };
 
   return (
