@@ -1,6 +1,7 @@
 import { MetadataRoute } from 'next';
 import { siteConfig } from '@/data/siteConfig';
 import { serviceAreas } from '@/data/areas';
+import { situations } from '@/data/situations';
 
 export default function sitemap(): MetadataRoute.Sitemap {
   const baseUrl = `https://${siteConfig.domain}`;
@@ -71,5 +72,23 @@ export default function sitemap(): MetadataRoute.Sitemap {
     priority: 0.85,
   }));
 
-  return [...staticPages, ...cityPages];
+  // Situations index page
+  const situationsIndex: MetadataRoute.Sitemap = [
+    {
+      url: `${baseUrl}/situations`,
+      lastModified: new Date(),
+      changeFrequency: 'monthly',
+      priority: 0.85,
+    },
+  ];
+
+  // Individual situation pages
+  const situationPages: MetadataRoute.Sitemap = situations.map((situation) => ({
+    url: `${baseUrl}/situations/${situation.slug}`,
+    lastModified: new Date(),
+    changeFrequency: 'monthly',
+    priority: 0.8,
+  }));
+
+  return [...staticPages, ...cityPages, ...situationsIndex, ...situationPages];
 }

@@ -52,6 +52,26 @@ export default function Footer() {
                   Get Your Offer
                 </Link>
               </li>
+              <li>
+                <Link href="/situations/foreclosure" className="text-gray-300 hover:text-white transition-colors">
+                  Facing Foreclosure
+                </Link>
+              </li>
+              <li>
+                <Link href="/situations/inherited-property" className="text-gray-300 hover:text-white transition-colors">
+                  Inherited Property
+                </Link>
+              </li>
+              <li>
+                <Link href="/situations/military-pcs" className="text-gray-300 hover:text-white transition-colors">
+                  Military PCS
+                </Link>
+              </li>
+              <li>
+                <Link href="/situations/divorce" className="text-gray-300 hover:text-white transition-colors">
+                  Divorce
+                </Link>
+              </li>
             </ul>
           </div>
 

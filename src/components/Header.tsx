@@ -13,6 +13,7 @@ export default function Header() {
     { href: '/how-it-works', label: 'How It Works' },
     { href: '/about', label: 'About' },
     { href: '/areas', label: 'Areas We Serve' },
+    { href: '/situations', label: 'Situations' },
     { href: '/reels', label: 'Reels' },
     { href: '/faq', label: 'FAQ' },
   ];
