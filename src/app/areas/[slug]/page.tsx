@@ -2,9 +2,11 @@ import { Metadata } from 'next';
 import Link from 'next/link';
 import { notFound } from 'next/navigation';
 import LeadForm from '@/components/LeadForm';
+import FAQAccordion from '@/components/FAQAccordion';
 import TestimonialCard from '@/components/TestimonialCard';
 import { siteConfig } from '@/data/siteConfig';
 import { serviceAreas as staticServiceAreas, cityData } from '@/data/areas';
+import type { FAQ } from '@/data/faqs';
 import { getServiceAreaBySlug, getFeaturedTestimonials, getSiteSettings } from '../../../../sanity/lib/fetch';
 
 interface PageProps {
@@ -32,8 +34,17 @@ export async function generateMetadata({ params }: PageProps): Promise<Metadata>
   }
 
   const city = area.city;
-  const metaTitle = sanityArea?.metaTitle || `Sell My House Fast ${city} TX | Cash Home Buyer Near Fort Hood | Sell to Josh`;
-  const metaDescription = sanityArea?.metaDescription || `We buy houses for cash in ${city}, Texas near Fort Hood (formerly Fort Cavazos). Sell your ${city} house fast - no repairs, no fees, close in 7-14 days. Get a fair cash offer within 24 hours from a local buyer you can trust.`;
+  const noFortHoodSlugs = ['waco', 'georgetown'];
+  const metaTitle = sanityArea?.metaTitle || (
+    noFortHoodSlugs.includes(slug)
+      ? `Sell My House Fast ${city} TX | Cash Home Buyer in ${city} | Sell to Josh`
+      : `Sell My House Fast ${city} TX | Cash Home Buyer Near Fort Hood | Sell to Josh`
+  );
+  const metaDescription = sanityArea?.metaDescription || (
+    noFortHoodSlugs.includes(slug)
+      ? `We buy houses for cash in ${city}, Texas. Sell your ${city} house fast - no repairs, no fees, close in 7-14 days. Get a fair cash offer within 24 hours from a local buyer you can trust.`
+      : `We buy houses for cash in ${city}, Texas near Fort Hood (formerly Fort Cavazos). Sell your ${city} house fast - no repairs, no fees, close in 7-14 days. Get a fair cash offer within 24 hours from a local buyer you can trust.`
+  );
 
   return {
     title: metaTitle,
@@ -43,7 +54,7 @@ export async function generateMetadata({ params }: PageProps): Promise<Metadata>
       `cash home buyer ${city}`,
       `we buy houses ${city} TX`,
       `sell house as-is ${city}`,
-      'Fort Hood home buyer',
+      ...(noFortHoodSlugs.includes(slug) ? [] : ['Fort Hood home buyer']),
       'Central Texas cash buyer',
     ],
     openGraph: {
@@ -110,6 +121,26 @@ function CityBusinessSchema({ city, slug }: { city: string; slug: string }) {
   );
 }
 
+// FAQPage JSON-LD Schema for city FAQs
+// Safe usage: content is serialized from our own static data via JSON.stringify, not user input
+function FAQPageSchema({ faqs }: { faqs: FAQ[] }) {
+  const schema = {
+    '@context': 'https://schema.org',
+    '@type': 'FAQPage',
+    mainEntity: faqs.map((f) => ({
+      '@type': 'Question',
+      name: f.question,
+      acceptedAnswer: { '@type': 'Answer', text: f.answer },
+    })),
+  };
+  return (
+    <script
+      type="application/ld+json"
+      dangerouslySetInnerHTML={{ __html: JSON.stringify(schema) }}
+    />
+  );
+}
+
 // Static fallback testimonials
 const fallbackTestimonials = [
   {
@@ -167,17 +198,20 @@ export default async function CityPage({ params }: PageProps) {
   return (
     <>
       <CityBusinessSchema city={area.city} slug={slug} />
+      {cityInfo?.faqs && cityInfo.faqs.length > 0 && (
+        <FAQPageSchema faqs={cityInfo.faqs} />
+      )}
 
       {/* Hero Section */}
       <section className="bg-gradient-to-br from-navy to-navy-dark text-white py-16 md:py-20">
         <div className="container-custom mx-auto px-4">
           <div className="grid lg:grid-cols-2 gap-12 items-center">
             <div>
-              <nav className="text-sm text-gray-300 mb-4">
+              <nav aria-label="Breadcrumb" className="text-sm text-gray-300 mb-4">
                 <Link href="/" className="hover:text-white">Home</Link>
-                <span className="mx-2">/</span>
+                <span className="mx-2" aria-hidden="true">/</span>
                 <Link href="/areas" className="hover:text-white">Areas We Serve</Link>
-                <span className="mx-2">/</span>
+                <span className="mx-2" aria-hidden="true">/</span>
                 <span className="text-orange">{area.city}</span>
               </nav>
 
@@ -194,7 +228,7 @@ export default async function CityPage({ params }: PageProps) {
                   href={phoneTel}
                   className="bg-white hover:bg-gray-100 text-navy font-bold py-3 px-6 rounded-lg transition-colors text-lg flex items-center justify-center gap-2"
                 >
-                  <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24" aria-hidden="true">
                     <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M3 5a2 2 0 012-2h3.28a1 1 0 01.948.684l1.498 4.493a1 1 0 01-.502 1.21l-2.257 1.13a11.042 11.042 0 005.516 5.516l1.13-2.257a1 1 0 011.21-.502l4.493 1.498a1 1 0 01.684.949V19a2 2 0 01-2 2h-1C9.716 21 3 14.284 3 6V5z" />
                   </svg>
                   Call {phone}
@@ -204,13 +238,13 @@ export default async function CityPage({ params }: PageProps) {
               {/* Trust Indicators */}
               <div className="flex flex-wrap gap-4 text-sm">
                 <div className="flex items-center gap-2">
-                  <svg className="w-5 h-5 text-orange" fill="currentColor" viewBox="0 0 20 20">
+                  <svg className="w-5 h-5 text-orange" fill="currentColor" viewBox="0 0 20 20" aria-hidden="true">
                     <path fillRule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clipRule="evenodd" />
                   </svg>
                   <span className="text-white font-medium">Local {area.city} Buyer</span>
                 </div>
                 <div className="flex items-center gap-2">
-                  <svg className="w-5 h-5 text-orange" fill="currentColor" viewBox="0 0 20 20">
+                  <svg className="w-5 h-5 text-orange" fill="currentColor" viewBox="0 0 20 20" aria-hidden="true">
                     <path fillRule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clipRule="evenodd" />
                   </svg>
                   <span className="text-white font-medium">Close in 7-14 Days</span>
@@ -271,7 +305,7 @@ export default async function CityPage({ params }: PageProps) {
           <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-6 max-w-5xl mx-auto">
             {area.scenarios?.map((scenario, index) => (
               <div key={index} className="bg-white p-6 rounded-xl shadow-sm flex items-start gap-4">
-                <svg className="w-6 h-6 text-orange flex-shrink-0 mt-1" fill="currentColor" viewBox="0 0 20 20">
+                <svg className="w-6 h-6 text-orange flex-shrink-0 mt-1" fill="currentColor" viewBox="0 0 20 20" aria-hidden="true">
                   <path fillRule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clipRule="evenodd" />
                 </svg>
                 <span className="text-gray-700 font-medium">{scenario}</span>
@@ -296,7 +330,7 @@ export default async function CityPage({ params }: PageProps) {
           <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-6">
             <div className="text-center p-6">
               <div className="w-16 h-16 bg-orange/10 rounded-full flex items-center justify-center mx-auto mb-4">
-                <svg className="w-8 h-8 text-orange" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <svg className="w-8 h-8 text-orange" fill="none" stroke="currentColor" viewBox="0 0 24 24" aria-hidden="true">
                   <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 8c-1.657 0-3 .895-3 2s1.343 2 3 2 3 .895 3 2-1.343 2-3 2m0-8c1.11 0 2.08.402 2.599 1M12 8V7m0 1v8m0 0v1m0-1c-1.11 0-2.08-.402-2.599-1M21 12a9 9 0 11-18 0 9 9 0 0118 0z" />
                 </svg>
               </div>
@@ -306,7 +340,7 @@ export default async function CityPage({ params }: PageProps) {
 
             <div className="text-center p-6">
               <div className="w-16 h-16 bg-orange/10 rounded-full flex items-center justify-center mx-auto mb-4">
-                <svg className="w-8 h-8 text-orange" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <svg className="w-8 h-8 text-orange" fill="none" stroke="currentColor" viewBox="0 0 24 24" aria-hidden="true">
                   <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M13 10V3L4 14h7v7l9-11h-7z" />
                 </svg>
               </div>
@@ -316,7 +350,7 @@ export default async function CityPage({ params }: PageProps) {
 
             <div className="text-center p-6">
               <div className="w-16 h-16 bg-orange/10 rounded-full flex items-center justify-center mx-auto mb-4">
-                <svg className="w-8 h-8 text-orange" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <svg className="w-8 h-8 text-orange" fill="none" stroke="currentColor" viewBox="0 0 24 24" aria-hidden="true">
                   <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z" />
                 </svg>
               </div>
@@ -326,7 +360,7 @@ export default async function CityPage({ params }: PageProps) {
 
             <div className="text-center p-6">
               <div className="w-16 h-16 bg-orange/10 rounded-full flex items-center justify-center mx-auto mb-4">
-                <svg className="w-8 h-8 text-orange" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <svg className="w-8 h-8 text-orange" fill="none" stroke="currentColor" viewBox="0 0 24 24" aria-hidden="true">
                   <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M17.657 16.657L13.414 20.9a1.998 1.998 0 01-2.827 0l-4.244-4.243a8 8 0 1111.314 0z" />
                   <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M15 11a3 3 0 11-6 0 3 3 0 016 0z" />
                 </svg>
@@ -404,6 +438,25 @@ export default async function CityPage({ params }: PageProps) {
         </div>
       </section>
 
+      {/* City-Specific FAQs */}
+      {cityInfo?.faqs && cityInfo.faqs.length > 0 && (
+        <section className="section-padding bg-gray-light">
+          <div className="container-custom mx-auto">
+            <div className="max-w-4xl mx-auto">
+              <div className="text-center mb-12">
+                <h2 className="text-3xl md:text-4xl font-bold text-navy mb-4">
+                  Frequently Asked Questions About Selling Your {area.city} Home
+                </h2>
+                <p className="text-xl text-gray-600 max-w-2xl mx-auto">
+                  Common questions from {area.city} homeowners
+                </p>
+              </div>
+              <FAQAccordion faqs={cityInfo.faqs} />
+            </div>
+          </div>
+        </section>
+      )}
+
       {/* Other Areas */}
       <section className="section-padding bg-navy text-white">
         <div className="container-custom mx-auto text-center">
@@ -449,7 +502,7 @@ export default async function CityPage({ params }: PageProps) {
               href={phoneTel}
               className="bg-white hover:bg-gray-100 text-navy font-bold py-3 px-8 rounded-lg transition-colors text-lg flex items-center justify-center gap-2"
             >
-              <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24" aria-hidden="true">
                 <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M3 5a2 2 0 012-2h3.28a1 1 0 01.948.684l1.498 4.493a1 1 0 01-.502 1.21l-2.257 1.13a11.042 11.042 0 005.516 5.516l1.13-2.257a1 1 0 011.21-.502l4.493 1.498a1 1 0 01.684.949V19a2 2 0 01-2 2h-1C9.716 21 3 14.284 3 6V5z" />
               </svg>
               Call {phone}
