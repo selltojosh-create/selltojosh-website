@@ -6,6 +6,15 @@ function getResend() {
   return new Resend(process.env.RESEND_API_KEY);
 }
 
+function escapeHtml(str: string): string {
+  return str
+    .replace(/&/g, '&amp;')
+    .replace(/</g, '&lt;')
+    .replace(/>/g, '&gt;')
+    .replace(/"/g, '&quot;')
+    .replace(/'/g, '&#39;');
+}
+
 interface LeadData {
   name: string;
   phone: string;
@@ -44,13 +53,13 @@ export async function POST(request: NextRequest) {
       );
     }
 
-    // Debug: Check if API key is loaded
-    console.log('=== LEAD API DEBUG ===');
-    console.log('RESEND_API_KEY exists:', !!process.env.RESEND_API_KEY);
-    console.log('RESEND_API_KEY prefix:', process.env.RESEND_API_KEY?.substring(0, 10) + '...');
-
     const data: LeadData = await request.json();
-    console.log('Received form data:', JSON.stringify(data, null, 2));
+
+    // S3: Input length limits
+    if (data.name?.length > 100 || data.phone?.length > 20 ||
+        data.address?.length > 200 || (data.message && data.message.length > 2000)) {
+      return NextResponse.json({ error: 'Input too long' }, { status: 400 });
+    }
 
     // Verify reCAPTCHA if token provided
     if (data.recaptchaToken) {
@@ -78,17 +87,6 @@ export async function POST(request: NextRequest) {
       timeStyle: 'short'
     });
 
-    // Log the lead (for development)
-    console.log('New lead received:', {
-      name: data.name,
-      phone: data.phone,
-      address: data.address,
-      message: data.message || '',
-      timestamp,
-    });
-
-    console.log('Attempting to send email via Resend...');
-
     // Send email notification via Resend
     const { data: emailData, error: emailError } = await getResend().emails.send({
       from: 'SellToJosh.com <leads@selltojosh.com>',
@@ -103,21 +101,21 @@ export async function POST(request: NextRequest) {
           <table style="width: 100%; border-collapse: collapse; margin-top: 20px;">
             <tr>
               <td style="padding: 10px; border-bottom: 1px solid #eee; font-weight: bold; width: 140px;">Name:</td>
-              <td style="padding: 10px; border-bottom: 1px solid #eee;">${data.name}</td>
+              <td style="padding: 10px; border-bottom: 1px solid #eee;">${escapeHtml(data.name)}</td>
             </tr>
             <tr>
               <td style="padding: 10px; border-bottom: 1px solid #eee; font-weight: bold;">Phone:</td>
               <td style="padding: 10px; border-bottom: 1px solid #eee;">
-                <a href="tel:${data.phone}" style="color: #2d3367;">${data.phone}</a>
+                <a href="tel:${escapeHtml(data.phone)}" style="color: #2d3367;">${escapeHtml(data.phone)}</a>
               </td>
             </tr>
             <tr>
               <td style="padding: 10px; border-bottom: 1px solid #eee; font-weight: bold;">Property Address:</td>
-              <td style="padding: 10px; border-bottom: 1px solid #eee;">${data.address}</td>
+              <td style="padding: 10px; border-bottom: 1px solid #eee;">${escapeHtml(data.address)}</td>
             </tr>
             <tr>
               <td style="padding: 10px; border-bottom: 1px solid #eee; font-weight: bold;">Message:</td>
-              <td style="padding: 10px; border-bottom: 1px solid #eee;">${data.message || 'No message provided'}</td>
+              <td style="padding: 10px; border-bottom: 1px solid #eee;">${escapeHtml(data.message || 'No message provided')}</td>
             </tr>
             <tr>
               <td style="padding: 10px; font-weight: bold;">Submitted:</td>
@@ -128,7 +126,7 @@ export async function POST(request: NextRequest) {
           <div style="margin-top: 30px; padding: 15px; background-color: #f7f7f7; border-radius: 8px;">
             <p style="margin: 0; color: #666; font-size: 14px;">
               <strong>Quick Actions:</strong><br>
-              • Call: <a href="tel:${data.phone}" style="color: #2d3367;">${data.phone}</a><br>
+              • Call: <a href="tel:${escapeHtml(data.phone)}" style="color: #2d3367;">${escapeHtml(data.phone)}</a><br>
               • Reply to this email to follow up
             </p>
           </div>
@@ -141,20 +139,16 @@ export async function POST(request: NextRequest) {
       text: `
 New Lead from SellToJosh.com
 
-Name: ${data.name}
-Phone: ${data.phone}
-Property Address: ${data.address}
-Message: ${data.message || 'No message provided'}
+Name: ${escapeHtml(data.name)}
+Phone: ${escapeHtml(data.phone)}
+Property Address: ${escapeHtml(data.address)}
+Message: ${escapeHtml(data.message || 'No message provided')}
 Submitted: ${timestamp}
       `.trim(),
     });
 
     if (emailError) {
-      console.error('=== EMAIL ERROR ===');
-      console.error('Error sending email:', JSON.stringify(emailError, null, 2));
-    } else {
-      console.log('=== EMAIL SUCCESS ===');
-      console.log('Email sent successfully:', JSON.stringify(emailData, null, 2));
+      console.error('Email send error:', emailError);
     }
 
     return NextResponse.json(
@@ -165,7 +159,7 @@ Submitted: ${timestamp}
     console.error('=== CATCH ERROR ===');
     console.error('Error processing lead:', error);
     return NextResponse.json(
-      { error: 'Failed to process lead', details: String(error) },
+      { error: 'Something went wrong. Please try again or call us directly.' },
       { status: 500 }
     );
   }

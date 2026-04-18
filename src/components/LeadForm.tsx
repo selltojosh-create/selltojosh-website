@@ -19,7 +19,6 @@ export default function LeadForm({ variant = 'default', darkMode = false, classN
     message: '',
   });
   const [isSubmitting, setIsSubmitting] = useState(false);
-  const [isSubmitted, setIsSubmitted] = useState(false);
   const [error, setError] = useState('');
 
   const handleSubmit = async (e: FormEvent) => {
@@ -64,31 +63,6 @@ export default function LeadForm({ variant = 'default', darkMode = false, classN
     }
   };
 
-  if (isSubmitted) {
-    return (
-      <div className={`${darkMode ? 'bg-green-900/50 border-green-700' : 'bg-green-50 border-green-200'} border rounded-lg p-6 text-center ${className}`}>
-        <svg
-          className={`w-12 h-12 ${darkMode ? 'text-green-400' : 'text-green-500'} mx-auto mb-4`}
-          fill="none"
-          stroke="currentColor"
-          viewBox="0 0 24 24"
-          aria-hidden="true"
-        >
-          <path
-            strokeLinecap="round"
-            strokeLinejoin="round"
-            strokeWidth={2}
-            d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z"
-          />
-        </svg>
-        <h3 className={`text-xl font-bold ${darkMode ? 'text-green-300' : 'text-green-800'} mb-2`}>Thank You!</h3>
-        <p className={darkMode ? 'text-green-200' : 'text-green-700'}>
-          We&apos;ve received your information and will contact you within 24 hours with your cash offer.
-        </p>
-      </div>
-    );
-  }
-
   const isCompact = variant === 'compact';
   const isFull = variant === 'full';
 
@@ -107,6 +81,7 @@ export default function LeadForm({ variant = 'default', darkMode = false, classN
             type="text"
             id={`${id}-name`}
             required
+            autoComplete="name"
             value={formData.name}
             onChange={(e) => setFormData({ ...formData, name: e.target.value })}
             className={inputClass}
@@ -122,6 +97,7 @@ export default function LeadForm({ variant = 'default', darkMode = false, classN
             type="tel"
             id={`${id}-phone`}
             required
+            autoComplete="tel"
             value={formData.phone}
             onChange={(e) => setFormData({ ...formData, phone: e.target.value })}
             className={inputClass}
@@ -138,6 +114,7 @@ export default function LeadForm({ variant = 'default', darkMode = false, classN
           type="text"
           id={`${id}-address`}
           required
+          autoComplete="street-address"
           value={formData.address}
           onChange={(e) => setFormData({ ...formData, address: e.target.value })}
           className={inputClass}

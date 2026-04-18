@@ -55,8 +55,8 @@ export default function AboutPage() {
             <div className="bg-white/10 backdrop-blur-sm rounded-2xl p-8 text-center">
               <div className="w-48 h-48 rounded-full mx-auto mb-6 overflow-hidden relative">
                 <Image
-                  src={siteConfig.ownerImage}
-                  alt="Josh - Founder of Sell to Josh"
+                  src="/josh-headshot.jpg"
+                  alt="Josh Isbell, founder of Sell to Josh, Central Texas cash home buyer"
                   fill
                   className="object-cover"
                   priority
