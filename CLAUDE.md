@@ -63,9 +63,21 @@ Content types: siteSettings (singleton), page (SEO meta), testimonial, faq, reel
 
 - `src/app/sitemap.ts` — Generates URLs for all static pages, 8 city pages, 4 situation pages
 - `src/app/robots.ts` — Allows all crawlers; disallows `/api/`
-- `LocalBusinessSchema.tsx` — JSON-LD LocalBusiness structured data in root layout
-- Situation pages include FAQPage JSON-LD schema
+- `LocalBusinessSchema.tsx` — JSON-LD LocalBusiness structured data in root layout with AggregateRating (5.0, 1 review from Brandon Dixon) and sameAs social links
+- City pages include per-city LocalBusiness schema + FAQPage JSON-LD schema (6 FAQs per city, 48 total)
+- Situation pages include FAQPage JSON-LD schema (6 FAQs per situation, 24 total)
 - Google Search Console verification meta tag in root layout metadata
+
+### SEO Title/Meta Strategy
+
+- Root layout template: `%s | Sell to Josh` — automatically appends brand to all child page titles
+- **Do NOT include `| Sell to Josh` in any child page metaTitle** — the template handles it
+- Homepage (`src/app/page.tsx`) is in the same segment as the layout, so the template does NOT apply — homepage title must include the brand name directly
+- All title tags are ≤60 chars (including template suffix)
+- All meta descriptions are ≤155 chars
+- City pages use pattern: `Sell My House Fast {City} TX for Cash`
+- Waco and Georgetown exclude Fort Hood references (controlled by `noFortHoodSlugs` in `areas/[slug]/page.tsx`)
+- OpenGraph titles must include `| ${siteConfig.name}` explicitly since OG doesn't use the layout template
 
 ### Security Headers
 
@@ -106,3 +118,17 @@ Tailwind CSS v4 with PostCSS plugin (`@tailwindcss/postcss`). Brand colors defin
 - Fort Hood is referred to as "Fort Hood (formerly Fort Cavazos)" throughout the site — maintain this format consistently.
 - Service areas: Killeen, Harker Heights, Temple, Belton, Copperas Cove, Waco, Salado, Georgetown.
 - The `@/*` path alias maps to `./src/*`.
+- Each city page has 500+ words of unique content + 6 city-specific FAQs in `src/data/areas.ts`.
+- Testimonials use Brandon Dixon's real review — do not add placeholder/fabricated testimonials.
+- Social profiles: Facebook (profile.php?id=61573261776960), Instagram (@selltojosh), YouTube (@FlippinTexas).
+
+## ADA / WCAG 2.1 AA
+
+- All decorative SVGs must have `aria-hidden="true"`
+- Breadcrumb separators must have `aria-hidden="true"`
+- Star ratings use `role="img"` + `aria-label="5 out of 5 stars"` on container, `aria-hidden="true"` on individual SVGs
+- reCAPTCHA badge is hidden from assistive tech via MutationObserver in root layout
+
+## Session Log — 2026-04-17
+
+**Commit `4b2a79b`:** SEO: fix duplicate titles, tighten meta, add AggregateRating schema, update social URLs, ADA fixes (16 files, 86 insertions, 89 deletions)
