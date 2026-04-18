@@ -51,7 +51,15 @@ Key data files:
 
 `LeadForm.tsx` (client component) → POST `/api/leads` → Resend email to SelltoJosh@gmail.com
 
-The form has 3 variants: `default`, `compact`, `full`. It optionally captures a reCAPTCHA v3 token. The API route (`src/app/api/leads/route.ts`) validates fields, verifies reCAPTCHA if configured, and sends a formatted HTML email via Resend. No CRM or database integration — email only.
+The form has 3 variants: `default`, `compact`, `full`. It uses React 19 `useId()` for unique field IDs, allowing multiple forms per page without duplicate HTML IDs. It optionally captures a reCAPTCHA v3 token. On successful submit, it pushes a `generate_lead` GA4 event to the GTM dataLayer before redirecting to `/thank-you`.
+
+The API route (`src/app/api/leads/route.ts`) applies in-memory rate limiting (5 requests per 15 minutes per IP via `src/lib/rate-limit.ts`), validates fields, verifies reCAPTCHA if configured, and sends a formatted HTML email via Resend. Returns 429 with `Retry-After` header when rate limited. No CRM or database integration — email only.
+
+LeadForm appears on:
+- Homepage hero (compact, dark)
+- Contact page (full)
+- All 8 city pages — hero (compact, dark) + mid-page section after FAQs (default, dark)
+- All 4 situation pages — hero (compact, dark) + mid-page section after FAQs (default, dark)
 
 ### Sanity CMS
 
@@ -124,11 +132,19 @@ Tailwind CSS v4 with PostCSS plugin (`@tailwindcss/postcss`). Brand colors defin
 
 ## ADA / WCAG 2.1 AA
 
-- All decorative SVGs must have `aria-hidden="true"`
+- All decorative SVGs must have `aria-hidden="true"` — 28 SVGs across 12 files verified as of 2026-04-17
 - Breadcrumb separators must have `aria-hidden="true"`
 - Star ratings use `role="img"` + `aria-label="5 out of 5 stars"` on container, `aria-hidden="true"` on individual SVGs
 - reCAPTCHA badge is hidden from assistive tech via MutationObserver in root layout
+- LeadForm uses `useId()` for unique field IDs — safe to render multiple forms per page without duplicate ID violations
 
 ## Session Log — 2026-04-17
 
 **Commit `4b2a79b`:** SEO: fix duplicate titles, tighten meta, add AggregateRating schema, update social URLs, ADA fixes (16 files, 86 insertions, 89 deletions)
+
+**Commit `f8ba5ec`:** Lead gen: add forms to city/situation pages, GA4 conversion event, rate limiting, ADA SVG fixes (18 files, 105 insertions, 37 deletions)
+- GA4 `generate_lead` event pushed to dataLayer on successful form submit
+- LeadForm added to all 8 city pages and 4 situation pages (mid-page section after FAQs)
+- React `useId()` used to generate unique form field IDs (fixes duplicate ID issue with multiple forms)
+- Rate limiting added to `/api/leads` — 5 requests per 15 min per IP, 429 response with Retry-After
+- 28 decorative SVGs fixed with `aria-hidden="true"` across 12 files
