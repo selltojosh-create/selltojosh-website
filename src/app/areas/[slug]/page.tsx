@@ -35,15 +35,11 @@ export async function generateMetadata({ params }: PageProps): Promise<Metadata>
 
   const city = area.city;
   const noFortHoodSlugs = ['waco', 'georgetown'];
-  const metaTitle = sanityArea?.metaTitle || (
-    noFortHoodSlugs.includes(slug)
-      ? `Sell My House Fast ${city} TX | Cash Home Buyer in ${city} | Sell to Josh`
-      : `Sell My House Fast ${city} TX | Cash Home Buyer Near Fort Hood | Sell to Josh`
-  );
+  const metaTitle = sanityArea?.metaTitle || `Sell My House Fast ${city} TX for Cash`;
   const metaDescription = sanityArea?.metaDescription || (
     noFortHoodSlugs.includes(slug)
-      ? `We buy houses for cash in ${city}, Texas. Sell your ${city} house fast - no repairs, no fees, close in 7-14 days. Get a fair cash offer within 24 hours from a local buyer you can trust.`
-      : `We buy houses for cash in ${city}, Texas near Fort Hood (formerly Fort Cavazos). Sell your ${city} house fast - no repairs, no fees, close in 7-14 days. Get a fair cash offer within 24 hours from a local buyer you can trust.`
+      ? `We buy houses for cash in ${city}, Texas. Sell your home fast — no repairs, no fees. Close in 7-14 days. Fair cash offer in 24 hours.`
+      : `We buy houses for cash in ${city}, Texas near Fort Hood. Sell fast — no repairs, no fees. Close in 7-14 days. Fair offer in 24 hours.`
   );
 
   return {
@@ -58,7 +54,7 @@ export async function generateMetadata({ params }: PageProps): Promise<Metadata>
       'Central Texas cash buyer',
     ],
     openGraph: {
-      title: metaTitle,
+      title: `${metaTitle} | ${siteConfig.name}`,
       description: metaDescription,
       url: `https://${siteConfig.domain}/areas/${slug}`,
       type: 'website',
@@ -144,19 +140,9 @@ function FAQPageSchema({ faqs }: { faqs: FAQ[] }) {
 // Static fallback testimonials
 const fallbackTestimonials = [
   {
-    quote: "Josh made selling our inherited property so easy. We closed in just 12 days and didn't have to worry about repairs or cleaning out the house.",
-    name: "Maria G.",
-    location: "Killeen, TX"
-  },
-  {
-    quote: "After my divorce, I needed to sell fast. Josh gave me a fair offer and worked around my schedule. No pressure, no games.",
-    name: "Robert T.",
-    location: "Temple, TX"
-  },
-  {
-    quote: "I was behind on payments and stressed about foreclosure. Josh helped me sell before it went to auction. He saved my credit.",
-    name: "Sandra L.",
-    location: "Harker Heights, TX"
+    quote: "Josh helped us out when my father passed. The house wasn't in great condition and had been on the market twice but didn't sell. Called Josh in March and he walked the property and bought it right there. Actually made more selling to Josh then I would have after all the realtor fees and closing cost.",
+    name: "Brandon Dixon",
+    location: "Central Texas"
   }
 ];
 

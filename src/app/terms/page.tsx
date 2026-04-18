@@ -2,8 +2,8 @@ import { Metadata } from 'next';
 import { siteConfig } from '@/data/siteConfig';
 
 export const metadata: Metadata = {
-  title: 'Terms of Service | Sell to Josh',
-  description: `Terms of Service for Sell to Josh. Important information about our services as a principal cash home buyer in Central Texas. Read before using our website.`,
+  title: 'Terms of Service',
+  description: 'Terms of Service for Sell to Josh. Information about our services as a principal cash home buyer in Central Texas.',
   alternates: {
     canonical: `https://${siteConfig.domain}/terms`,
   },

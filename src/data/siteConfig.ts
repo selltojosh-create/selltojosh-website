@@ -36,9 +36,9 @@ export const siteConfig = {
 
   // Social Media
   social: {
-    facebook: "https://facebook.com/selltojosh",
-    instagram: "https://instagram.com/selltojosh",
-    youtube: "https://youtube.com/@selltojosh"
+    facebook: "https://www.facebook.com/profile.php?id=61573261776960",
+    instagram: "https://www.instagram.com/selltojosh/",
+    youtube: "https://www.youtube.com/@FlippinTexas"
   },
 
   // Hero section - change this path to update the hero background image

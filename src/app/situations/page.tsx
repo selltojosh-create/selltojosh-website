@@ -5,12 +5,12 @@ import { serviceAreas } from '@/data/areas';
 import { situations, situationData } from '@/data/situations';
 
 export const metadata: Metadata = {
-  title: 'Sell Your House Fast in Any Situation | Central Texas | Sell to Josh',
-  description: 'Facing foreclosure, inherited property, PCS orders, or divorce? We buy houses for cash in Central Texas near Fort Hood. No repairs, no fees. Get a fair offer today.',
+  title: 'Sell Your House Fast in Any Situation',
+  description: 'Facing foreclosure, inherited property, PCS orders, or divorce? We buy houses for cash in Central Texas. No repairs, no fees.',
   keywords: ['sell house fast Central Texas', 'foreclosure help Killeen', 'inherited property sale', 'military PCS home sale', 'divorce house sale Texas'],
   openGraph: {
-    title: 'Sell Your House Fast in Any Situation | Central Texas | Sell to Josh',
-    description: 'Facing foreclosure, inherited property, PCS orders, or divorce? We buy houses for cash in Central Texas near Fort Hood.',
+    title: 'Sell Your House Fast in Any Situation | Sell to Josh',
+    description: 'Facing foreclosure, inherited property, PCS orders, or divorce? We buy houses for cash in Central Texas. No repairs, no fees.',
     url: `https://${siteConfig.domain}/situations`,
     type: 'website',
   },

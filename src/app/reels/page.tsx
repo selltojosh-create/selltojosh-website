@@ -8,11 +8,11 @@ export async function generateMetadata(): Promise<Metadata> {
   const pageData = await getPageBySlug('reels');
 
   return {
-    title: pageData?.metaTitle || 'Videos | Learn About Selling Your House for Cash | Sell to Josh',
-    description: pageData?.metaDescription || 'Watch helpful videos about selling your home for cash in Central Texas. Learn about inherited properties, foreclosure prevention, selling as-is, and our simple process.',
+    title: pageData?.metaTitle || 'Videos | Selling Your House for Cash',
+    description: pageData?.metaDescription || 'Watch videos about selling your home for cash in Central Texas. Inherited properties, foreclosure, selling as-is, and our process.',
     openGraph: {
-      title: pageData?.metaTitle || 'Videos | Learn About Selling Your House for Cash | Sell to Josh',
-      description: pageData?.metaDescription || 'Watch helpful videos about selling your home for cash in Central Texas.',
+      title: pageData?.metaTitle || 'Videos | Selling Your House for Cash | Sell to Josh',
+      description: pageData?.metaDescription || 'Watch videos about selling your home for cash in Central Texas. Inherited properties, foreclosure, selling as-is, and our process.',
     },
     alternates: {
       canonical: `https://selltojosh.com/reels`,

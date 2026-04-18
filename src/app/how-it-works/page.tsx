@@ -3,11 +3,11 @@ import Link from 'next/link';
 import { siteConfig } from '@/data/siteConfig';
 
 export const metadata: Metadata = {
-  title: 'How to Sell Your House Fast for Cash | 3 Simple Steps | Sell to Josh',
-  description: 'Learn our simple 3-step process to sell your Central Texas home for cash. Contact us, get your cash offer in 24-48 hours, and close on your timeline. No repairs, no fees, no hassle.',
+  title: 'How to Sell Your House Fast for Cash',
+  description: 'Our simple 3-step process to sell your Central Texas home for cash. Get an offer in 24-48 hours and close on your timeline. No fees.',
   openGraph: {
-    title: 'How to Sell Your House Fast for Cash | 3 Simple Steps | Sell to Josh',
-    description: 'Learn our simple 3-step process to sell your Central Texas home for cash. Get your offer in 24-48 hours, close on your timeline.',
+    title: 'How to Sell Your House Fast for Cash | Sell to Josh',
+    description: 'Our simple 3-step process to sell your Central Texas home for cash. Get an offer in 24-48 hours and close on your timeline. No fees.',
   },
   alternates: {
     canonical: `https://${siteConfig.domain}/how-it-works`,

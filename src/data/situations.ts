@@ -29,8 +29,8 @@ export const situations: Situation[] = [
     slug: "foreclosure",
     title: "Foreclosure",
     headline: "Facing Foreclosure in Central Texas? Sell Your House Fast for Cash",
-    metaTitle: "Sell Your House Before Foreclosure in Central Texas | Sell to Josh",
-    metaDescription: "Facing foreclosure near Fort Hood or Central Texas? Learn how selling your home for cash may help you avoid foreclosure, protect your equity, and move forward. Get a fair offer within 24 hours.",
+    metaTitle: "Sell Before Foreclosure in Central Texas",
+    metaDescription: "Facing foreclosure in Central Texas? Sell your home fast for cash. Protect your equity and avoid auction. Fair offer within 24 hours.",
     description: "If you've received a foreclosure notice or are behind on payments, you may have more options than you think. A cash sale can help you move forward on your terms.",
     keywords: [
       "stop foreclosure Central Texas",
@@ -44,8 +44,8 @@ export const situations: Situation[] = [
     slug: "inherited-property",
     title: "Inherited Property",
     headline: "Inherited a House in Central Texas? We Can Help You Sell It",
-    metaTitle: "Sell an Inherited House in Central Texas | No Repairs Needed | Sell to Josh",
-    metaDescription: "Inherited a property near Fort Hood or Central Texas? Sell it as-is for cash — no repairs, no cleanout, no lengthy listing. We handle the complexities so you don't have to.",
+    metaTitle: "Sell an Inherited House for Cash in Texas",
+    metaDescription: "Inherited a house in Central Texas? Sell it as-is for cash. No repairs, no cleanout, no listing. Get a fair offer within 24 hours.",
     description: "Inheriting a home comes with emotions, responsibilities, and tough decisions. Whether the property needs work, you live out of state, or multiple heirs are involved, we can help simplify the process.",
     keywords: [
       "sell inherited house Killeen",
@@ -59,8 +59,8 @@ export const situations: Situation[] = [
     slug: "military-pcs",
     title: "Military PCS",
     headline: "PCS Orders? Sell Your Fort Hood Area Home Fast for Cash",
-    metaTitle: "Sell Your Home Fast for Military PCS Near Fort Hood | Sell to Josh",
-    metaDescription: "Received PCS orders from Fort Hood (formerly Fort Cavazos)? Sell your home fast for cash. We work with military timelines and can close before your report date.",
+    metaTitle: "PCS Orders? Sell Your Fort Hood Home Fast",
+    metaDescription: "PCS orders from Fort Hood? Sell your home fast for cash. We close on military timelines, even before your report date.",
     description: "When PCS orders come, your timeline is set. Traditional home sales can take months — but a cash sale can close in days. We work with military families every day and understand the urgency of relocation.",
     keywords: [
       "PCS orders sell house fast",
@@ -74,8 +74,8 @@ export const situations: Situation[] = [
     slug: "divorce",
     title: "Divorce",
     headline: "Going Through a Divorce? Sell Your Central Texas Home for Cash",
-    metaTitle: "Sell Your House During Divorce in Central Texas | Sell to Josh",
-    metaDescription: "Need to sell your home during a divorce in Central Texas? Get a fair cash offer and close quickly so both parties can move forward. No showings, no stress.",
+    metaTitle: "Sell Your Home During Divorce in Texas",
+    metaDescription: "Selling your home during a divorce in Central Texas? Get a fair cash offer and close quickly. No showings, no stress.",
     description: "Divorce is already difficult. Selling the house doesn't have to make it harder. Whether both parties agree to sell or a court has ordered the sale, we can make a fair cash offer and close quickly.",
     keywords: [
       "sell house during divorce Texas",

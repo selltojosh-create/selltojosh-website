@@ -34,7 +34,7 @@ export async function generateMetadata({ params }: PageProps): Promise<Metadata>
     description: situation.metaDescription,
     keywords: situation.keywords,
     openGraph: {
-      title: situation.metaTitle,
+      title: `${situation.metaTitle} | ${siteConfig.name}`,
       description: situation.metaDescription,
       url: `https://${siteConfig.domain}/situations/${slug}`,
       type: 'website',
@@ -86,9 +86,9 @@ export default async function SituationPage({ params }: PageProps) {
             <div>
               <nav aria-label="Breadcrumb" className="text-sm text-gray-300 mb-4">
                 <Link href="/" className="hover:text-white">Home</Link>
-                <span className="mx-2">/</span>
+                <span className="mx-2" aria-hidden="true">/</span>
                 <Link href="/situations" className="hover:text-white">Situations</Link>
-                <span className="mx-2">/</span>
+                <span className="mx-2" aria-hidden="true">/</span>
                 <span className="text-orange">{situation.title}</span>
               </nav>
 
@@ -105,7 +105,7 @@ export default async function SituationPage({ params }: PageProps) {
                   href={siteConfig.phoneTel}
                   className="bg-white hover:bg-gray-100 text-navy font-bold py-3 px-6 rounded-lg transition-colors text-lg flex items-center justify-center gap-2"
                 >
-                  <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24" aria-hidden="true">
                     <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M3 5a2 2 0 012-2h3.28a1 1 0 01.948.684l1.498 4.493a1 1 0 01-.502 1.21l-2.257 1.13a11.042 11.042 0 005.516 5.516l1.13-2.257a1 1 0 011.21-.502l4.493 1.498a1 1 0 01.684.949V19a2 2 0 01-2 2h-1C9.716 21 3 14.284 3 6V5z" />
                   </svg>
                   Call {siteConfig.phone}
@@ -115,13 +115,13 @@ export default async function SituationPage({ params }: PageProps) {
               {/* Trust Indicators */}
               <div className="flex flex-wrap gap-4 text-sm">
                 <div className="flex items-center gap-2">
-                  <svg className="w-5 h-5 text-orange" fill="currentColor" viewBox="0 0 20 20">
+                  <svg className="w-5 h-5 text-orange" fill="currentColor" viewBox="0 0 20 20" aria-hidden="true">
                     <path fillRule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clipRule="evenodd" />
                   </svg>
                   <span className="text-white font-medium">Buying Central Texas Homes Since 2009</span>
                 </div>
                 <div className="flex items-center gap-2">
-                  <svg className="w-5 h-5 text-orange" fill="currentColor" viewBox="0 0 20 20">
+                  <svg className="w-5 h-5 text-orange" fill="currentColor" viewBox="0 0 20 20" aria-hidden="true">
                     <path fillRule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clipRule="evenodd" />
                   </svg>
                   <span className="text-white font-medium">Close in 7-14 Days</span>
@@ -171,7 +171,7 @@ export default async function SituationPage({ params }: PageProps) {
           <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-6 max-w-5xl mx-auto">
             {situationInfo.scenarios.map((scenario, index) => (
               <div key={index} className="bg-white p-6 rounded-xl shadow-sm flex items-start gap-4">
-                <svg className="w-6 h-6 text-orange flex-shrink-0 mt-1" fill="currentColor" viewBox="0 0 20 20">
+                <svg className="w-6 h-6 text-orange flex-shrink-0 mt-1" fill="currentColor" viewBox="0 0 20 20" aria-hidden="true">
                   <path fillRule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clipRule="evenodd" />
                 </svg>
                 <span className="text-gray-700 font-medium">{scenario}</span>

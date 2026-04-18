@@ -3,11 +3,11 @@ import LeadForm from '@/components/LeadForm';
 import { siteConfig } from '@/data/siteConfig';
 
 export const metadata: Metadata = {
-  title: 'Get Your Free Cash Offer | Sell Your House Fast | Sell to Josh',
-  description: 'Request your free, no-obligation cash offer for your Central Texas home. Fill out our simple form or call (254) 498-6025. We buy houses in Killeen, Temple, Harker Heights & more. We respond within 24 hours.',
+  title: 'Get Your Free Cash Offer Today',
+  description: 'Get your free, no-obligation cash offer for your Central Texas home. Call (254) 498-6025 or fill out our form. We respond in 24 hours.',
   openGraph: {
-    title: 'Get Your Free Cash Offer | Sell Your House Fast | Sell to Josh',
-    description: 'Request your free, no-obligation cash offer for your Central Texas home. We buy houses in Killeen, Temple, Harker Heights & more.',
+    title: 'Get Your Free Cash Offer Today | Sell to Josh',
+    description: 'Get your free, no-obligation cash offer for your Central Texas home. Call (254) 498-6025 or fill out our form. We respond in 24 hours.',
   },
   alternates: {
     canonical: `https://${siteConfig.domain}/contact`,

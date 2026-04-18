@@ -35,6 +35,26 @@ export default function LocalBusinessSchema() {
       opens: '08:00',
       closes: '20:00',
     },
+    sameAs: [
+      siteConfig.social.facebook,
+      siteConfig.social.instagram,
+      siteConfig.social.youtube,
+    ],
+    aggregateRating: {
+      '@type': 'AggregateRating',
+      ratingValue: '5',
+      bestRating: '5',
+      worstRating: '1',
+      reviewCount: '1',
+    },
+    review: [
+      {
+        '@type': 'Review',
+        reviewRating: { '@type': 'Rating', ratingValue: '5', bestRating: '5' },
+        author: { '@type': 'Person', name: 'Brandon Dixon' },
+        reviewBody: 'Josh helped us out when my father passed. The house wasn\'t in great condition and had been on the market twice but didn\'t sell. Called Josh in March and he walked the property and bought it right there. Actually made more selling to Josh then I would have after all the realtor fees and closing cost.',
+      },
+    ],
   };
 
   return (

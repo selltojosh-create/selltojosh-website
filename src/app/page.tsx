@@ -8,11 +8,11 @@ import { getSiteSettings, getFeaturedTestimonials, getAllFaqs } from '../../sani
 import { urlFor } from '../../sanity/lib/client';
 
 export const metadata: Metadata = {
-  title: 'Sell My House Fast Killeen TX | Cash Home Buyer | Sell to Josh',
-  description: 'Sell your house fast for cash in Killeen, Temple, Harker Heights & Central Texas. No repairs, no fees, close in 7-14 days. Get a fair cash offer from a local buyer. Call (254) 498-6025!',
+  title: 'Sell My House Fast Killeen TX | Sell to Josh',
+  description: 'Sell your house fast for cash in Killeen, Temple & Central Texas. No repairs, no fees, close in 7-14 days. Get a fair cash offer today.',
   openGraph: {
-    title: 'Sell My House Fast Killeen TX | Cash Home Buyer | Sell to Josh',
-    description: 'Sell your house fast for cash in Killeen, Temple, Harker Heights & Central Texas. No repairs, no fees, close in 7-14 days. Get a fair cash offer today!',
+    title: 'Sell My House Fast Killeen TX | Sell to Josh',
+    description: 'Sell your house fast for cash in Killeen, Temple & Central Texas. No repairs, no fees, close in 7-14 days. Get a fair cash offer today.',
   },
   alternates: {
     canonical: `https://${siteConfig.domain}`,
@@ -22,19 +22,9 @@ export const metadata: Metadata = {
 // Static fallback testimonials
 const fallbackTestimonials = [
   {
-    quote: "Josh made selling our inherited property so easy. We closed in just 12 days and didn't have to worry about repairs or cleaning out the house.",
-    name: "Maria G.",
-    location: "Killeen, TX"
-  },
-  {
-    quote: "After my divorce, I needed to sell fast. Josh gave me a fair offer and worked around my schedule. No pressure, no games.",
-    name: "Robert T.",
-    location: "Temple, TX"
-  },
-  {
-    quote: "I was behind on payments and stressed about foreclosure. Josh helped me sell before it went to auction. He saved my credit.",
-    name: "Sandra L.",
-    location: "Harker Heights, TX"
+    quote: "Josh helped us out when my father passed. The house wasn't in great condition and had been on the market twice but didn't sell. Called Josh in March and he walked the property and bought it right there. Actually made more selling to Josh then I would have after all the realtor fees and closing cost.",
+    name: "Brandon Dixon",
+    location: "Central Texas"
   }
 ];
 

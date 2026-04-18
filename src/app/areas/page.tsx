@@ -8,11 +8,11 @@ export async function generateMetadata(): Promise<Metadata> {
   const pageData = await getPageBySlug('areas');
 
   return {
-    title: pageData?.metaTitle || 'We Buy Houses Central Texas | Killeen, Temple, Waco | Sell to Josh',
-    description: pageData?.metaDescription || 'Cash home buyers serving Killeen, Temple, Harker Heights, Belton, Copperas Cove, Waco, Salado, Georgetown & surrounding Central Texas near Fort Hood (formerly Fort Cavazos). Get a fair cash offer today.',
+    title: pageData?.metaTitle || 'We Buy Houses in Central Texas for Cash',
+    description: pageData?.metaDescription || 'Cash home buyers in Killeen, Temple, Harker Heights, Belton, Copperas Cove, Waco & Central Texas near Fort Hood. Fair cash offers.',
     openGraph: {
-      title: pageData?.metaTitle || 'We Buy Houses Central Texas | Killeen, Temple, Waco | Sell to Josh',
-      description: pageData?.metaDescription || 'Cash home buyers serving Killeen, Temple, Harker Heights, Belton, Copperas Cove, Waco & surrounding Central Texas near Fort Hood.',
+      title: pageData?.metaTitle || 'We Buy Houses in Central Texas for Cash | Sell to Josh',
+      description: pageData?.metaDescription || 'Cash home buyers in Killeen, Temple, Harker Heights, Belton, Copperas Cove, Waco & Central Texas near Fort Hood. Fair cash offers.',
     },
     alternates: {
       canonical: `https://selltojosh.com/areas`,
