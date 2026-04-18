@@ -42,3 +42,12 @@ next-env.d.ts
 
 # Windows reserved files
 NUL
+
+.vercel
+
+# credentials
+secrets/
+gsc-credentials.json
+
+# agent reports
+reports/

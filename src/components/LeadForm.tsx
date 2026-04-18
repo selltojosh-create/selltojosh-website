@@ -1,6 +1,6 @@
 'use client';
 
-import { useState, FormEvent } from 'react';
+import { useState, useId, FormEvent } from 'react';
 import { useRouter } from 'next/navigation';
 
 interface LeadFormProps {
@@ -11,6 +11,7 @@ interface LeadFormProps {
 
 export default function LeadForm({ variant = 'default', darkMode = false, className = '' }: LeadFormProps) {
   const router = useRouter();
+  const id = useId();
   const [formData, setFormData] = useState({
     name: '',
     phone: '',
@@ -49,6 +50,8 @@ export default function LeadForm({ variant = 'default', darkMode = false, classN
 
       if (response.ok) {
         setFormData({ name: '', phone: '', address: '', message: '' });
+        const w = window as Window & { dataLayer?: Record<string, unknown>[] };
+        w.dataLayer?.push({ event: 'generate_lead', lead_source: 'website_form' });
         router.push('/thank-you');
         return;
       } else {
@@ -69,6 +72,7 @@ export default function LeadForm({ variant = 'default', darkMode = false, classN
           fill="none"
           stroke="currentColor"
           viewBox="0 0 24 24"
+          aria-hidden="true"
         >
           <path
             strokeLinecap="round"
@@ -96,12 +100,12 @@ export default function LeadForm({ variant = 'default', darkMode = false, classN
     <form onSubmit={handleSubmit} className={`space-y-4 ${className}`}>
       <div className={isFull ? 'grid md:grid-cols-2 gap-4' : 'space-y-4'}>
         <div>
-          <label htmlFor="name" className={`block text-sm font-medium ${labelClass} mb-1`}>
+          <label htmlFor={`${id}-name`} className={`block text-sm font-medium ${labelClass} mb-1`}>
             Your Name *
           </label>
           <input
             type="text"
-            id="name"
+            id={`${id}-name`}
             required
             value={formData.name}
             onChange={(e) => setFormData({ ...formData, name: e.target.value })}
@@ -111,12 +115,12 @@ export default function LeadForm({ variant = 'default', darkMode = false, classN
         </div>
 
         <div>
-          <label htmlFor="phone" className={`block text-sm font-medium ${labelClass} mb-1`}>
+          <label htmlFor={`${id}-phone`} className={`block text-sm font-medium ${labelClass} mb-1`}>
             Phone Number *
           </label>
           <input
             type="tel"
-            id="phone"
+            id={`${id}-phone`}
             required
             value={formData.phone}
             onChange={(e) => setFormData({ ...formData, phone: e.target.value })}
@@ -127,12 +131,12 @@ export default function LeadForm({ variant = 'default', darkMode = false, classN
       </div>
 
       <div>
-        <label htmlFor="address" className={`block text-sm font-medium ${labelClass} mb-1`}>
+        <label htmlFor={`${id}-address`} className={`block text-sm font-medium ${labelClass} mb-1`}>
           Property Address *
         </label>
         <input
           type="text"
-          id="address"
+          id={`${id}-address`}
           required
           value={formData.address}
           onChange={(e) => setFormData({ ...formData, address: e.target.value })}
@@ -143,11 +147,11 @@ export default function LeadForm({ variant = 'default', darkMode = false, classN
 
       {!isCompact && (
         <div>
-          <label htmlFor="message" className={`block text-sm font-medium ${labelClass} mb-1`}>
+          <label htmlFor={`${id}-message`} className={`block text-sm font-medium ${labelClass} mb-1`}>
             Tell Us About Your Situation (Optional)
           </label>
           <textarea
-            id="message"
+            id={`${id}-message`}
             rows={isFull ? 4 : 3}
             value={formData.message}
             onChange={(e) => setFormData({ ...formData, message: e.target.value })}

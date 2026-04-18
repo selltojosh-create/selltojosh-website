@@ -1,7 +1,10 @@
 import { NextRequest, NextResponse } from 'next/server';
 import { Resend } from 'resend';
+import { rateLimit } from '@/lib/rate-limit';
 
-const resend = new Resend(process.env.RESEND_API_KEY);
+function getResend() {
+  return new Resend(process.env.RESEND_API_KEY);
+}
 
 interface LeadData {
   name: string;
@@ -31,6 +34,16 @@ async function verifyRecaptcha(token: string): Promise<boolean> {
 
 export async function POST(request: NextRequest) {
   try {
+    // Rate limit by IP
+    const ip = request.headers.get('x-forwarded-for')?.split(',')[0]?.trim() || 'unknown';
+    const { allowed, retryAfter } = rateLimit(ip);
+    if (!allowed) {
+      return NextResponse.json(
+        { error: 'Too many requests. Please try again later.' },
+        { status: 429, headers: { 'Retry-After': String(retryAfter) } }
+      );
+    }
+
     // Debug: Check if API key is loaded
     console.log('=== LEAD API DEBUG ===');
     console.log('RESEND_API_KEY exists:', !!process.env.RESEND_API_KEY);
@@ -77,7 +90,7 @@ export async function POST(request: NextRequest) {
     console.log('Attempting to send email via Resend...');
 
     // Send email notification via Resend
-    const { data: emailData, error: emailError } = await resend.emails.send({
+    const { data: emailData, error: emailError } = await getResend().emails.send({
       from: 'SellToJosh.com <leads@selltojosh.com>',
       to: 'SelltoJosh@gmail.com',
       subject: 'New Lead from SellToJosh.com',

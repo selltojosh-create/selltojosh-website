@@ -224,6 +224,25 @@ export default async function SituationPage({ params }: PageProps) {
         </div>
       </section>
 
+      {/* Mid-Page Lead Form */}
+      <section className="section-padding bg-gradient-to-br from-navy to-navy-dark text-white">
+        <div className="container-custom mx-auto">
+          <div className="max-w-2xl mx-auto">
+            <div className="text-center mb-8">
+              <h2 className="text-3xl md:text-4xl font-bold mb-4">
+                Get a Free Cash Offer Today
+              </h2>
+              <p className="text-xl text-gray-300">
+                No obligation. No fees. We buy homes in any condition.
+              </p>
+            </div>
+            <div className="bg-navy/90 backdrop-blur-sm p-6 md:p-8 rounded-2xl shadow-2xl border border-white/10">
+              <LeadForm darkMode />
+            </div>
+          </div>
+        </div>
+      </section>
+
       {/* Cities Served */}
       <section className="section-padding bg-navy text-white">
         <div className="container-custom mx-auto text-center">
@@ -280,7 +299,7 @@ export default async function SituationPage({ params }: PageProps) {
               href={siteConfig.phoneTel}
               className="bg-white hover:bg-gray-100 text-navy font-bold py-3 px-8 rounded-lg transition-colors text-lg flex items-center justify-center gap-2"
             >
-              <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24" aria-hidden="true">
                 <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M3 5a2 2 0 012-2h3.28a1 1 0 01.948.684l1.498 4.493a1 1 0 01-.502 1.21l-2.257 1.13a11.042 11.042 0 005.516 5.516l1.13-2.257a1 1 0 011.21-.502l4.493 1.498a1 1 0 01.684.949V19a2 2 0 01-2 2h-1C9.716 21 3 14.284 3 6V5z" />
               </svg>
               Call {siteConfig.phone}

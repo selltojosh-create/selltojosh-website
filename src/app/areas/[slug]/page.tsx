@@ -443,6 +443,25 @@ export default async function CityPage({ params }: PageProps) {
         </section>
       )}
 
+      {/* Mid-Page Lead Form */}
+      <section className="section-padding bg-gradient-to-br from-navy to-navy-dark text-white">
+        <div className="container-custom mx-auto">
+          <div className="max-w-2xl mx-auto">
+            <div className="text-center mb-8">
+              <h2 className="text-3xl md:text-4xl font-bold mb-4">
+                Get Your Free Cash Offer for Your {area.city} Home
+              </h2>
+              <p className="text-xl text-gray-300">
+                No obligation. No fees. We buy homes in any condition.
+              </p>
+            </div>
+            <div className="bg-navy/90 backdrop-blur-sm p-6 md:p-8 rounded-2xl shadow-2xl border border-white/10">
+              <LeadForm darkMode />
+            </div>
+          </div>
+        </div>
+      </section>
+
       {/* Other Areas */}
       <section className="section-padding bg-navy text-white">
         <div className="container-custom mx-auto text-center">

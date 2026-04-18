@@ -1,0 +1,12 @@
+{
+  "name": "selltojosh-seo-agent",
+  "version": "1.0.0",
+  "description": "SEO monitoring agent for SellToJosh.com using Google Search Console",
+  "main": "seo-agent.js",
+  "scripts": {
+    "start": "node seo-agent.js"
+  },
+  "dependencies": {
+    "googleapis": "^144.0.0"
+  }
+}
