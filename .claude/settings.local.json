@@ -28,7 +28,8 @@
       "Bash(npm run:*)",
       "Bash(rm:*)",
       "Bash(vercel:*)",
-      "WebFetch(domain:selltojosh.com)"
+      "WebFetch(domain:selltojosh.com)",
+      "Bash(ls:*)"
     ]
   }
 }

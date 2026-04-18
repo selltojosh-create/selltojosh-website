@@ -148,3 +148,12 @@ Tailwind CSS v4 with PostCSS plugin (`@tailwindcss/postcss`). Brand colors defin
 - React `useId()` used to generate unique form field IDs (fixes duplicate ID issue with multiple forms)
 - Rate limiting added to `/api/leads` — 5 requests per 15 min per IP, 429 response with Retry-After
 - 28 decorative SVGs fixed with `aria-hidden="true"` across 12 files
+
+**Commit `3a54cca`:** Security: XSS fix, input validation, remove debug logs, ADA: nav aria-expanded, form autocomplete, remove dead code (5 files, 34 insertions, 61 deletions)
+- `escapeHtml()` added to sanitize all user input in HTML email template (XSS fix)
+- Generic 500 error response — no longer leaks `error.message` or Resend internals
+- Input length limits on all form fields (name: 100, phone: 20, address: 200, message: 2000)
+- All debug `console.log` removed from `/api/leads` (API key prefix, PII, verbose email logs)
+- Mobile nav hamburger button: `aria-expanded` + `aria-controls="mobile-menu"` added
+- LeadForm: `autoComplete` attributes added to name/phone/address inputs (WCAG 1.3.5)
+- Dead `isSubmitted` state and unreachable success UI block removed from LeadForm

@@ -6,6 +6,7 @@ import FAQAccordion from '@/components/FAQAccordion';
 import TestimonialCard from '@/components/TestimonialCard';
 import { siteConfig } from '@/data/siteConfig';
 import { serviceAreas as staticServiceAreas, cityData } from '@/data/areas';
+import { situations } from '@/data/situations';
 import type { FAQ } from '@/data/faqs';
 import { getServiceAreaBySlug, getFeaturedTestimonials, getSiteSettings } from '../../../../sanity/lib/fetch';
 
@@ -297,6 +298,24 @@ export default async function CityPage({ params }: PageProps) {
                 <span className="text-gray-700 font-medium">{scenario}</span>
               </div>
             ))}
+          </div>
+
+          {/* Situation Links */}
+          <div className="mt-12 text-center">
+            <p className="text-lg text-gray-600 mb-6">
+              Learn more about selling in your specific situation:
+            </p>
+            <div className="flex flex-wrap justify-center gap-3">
+              {situations.map((situation) => (
+                <Link
+                  key={situation.slug}
+                  href={`/situations/${situation.slug}`}
+                  className="bg-white hover:bg-orange/10 border border-gray-200 px-5 py-2.5 rounded-full font-medium text-navy hover:text-orange transition-colors text-sm"
+                >
+                  {situation.title}
+                </Link>
+              ))}
+            </div>
           </div>
         </div>
       </section>

@@ -37,20 +37,11 @@ export const metadata: Metadata = {
     siteName: siteConfig.name,
     title: `${siteConfig.name} | Cash Home Buyers in Central Texas`,
     description: siteConfig.description,
-    images: [
-      {
-        url: "/og-image.jpg",
-        width: 1200,
-        height: 630,
-        alt: `${siteConfig.name} - Central Texas Cash Home Buyer`,
-      },
-    ],
   },
   twitter: {
     card: "summary_large_image",
     title: `${siteConfig.name} | Cash Home Buyers in Central Texas`,
     description: siteConfig.description,
-    images: ["/og-image.jpg"],
   },
   verification: {
     google: "UIBIiwWtg0mhB7mk5TY85XI9EMR5ky8yNG4d3BxAr_Q",

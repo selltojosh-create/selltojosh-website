@@ -2,6 +2,7 @@ import { Metadata } from 'next';
 import Link from 'next/link';
 import ReelsCarousel from '@/components/ReelsCarousel';
 import { reels as staticReels } from '@/data/reels';
+import { siteConfig } from '@/data/siteConfig';
 import { getAllReels, getPageBySlug } from '../../../sanity/lib/fetch';
 
 export async function generateMetadata(): Promise<Metadata> {
@@ -15,7 +16,7 @@ export async function generateMetadata(): Promise<Metadata> {
       description: pageData?.metaDescription || 'Watch videos about selling your home for cash in Central Texas. Inherited properties, foreclosure, selling as-is, and our process.',
     },
     alternates: {
-      canonical: `https://selltojosh.com/reels`,
+      canonical: `https://${siteConfig.domain}/reels`,
     },
   };
 }

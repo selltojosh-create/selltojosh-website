@@ -3,9 +3,18 @@ import Link from 'next/link';
 import { notFound } from 'next/navigation';
 import LeadForm from '@/components/LeadForm';
 import FAQAccordion from '@/components/FAQAccordion';
+import TestimonialCard from '@/components/TestimonialCard';
 import { siteConfig } from '@/data/siteConfig';
 import { serviceAreas } from '@/data/areas';
 import { situations, situationData } from '@/data/situations';
+
+const fallbackTestimonials = [
+  {
+    quote: "Josh helped us out when my father passed. The house wasn't in great condition and had been on the market twice but didn't sell. Called Josh in March and he walked the property and bought it right there. Actually made more selling to Josh then I would have after all the realtor fees and closing cost.",
+    name: "Brandon Dixon",
+    location: "Central Texas"
+  }
+];
 
 interface PageProps {
   params: Promise<{ slug: string }>;
@@ -203,6 +212,23 @@ export default async function SituationPage({ params }: PageProps) {
                 <p className="text-gray-600">{step.description}</p>
               </div>
             ))}
+          </div>
+        </div>
+      </section>
+
+      {/* Testimonials */}
+      <section className="section-padding bg-gray-light">
+        <div className="container-custom mx-auto">
+          <div className="text-center mb-12">
+            <h2 className="text-3xl md:text-4xl font-bold text-navy mb-4">
+              What Central Texas Homeowners Say
+            </h2>
+            <p className="text-xl text-gray-600 max-w-2xl mx-auto">
+              Real stories from homeowners who sold to us.
+            </p>
+          </div>
+          <div className="max-w-xl mx-auto">
+            <TestimonialCard {...fallbackTestimonials[0]} />
           </div>
         </div>
       </section>
