@@ -157,3 +157,28 @@ Tailwind CSS v4 with PostCSS plugin (`@tailwindcss/postcss`). Brand colors defin
 - Mobile nav hamburger button: `aria-expanded` + `aria-controls="mobile-menu"` added
 - LeadForm: `autoComplete` attributes added to name/phone/address inputs (WCAG 1.3.5)
 - Dead `isSubmitted` state and unreachable success UI block removed from LeadForm
+
+**Commit `e29a948`:** P1: OG image, situation cross-links on city pages, testimonial on situation pages, fix reels canonical (7 files, 161 insertions, 11 deletions)
+- `src/app/opengraph-image.tsx` created — Next.js file convention auto-generates OG meta tags for all routes (edge runtime, 1200x630, branded navy/orange design)
+- Removed dead `images` arrays from `layout.tsx` openGraph + twitter config (referenced non-existent `/og-image.jpg`)
+- Brandon Dixon testimonial added to all 4 situation pages via `TestimonialCard` (between "How We Help" and FAQ sections)
+- 32 situation cross-links added to all 8 city pages (pill-style links in "Common Scenarios" section → 4 situation pages each)
+- Reels page canonical fixed from hardcoded `https://selltojosh.com/reels` to `https://${siteConfig.domain}/reels`
+
+## Session Log — 2026-04-18
+
+**Commit `375135a`:** Pre-PPC: UTM capture, image compression, robots fix, cleanup (4 files, 50 insertions, 10 deletions)
+- UTM parameter capture added to LeadForm via `useSearchParams()` — reads `utm_source`, `utm_medium`, `utm_campaign`, `utm_content`, `utm_term` from URL and passes to `/api/leads` POST body
+- API route `LeadData` interface extended with optional `utmParams` object; UTM values escaped via `escapeHtml()` and validated (200 char max each)
+- Lead notification email includes "Campaign Info" section (HTML + plain text) when UTM params present — only shown for PPC traffic, clean for organic
+- GA4 `generate_lead` event now includes `utm_source` and `utm_campaign` for GTM attribution
+- LeadForm wrapped in `<Suspense>` boundary (outer/inner component pattern) to fix SSG build error with `useSearchParams()`
+- `public/josh.jpg` compressed from 8.2 MB (5504x8256 Nikon D850) to 83 KB (800px wide, quality 80, Exif stripped)
+- `/studio` added to `robots.ts` disallow list — prevents Sanity CMS admin from being indexed
+- Removed unused `emailData` variable from API route (ESLint fix)
+- Removed 2 dev `console.log` statements from reCAPTCHA verification in API route
+
+### PPC Launch Status: CONDITIONAL GO
+Pending before PPC spend:
+1. Configure Google Ads conversion tag in GTM (import `generate_lead` event as conversion)
+2. Test UTM flow end-to-end: visit a city page with `?utm_source=google&utm_medium=cpc&utm_campaign=test`, submit form, verify UTM params appear in lead email
