@@ -21,12 +21,18 @@ interface LeadData {
   address: string;
   message?: string;
   recaptchaToken?: string;
+  utmParams?: {
+    utm_source?: string;
+    utm_medium?: string;
+    utm_campaign?: string;
+    utm_content?: string;
+    utm_term?: string;
+  };
 }
 
 async function verifyRecaptcha(token: string): Promise<boolean> {
   const secret = process.env.RECAPTCHA_SECRET_KEY;
   if (!secret) {
-    console.log('[DEV] reCAPTCHA secret not configured — skipping verification');
     return true;
   }
 
@@ -37,7 +43,6 @@ async function verifyRecaptcha(token: string): Promise<boolean> {
   });
 
   const data = await res.json();
-  console.log('reCAPTCHA verify:', { score: data.score, success: data.success });
   return data.success && (data.score ?? 0) >= 0.5;
 }
 
@@ -58,6 +63,12 @@ export async function POST(request: NextRequest) {
     // S3: Input length limits
     if (data.name?.length > 100 || data.phone?.length > 20 ||
         data.address?.length > 200 || (data.message && data.message.length > 2000)) {
+      return NextResponse.json({ error: 'Input too long' }, { status: 400 });
+    }
+
+    // Validate UTM param lengths
+    const utmFields = data.utmParams ? Object.values(data.utmParams) : [];
+    if (utmFields.some(v => v && v.length > 200)) {
       return NextResponse.json({ error: 'Input too long' }, { status: 400 });
     }
 
@@ -88,7 +99,7 @@ export async function POST(request: NextRequest) {
     });
 
     // Send email notification via Resend
-    const { data: emailData, error: emailError } = await getResend().emails.send({
+    const { error: emailError } = await getResend().emails.send({
       from: 'SellToJosh.com <leads@selltojosh.com>',
       to: 'SelltoJosh@gmail.com',
       subject: 'New Lead from SellToJosh.com',
@@ -121,6 +132,14 @@ export async function POST(request: NextRequest) {
               <td style="padding: 10px; font-weight: bold;">Submitted:</td>
               <td style="padding: 10px;">${timestamp}</td>
             </tr>
+            ${data.utmParams?.utm_source ? `
+            <tr><td colspan="2" style="padding: 15px 10px 5px; font-weight: bold; color: #2d3367; border-bottom: 1px solid #eee;">Campaign Info</td></tr>
+            ${data.utmParams.utm_source ? `<tr><td style="padding: 8px 10px; border-bottom: 1px solid #eee; font-weight: bold;">Source:</td><td style="padding: 8px 10px; border-bottom: 1px solid #eee;">${escapeHtml(data.utmParams.utm_source)}</td></tr>` : ''}
+            ${data.utmParams.utm_medium ? `<tr><td style="padding: 8px 10px; border-bottom: 1px solid #eee; font-weight: bold;">Medium:</td><td style="padding: 8px 10px; border-bottom: 1px solid #eee;">${escapeHtml(data.utmParams.utm_medium)}</td></tr>` : ''}
+            ${data.utmParams.utm_campaign ? `<tr><td style="padding: 8px 10px; border-bottom: 1px solid #eee; font-weight: bold;">Campaign:</td><td style="padding: 8px 10px; border-bottom: 1px solid #eee;">${escapeHtml(data.utmParams.utm_campaign)}</td></tr>` : ''}
+            ${data.utmParams.utm_content ? `<tr><td style="padding: 8px 10px; border-bottom: 1px solid #eee; font-weight: bold;">Content:</td><td style="padding: 8px 10px; border-bottom: 1px solid #eee;">${escapeHtml(data.utmParams.utm_content)}</td></tr>` : ''}
+            ${data.utmParams.utm_term ? `<tr><td style="padding: 8px 10px; font-weight: bold;">Term:</td><td style="padding: 8px 10px;">${escapeHtml(data.utmParams.utm_term)}</td></tr>` : ''}
+            ` : ''}
           </table>
 
           <div style="margin-top: 30px; padding: 15px; background-color: #f7f7f7; border-radius: 8px;">
@@ -143,7 +162,7 @@ Name: ${escapeHtml(data.name)}
 Phone: ${escapeHtml(data.phone)}
 Property Address: ${escapeHtml(data.address)}
 Message: ${escapeHtml(data.message || 'No message provided')}
-Submitted: ${timestamp}
+Submitted: ${timestamp}${data.utmParams?.utm_source ? `\n\nCampaign Info:\nSource: ${escapeHtml(data.utmParams.utm_source)}${data.utmParams.utm_medium ? `\nMedium: ${escapeHtml(data.utmParams.utm_medium)}` : ''}${data.utmParams.utm_campaign ? `\nCampaign: ${escapeHtml(data.utmParams.utm_campaign)}` : ''}${data.utmParams.utm_content ? `\nContent: ${escapeHtml(data.utmParams.utm_content)}` : ''}${data.utmParams.utm_term ? `\nTerm: ${escapeHtml(data.utmParams.utm_term)}` : ''}` : ''}
       `.trim(),
     });
 

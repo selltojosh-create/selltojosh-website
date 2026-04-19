@@ -1,7 +1,7 @@
 'use client';
 
-import { useState, useId, FormEvent } from 'react';
-import { useRouter } from 'next/navigation';
+import { Suspense, useState, useId, FormEvent } from 'react';
+import { useRouter, useSearchParams } from 'next/navigation';
 
 interface LeadFormProps {
   variant?: 'default' | 'compact' | 'full';
@@ -9,7 +9,15 @@ interface LeadFormProps {
   className?: string;
 }
 
-export default function LeadForm({ variant = 'default', darkMode = false, className = '' }: LeadFormProps) {
+export default function LeadForm(props: LeadFormProps) {
+  return (
+    <Suspense>
+      <LeadFormInner {...props} />
+    </Suspense>
+  );
+}
+
+function LeadFormInner({ variant = 'default', darkMode = false, className = '' }: LeadFormProps) {
   const router = useRouter();
   const id = useId();
   const [formData, setFormData] = useState({
@@ -20,6 +28,14 @@ export default function LeadForm({ variant = 'default', darkMode = false, classN
   });
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [error, setError] = useState('');
+  const searchParams = useSearchParams();
+  const utmParams = {
+    utm_source: searchParams.get('utm_source') || '',
+    utm_medium: searchParams.get('utm_medium') || '',
+    utm_campaign: searchParams.get('utm_campaign') || '',
+    utm_content: searchParams.get('utm_content') || '',
+    utm_term: searchParams.get('utm_term') || '',
+  };
 
   const handleSubmit = async (e: FormEvent) => {
     e.preventDefault();
@@ -44,13 +60,18 @@ export default function LeadForm({ variant = 'default', darkMode = false, classN
       const response = await fetch('/api/leads', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({ ...formData, recaptchaToken }),
+        body: JSON.stringify({ ...formData, recaptchaToken, utmParams }),
       });
 
       if (response.ok) {
         setFormData({ name: '', phone: '', address: '', message: '' });
         const w = window as Window & { dataLayer?: Record<string, unknown>[] };
-        w.dataLayer?.push({ event: 'generate_lead', lead_source: 'website_form' });
+        w.dataLayer?.push({
+          event: 'generate_lead',
+          lead_source: 'website_form',
+          ...(utmParams.utm_source && { utm_source: utmParams.utm_source }),
+          ...(utmParams.utm_campaign && { utm_campaign: utmParams.utm_campaign }),
+        });
         router.push('/thank-you');
         return;
       } else {
