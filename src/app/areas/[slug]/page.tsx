@@ -35,7 +35,7 @@ export async function generateMetadata({ params }: PageProps): Promise<Metadata>
   }
 
   const city = area.city;
-  const noFortHoodSlugs = ['waco', 'georgetown'];
+  const noFortHoodSlugs = ['waco', 'georgetown', 'lampasas'];
   const metaTitle = sanityArea?.metaTitle || `Sell My House Fast ${city} TX for Cash`;
   const metaDescription = sanityArea?.metaDescription || (
     noFortHoodSlugs.includes(slug)

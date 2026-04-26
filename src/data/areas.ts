@@ -139,6 +139,36 @@ export const serviceAreas: ServiceArea[] = [
       "Relocating for work or retirement",
       "Investment properties you want to exit"
     ]
+  },
+  {
+    slug: "nolanville",
+    city: "Nolanville",
+    state: "TX",
+    headline: "Sell Your Nolanville Home Fast for Cash",
+    description: "We buy houses for cash in Nolanville, TX near Fort Hood (formerly Fort Cavazos). Whether you're in Warriors Legacy, The Enclave, Bella Charca, or anywhere in this fast-growing Bell County community along I-14, we provide fast cash offers on homes in any condition. PCS orders, inherited property, foreclosure, or just need to sell fast — we handle every situation with a fair offer and no repairs needed.",
+    scenarios: [
+      "PCS orders requiring a quick sale",
+      "Inherited Fort Hood-area properties",
+      "Vacant rental properties costing you money",
+      "Pre-foreclosure or behind on payments",
+      "Divorce situations requiring fast resolution",
+      "Job relocation away from Central Texas"
+    ]
+  },
+  {
+    slug: "lampasas",
+    city: "Lampasas",
+    state: "TX",
+    headline: "Sell Your Lampasas Home Fast for Cash",
+    description: "We buy houses for cash in Lampasas, TX — the northern gateway to the Texas Hill Country. From historic homes near the downtown square to ranches and acreage throughout Lampasas County, we make fair cash offers on properties in any condition. Inherited homes, rural properties with outbuildings, divorce situations, or just need to sell fast — we close on your timeline with no repairs, no fees, and no hassle.",
+    scenarios: [
+      "Inherited Hill Country homes and family properties",
+      "Rural properties with acreage and outbuildings",
+      "Older homes near downtown needing updates",
+      "Vacant properties costing money each month",
+      "Divorce situations requiring fast resolution",
+      "Downsizing from larger rural properties"
+    ]
   }
 ];
 
@@ -535,6 +565,105 @@ export const cityData: Record<string, CityData> = {
       {
         question: "What Georgetown neighborhoods do you buy in?",
         answer: "We buy homes throughout Georgetown and Williamson County — Sun City, the historic downtown area, Berry Creek, Wolf Ranch, neighborhoods near Southwestern University, properties along the San Gabriel River, and all surrounding areas. Whether your home is in an established neighborhood or a newer development, we're interested."
+      }
+    ]
+  },
+  "nolanville": {
+    content: [
+      "Nolanville sits right in the middle of the Fort Hood (formerly Fort Cavazos) corridor, tucked between Killeen and Belton along I-14. It's one of the fastest-growing small towns in Bell County, and that growth has brought a lot of new homeowners into neighborhoods like Warriors Legacy, The Enclave, and Bella Charca. But growth doesn't solve every situation — and when you need to sell a Nolanville house fast, a traditional listing isn't always the right move.",
+      "I'm a local Central Texas cash home buyer, and I've been buying homes in the Fort Hood area since 2009. When you sell your Nolanville house to me, you skip the repairs, the showings, the inspections, and the agent commissions. I make a fair cash offer based on real Nolanville market values — not a lowball number — and you pick the closing date.",
+      "Nolanville homeowners come to me for a lot of different reasons. PCS orders are a big one. When Fort Hood sends your family across the country on short notice, you don't have time to list, wait 60 days for the right buyer, negotiate repairs, and hope financing goes through. A cash sale closes in 7 to 14 days so you can focus on the move. Inherited homes are another — if you've ended up with a family home in Nolanville that needs work or has belongings still inside, I can take it as-is and coordinate with the probate attorney and title company on timing. I also work with homeowners facing foreclosure, divorce, job relocation, and long-vacant rental properties that have become more trouble than they're worth.",
+      "Because Nolanville is newer and still growing — especially east of I-14 where the Warriors Legacy expansion keeps adding phases — a lot of the homes here are relatively modern. That's fine, but it also means some of the older properties near downtown Nolanville or on the north side get overlooked in traditional listings. I don't care about age, condition, or whether the kitchen's been updated. I buy houses in any condition, in any Nolanville neighborhood.",
+      "The process is simple. Tell me about your property — a quick call or form is enough to start. I'll evaluate it based on its condition, location, and comparable sales nearby, and get back to you with a cash offer within 24 to 48 hours. If you accept, we close at a local title company on a date that works for you. I pay standard closing costs, and there are no agent fees or commissions. The offer I give you is the amount you walk away with, minus any existing mortgage payoff.",
+      "As a local buyer, I know this market. I live and work in Central Texas, I understand what Nolanville homes are actually worth, and I'm not a faceless out-of-state investor making offers sight unseen. You'll deal directly with me — someone who can walk the property, look you in the eye, and give you a straight answer.",
+      "If you're ready for a fair cash offer on your Nolanville home, or you just want to know what's possible, reach out. No pressure, no obligation, no games."
+    ],
+    landmarks: [
+      "Warriors Legacy",
+      "The Enclave",
+      "Bella Charca",
+      "Downtown Nolanville",
+      "I-14 corridor",
+      "Salado Creek"
+    ],
+    coordinates: {
+      lat: 31.0782,
+      lng: -97.6086
+    },
+    faqs: [
+      {
+        question: "Do you buy houses in any Nolanville neighborhood?",
+        answer: "Yes. I buy homes throughout Nolanville, including Warriors Legacy, The Enclave, Bella Charca, the older neighborhoods near downtown, and properties on the outskirts near Salado Creek and the rural parts of Bell County. Neighborhood, age, and condition don't matter — I'll make a fair cash offer on any Nolanville property."
+      },
+      {
+        question: "I'm getting PCS orders from Fort Hood. Can you really close in time?",
+        answer: "Yes. Military PCS timelines are one of the most common situations I work with. A typical cash closing takes 7 to 14 days once you accept the offer, which is fast enough for most PCS windows. If you have a specific date the military needs you out by, tell me upfront and I'll build the closing around it."
+      },
+      {
+        question: "What if my Nolanville house needs major repairs?",
+        answer: "That's fine — I buy houses as-is. Roof issues, foundation problems, outdated kitchens and bathrooms, HVAC problems, hoarder situations — none of it changes whether I'll buy the property. I factor condition into the offer, but I don't ask you to fix anything or clean anything out before closing."
+      },
+      {
+        question: "How do you determine the cash offer for a Nolanville home?",
+        answer: "The offer is based on three things: the property's condition, its location within Nolanville, and recent comparable sales in the area. I also factor in the cost of repairs I'll need to make after closing. I'm transparent about how I get to the number, and I'm happy to walk you through it so you can see it's fair."
+      },
+      {
+        question: "Are there any fees or commissions when I sell to you?",
+        answer: "No. Zero agent commissions, zero listing fees, no closing costs on your side — I cover standard closing costs. The offer I make is the amount you receive at closing, minus only any existing mortgage payoff. That's a big reason cash sales often net similar (or more) than a traditional listing after fees."
+      },
+      {
+        question: "How does Nolanville's growth affect what my home is worth to a cash buyer?",
+        answer: "Growth is mostly good for value — newer developments like Warriors Legacy and The Enclave have strengthened the overall Nolanville market, which lifts comps for older properties too. When I evaluate your home, I look at recent sales in your specific section of town, not just the citywide average. So whether you're in a newer subdivision or an older home near downtown, I'll base the offer on what's actually selling near you."
+      }
+    ]
+  },
+  "lampasas": {
+    content: [
+      "Lampasas has a different feel than the rest of the Fort Hood corridor. Sitting at the crossroads of US-183, US-190, and US-281, it's the northern gateway to the Texas Hill Country — a small town of around 8,000 with historic roots, natural springs, and a mix of in-town homes, ranches, and rural acreage. It's about an hour from Austin and 30 minutes west of Copperas Cove, which makes it a popular spot for folks who want more space, quieter surroundings, and real Hill Country scenery. But when life shifts and you need to sell a Lampasas home fast, a traditional listing can drag out for months — especially for rural or unique properties that don't fit the typical buyer's checklist.",
+      "I'm a local Central Texas cash home buyer, and I buy houses throughout Lampasas County. Whether you own a historic home near the downtown square, a ranch property off US-281, a newer build in one of the gated communities like Stargazer Ranch or High Creek Ranch, or an in-town bungalow that needs some work — I can make a fair cash offer and close on your schedule.",
+      "Lampasas sellers come to me for a lot of reasons. Inherited properties are one of the most common. If you've ended up with a family home in Lampasas or on acreage in Lampasas County, dealing with distance, probate, or multiple heirs can make a traditional listing difficult. I buy inherited properties as-is and coordinate with the title company and probate attorney on timing. I also work with homeowners going through divorce, facing financial hardship, dealing with long-vacant properties that are costing money every month, or who simply want to downsize without the hassle of repairs, showings, and negotiation.",
+      "Because Lampasas has such a wide range of property types, a lot of homes get overlooked in traditional listings. Older homes near the courthouse square that need updates, homes on larger in-town lots, rural properties with mobile homes or outbuildings, and ranches with acreage — they all take longer to sell on the open market, and sometimes the right buyer just doesn't show up. That's where a cash sale makes sense. I buy houses in any condition, on any size lot, in any part of Lampasas County.",
+      "The process is simple. Tell me about your property — a quick call or form is all it takes. I'll evaluate it based on its condition, location, comparable sales in the area, and any unique features (acreage, outbuildings, mineral rights, ag exemptions). You'll get a fair cash offer within 24 to 48 hours. If you accept, we close at a local title company on a date that works for you — typically within 7 to 21 days depending on your timeline. I cover standard closing costs, and there are no agent commissions or hidden fees. The offer I give you is the amount you walk away with, minus any existing mortgage payoff.",
+      "As a local Central Texas buyer, I understand that Lampasas isn't just a ZIP code on a map. I know the difference between a property in Lampasas ISD versus Copperas Cove ISD, what Hill Country views are actually worth, and how to value a home that doesn't fit a cookie-cutter comp. You'll deal directly with me — not a call center or an out-of-state wholesaler who's never seen the property.",
+      "If you're ready for a fair cash offer on your Lampasas home, reach out. No pressure, no obligation, no games."
+    ],
+    landmarks: [
+      "Historic Downtown Square",
+      "Lampasas County Courthouse",
+      "US-281 corridor",
+      "US-183 corridor",
+      "Stargazer Ranch",
+      "High Creek Ranch",
+      "Hill Country gateway"
+    ],
+    coordinates: {
+      lat: 31.0635,
+      lng: -98.1817
+    },
+    faqs: [
+      {
+        question: "Do you buy rural properties and land in Lampasas County, or just in-town homes?",
+        answer: "Both. I buy in-town Lampasas homes, rural properties with acreage, ranches, and homes in the surrounding gated communities and unincorporated areas of Lampasas County. Acreage, outbuildings, and ag exemptions don't complicate the deal — I factor them into the offer."
+      },
+      {
+        question: "My Lampasas house is old and needs a lot of work. Will you still buy it?",
+        answer: "Yes. I buy houses in any condition. Older homes near the downtown square, properties that haven't been updated in decades, homes with deferred maintenance, rural properties with older mobile homes on them — all of it is fine. I don't ask you to fix anything or clean anything out. I buy as-is."
+      },
+      {
+        question: "How long does a cash sale in Lampasas typically take?",
+        answer: "Most of my cash closings happen within 7 to 21 days of the offer being accepted. The exact timeline depends on the title company's schedule and any unique factors like probate, liens, or heirship issues. If you need to close fast, tell me — I can often accommodate tight timelines."
+      },
+      {
+        question: "Can you buy my inherited Lampasas property if it's still in probate?",
+        answer: "Yes, in most cases. I regularly work with families dealing with probate in Lampasas County. If you've been appointed as executor or administrator, I can work within your probate timeline and coordinate with the title company and your attorney to make sure everything's handled properly."
+      },
+      {
+        question: "Do you only buy in Lampasas city limits?",
+        answer: "No. I buy throughout Lampasas County, including unincorporated areas, nearby communities like Kempner and Lometa, and the rural stretches off US-281 and US-183. If your property is in Lampasas County or right on the edge of it, reach out — I can probably help."
+      },
+      {
+        question: "Does it matter to you if my Lampasas property has unique features like mineral rights, a well, or an ag exemption?",
+        answer: "Not in a bad way — those features just need to be factored into the offer correctly. Mineral rights, working wells, septic systems, ag or wildlife exemptions, outbuildings, and acreage are common on Lampasas County properties, and I have experience valuing all of them. Tell me what comes with the property upfront and I'll account for it in the cash offer."
       }
     ]
   }

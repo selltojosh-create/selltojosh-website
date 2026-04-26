@@ -31,7 +31,9 @@ export const siteConfig = {
     "Copperas Cove",
     "Waco",
     "Salado",
-    "Georgetown"
+    "Georgetown",
+    "Nolanville",
+    "Lampasas"
   ],
 
   // Social Media
