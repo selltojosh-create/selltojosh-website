@@ -176,7 +176,7 @@ export default async function HomePage() {
                 </a>
               </div>
               <p className="text-gray-200 text-sm mb-6">
-                Serving {serviceAreas.slice(0, -1).join(', ')}{serviceAreas.length > 1 ? ` & ${serviceAreas[serviceAreas.length - 1]}` : serviceAreas[0]} & surrounding areas
+                Serving {serviceAreas.join(', ')} & surrounding areas
               </p>
               {/* Credibility Indicators */}
               <div className="flex flex-wrap gap-4 text-sm">
