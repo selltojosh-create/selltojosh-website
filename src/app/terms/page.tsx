@@ -1,4 +1,5 @@
 import { Metadata } from 'next';
+import Link from 'next/link';
 import { siteConfig } from '@/data/siteConfig';
 
 export const metadata: Metadata = {
@@ -17,7 +18,7 @@ export default function TermsPage() {
           <h1 className="text-3xl md:text-4xl font-bold text-navy mb-8">Terms of Service</h1>
 
           <p className="text-gray-600 mb-6">
-            Last updated: January 2025
+            Last updated: May 2, 2026
           </p>
 
           {/* Principal-Buyer Disclaimer - Prominently displayed */}
@@ -52,6 +53,17 @@ export default function TermsPage() {
             We do not provide real estate brokerage services. We do not act as agents or representatives for property sellers.
             We are purchasing homes as principals for our own investment purposes.
             We encourage all sellers to seek independent legal or real estate advice before entering into any agreement with us.
+          </p>
+
+          <h2 className="text-xl font-bold text-navy mt-8 mb-4">No Agency Relationship</h2>
+          <p className="text-gray-600 mb-6">
+            Sell to Josh is operated by Josh Isbell as a cash home buyer. Josh Isbell holds a Texas real estate broker license (TREC #
+            <span className="whitespace-nowrap">597248-B</span>
+            ), but in transactions arranged through this website, Josh is acting as a principal buyer through TrippCo Holdings LLC, Red Belly Holdings LLC, or other entities owned by Joshua Isbell, not as a real estate agent representing the seller. No agency relationship is created between visitors to this website and Josh Isbell, the buying entities, or any affiliated entity. For more information, see our{' '}
+            <Link href="/buyer-disclosure" className="text-navy underline hover:text-navy-dark">
+              Buyer Disclosure
+            </Link>{' '}
+            page.
           </p>
 
           <h2 className="text-xl font-bold text-navy mt-8 mb-4">No Guarantees</h2>

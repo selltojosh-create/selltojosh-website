@@ -17,7 +17,7 @@ export default function PrivacyPage() {
           <h1 className="text-3xl md:text-4xl font-bold text-navy mb-8">Privacy Policy</h1>
 
           <p className="text-gray-600 mb-6">
-            Last updated: January 2025
+            Last updated: May 2, 2026
           </p>
 
           <h2 className="text-xl font-bold text-navy mt-8 mb-4">About Us</h2>
@@ -64,6 +64,20 @@ export default function PrivacyPage() {
           <h2 className="text-xl font-bold text-navy mt-8 mb-4">Cookies</h2>
           <p className="text-gray-600 mb-6">
             Our website may use cookies to improve your experience and analyze site traffic. You can disable cookies in your browser settings.
+          </p>
+
+          <h2 className="text-xl font-bold text-navy mt-8 mb-4">Tracking and Analytics</h2>
+          <p className="text-gray-600 mb-6">
+            This site uses Google Analytics, Google Ads conversion tracking, Google Tag Manager, and call tracking services to measure the performance of our advertising. When you submit a form or call us through a tracked phone number, certain information may be transmitted to Google Ads to attribute the lead to its source. We use this data to improve our marketing and to understand which of our pages and ads are most useful to homeowners. You can opt out of Google&apos;s advertising cookies at{' '}
+            <a
+              href="https://adssettings.google.com/"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="text-navy underline hover:text-navy-dark"
+            >
+              https://adssettings.google.com/
+            </a>
+            .
           </p>
 
           <h2 className="text-xl font-bold text-navy mt-8 mb-4">Your Rights</h2>
