@@ -93,6 +93,34 @@ export default function Footer() {
           </div>
         </div>
 
+        {/* TREC Compliance Disclosure */}
+        <hr role="separator" className="border-t border-gray-600 mt-8" />
+        <div className="mt-8 text-[13px] md:text-sm text-gray-300 space-y-2 leading-relaxed">
+          <p>
+            Josh Isbell <span aria-hidden="true">•</span> Texas Licensed Real Estate Broker{' '}
+            <span aria-hidden="true">•</span> TREC #
+            <span className="whitespace-nowrap">597248-B</span>
+          </p>
+          <p>
+            Properties purchased by TrippCo Holdings LLC, Red Belly Holdings LLC, or other entities owned by Joshua Isbell
+          </p>
+          <p>Buying directly as principal — no agency relationship is created with sellers</p>
+        </div>
+        <nav
+          aria-label="Legal disclosures"
+          className="mt-4 flex flex-wrap gap-x-6 gap-y-2 text-[13px] md:text-sm"
+        >
+          <Link href="/buyer-disclosure" className="text-gray-300 hover:text-white underline">
+            Buyer Disclosure
+          </Link>
+          <Link href="/privacy" className="text-gray-300 hover:text-white underline">
+            Privacy Policy
+          </Link>
+          <Link href="/terms" className="text-gray-300 hover:text-white underline">
+            Terms of Service
+          </Link>
+        </nav>
+
         {/* Bottom Bar */}
         <div className="border-t border-gray-600 mt-8 pt-8">
           <div className="flex flex-col md:flex-row justify-between items-center gap-4">
