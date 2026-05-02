@@ -48,13 +48,6 @@ export default function TermsPage() {
             Submitting a form does not obligate you to sell your property, nor does it obligate us to make an offer.
           </p>
 
-          <h2 className="text-xl font-bold text-navy mt-8 mb-4">No Agency or Representation</h2>
-          <p className="text-gray-600 mb-6">
-            We do not provide real estate brokerage services. We do not act as agents or representatives for property sellers.
-            We are purchasing homes as principals for our own investment purposes.
-            We encourage all sellers to seek independent legal or real estate advice before entering into any agreement with us.
-          </p>
-
           <h2 className="text-xl font-bold text-navy mt-8 mb-4">No Agency Relationship</h2>
           <p className="text-gray-600 mb-6">
             Sell to Josh is operated by Josh Isbell as a cash home buyer. Josh Isbell holds a Texas real estate broker license (TREC #
