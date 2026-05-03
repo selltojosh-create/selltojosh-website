@@ -7,6 +7,7 @@ interface LeadFormProps {
   variant?: 'default' | 'compact' | 'full';
   darkMode?: boolean;
   className?: string;
+  submitText?: string;
 }
 
 export default function LeadForm(props: LeadFormProps) {
@@ -17,7 +18,7 @@ export default function LeadForm(props: LeadFormProps) {
   );
 }
 
-function LeadFormInner({ variant = 'default', darkMode = false, className = '' }: LeadFormProps) {
+function LeadFormInner({ variant = 'default', darkMode = false, className = '', submitText = 'GET MY OFFER' }: LeadFormProps) {
   const router = useRouter();
   const id = useId();
   const [formData, setFormData] = useState({
@@ -170,7 +171,7 @@ function LeadFormInner({ variant = 'default', darkMode = false, className = '' }
         disabled={isSubmitting}
         className="w-full bg-orange hover:bg-orange-hover text-navy font-bold py-3 px-6 rounded-lg transition-all duration-200 shadow-md hover:shadow-lg disabled:opacity-50 disabled:cursor-not-allowed"
       >
-        {isSubmitting ? 'Submitting...' : 'GET MY OFFER'}
+        {isSubmitting ? 'Submitting...' : submitText}
       </button>
 
       <p className={`text-xs ${helperClass} text-center`}>
