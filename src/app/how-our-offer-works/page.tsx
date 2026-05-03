@@ -171,7 +171,7 @@ export default function HowOurOfferWorksPage() {
               <p className="text-gray-600">
                 Fill out the form on{' '}
                 <Link href="/cash-offer" className="text-navy font-semibold underline hover:text-navy-dark">
-                  /cash-offer
+                  the cash offer page
                 </Link>{' '}
                 or call{' '}
                 <a href={phoneTel} className="text-navy font-semibold underline hover:text-navy-dark">
