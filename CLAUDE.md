@@ -30,7 +30,8 @@ No test framework. Use `npm run build` to catch type errors and broken pages.
 - **Sanity CMS 5.4.0** (Studio at `/studio`, fetch with static fallback)
 - **Resend 6.7.0** (lead notification emails to `SelltoJosh@gmail.com`)
 - **Vercel** (production deploy from `main` branch)
-- **Google Tag Manager** container `GTM-5L25X4L6` (live in production)
+- **Google Tag Manager** container `GTM-5L25X4L6` — Version 3 (Live), published by selltojosh@gmail.com on 2026-05-03
+- **CallRail** company ID `180352688`, swap key `b4664efee791deafebc4` — live in production via GTM
 - **reCAPTCHA v3** (optional — activates if env vars present)
 
 ## Architecture (high level)
@@ -108,19 +109,23 @@ Defensible: brand palette is a documented design constraint; alternate communica
 
 ## Tracking and Analytics (current state)
 
-Audited 2026-05-03. **State:**
+Updated 2026-05-03 (evening session). **State:**
 
 | System | Status |
 |---|---|
-| Google Tag Manager | **Live in production** — container `GTM-5L25X4L6` (loaded conditionally via `NEXT_PUBLIC_GTM_ID` in `layout.tsx`) |
-| Google Analytics 4 | **Not in code** — may be configured inside GTM container (audit GTM web UI to confirm) |
-| Google Ads conversion tracking | **Not in code** — pre-PPC launch note flagged this as pending. Likely needed: import `generate_lead` dataLayer event as a conversion in Google Ads via GTM. |
-| CallRail | **Not installed** — planned next |
+| Google Tag Manager | **Live in production** — container `GTM-5L25X4L6`, **Version 3 (Live)** published 2026-05-03 by selltojosh@gmail.com. Loaded conditionally via `NEXT_PUBLIC_GTM_ID` in `layout.tsx`. |
+| Google Analytics 4 | **Live via GTM** — "GA4 Configuration" tag |
+| Google Ads conversion tracking | **Live** — "GA4 - Thank You Conversion" tag fires `generate_lead` event; conversion action `generate_lead` (ID `528683826`) created in Google Ads, sourced from GA4, Primary, $50 default value, one-per-click, 30-day window |
+| CallRail | **Live** — "CallRail Swap Script" tag (company `180352688`, swap key `b4664efee791deafebc4`). CSP allowlists `cdn.callrail.com` + `*.callrail.com` (commit `ae4ffdf`). Number swap verified live in incognito. |
 | Facebook Pixel / Meta | Not installed |
 | Hotjar / Mixpanel / Segment / PostHog / Sentry / Datadog | None |
 | reCAPTCHA v3 | Wired but optional (activates if env vars present) |
 
-**`dataLayer` push:** `LeadForm.tsx:69-75` pushes `event: 'generate_lead'` with optional `utm_source` and `utm_campaign` on successful form submit. GTM is listening; whether a Google Ads conversion tag is configured to fire on this event is not visible from code.
+**Three live GTM tags:** GA4 Configuration, GA4 - Thank You Conversion, CallRail Swap Script.
+
+**`dataLayer` push:** `LeadForm.tsx:69-75` pushes `event: 'generate_lead'` with `utm_source`, `utm_medium`, `utm_campaign`, `utm_content`, `utm_term` (all conditional) on successful form submit.
+
+**End-to-end conversion path verified** in GTM Preview on 2026-05-03: ad click → form submit → /thank-you → GA4 `generate_lead` → Google Ads conversion.
 
 ## Environment Variables
 
@@ -184,11 +189,16 @@ NEXT_PUBLIC_GTM_ID=GTM-...
 - **JSON-LD FAQ schema** on `/sell-as-is`, `/cash-offer`, `/buyer-disclosure` — not yet added because the project's PreToolUse security hook blocks new inline JSON-LD injection. Existing city/situation pages have it via pre-hook code. Resolve via the `next/script` component pattern when prioritized.
 - **Brand orange + brand navy contrast** on certain non-text elements (form input borders, footer separator) intentionally unchanged for brand identity preservation. Documented in /accessibility statement context.
 - **`.env.local.example`** does not document non-Sanity env vars (Resend, GTM, reCAPTCHA) — should be expanded for new contributors.
-- **Pre-PPC launch checklist** from earlier session: configure Google Ads conversion tag inside GTM (import `generate_lead` event as a conversion); test UTM flow end-to-end.
+- **Pre-launch pending items** (as of 2026-05-03 evening):
+  - GBP (Google Business Profile) phone update to **254-401-4216**
+  - CallRail ↔ Google Ads integration in CallRail dashboard
+  - Google Ads advertiser verification doc upload (21–30 day grace period)
+  - RSA library + 5 campaign builds at $3K total budget
 
-## Session Log — 2026-05-02 to 2026-05-03 (17 commits, reverse chronological)
+## Session Log — 2026-05-02 to 2026-05-03 (18 commits, reverse chronological)
 
 ```
+ae4ffdf  fix(csp): allowlist CallRail domains for script/style/img/connect
 1a4e289  fix(leads): replace dead sms: link with copyable message block (Gmail filters sms: protocol)
 08078e7  fix(leads): don't HTML-escape sms: link href in lead emails
 66e2577  feat(leads): add SMS quick-action link to lead emails + update thank-you copy
