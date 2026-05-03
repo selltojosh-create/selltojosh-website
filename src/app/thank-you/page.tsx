@@ -37,35 +37,35 @@ export default function ThankYouPage() {
         <div className="container-custom mx-auto">
           <div className="max-w-2xl mx-auto">
             <h2 className="text-2xl font-bold text-navy mb-6 text-center">What Happens Next</h2>
-            <div className="space-y-6">
-              <div className="flex gap-4">
-                <div className="flex-shrink-0 w-10 h-10 bg-orange text-navy rounded-full flex items-center justify-center font-bold">
+            <ol className="space-y-6">
+              <li className="flex gap-4">
+                <div className="flex-shrink-0 w-10 h-10 bg-orange text-navy rounded-full flex items-center justify-center font-bold" aria-hidden="true">
                   1
                 </div>
                 <div>
                   <h3 className="font-semibold text-navy">We Review Your Property</h3>
                   <p className="text-gray-600 mt-1">Our team looks at your property details and local market data.</p>
                 </div>
-              </div>
-              <div className="flex gap-4">
-                <div className="flex-shrink-0 w-10 h-10 bg-orange text-navy rounded-full flex items-center justify-center font-bold">
+              </li>
+              <li className="flex gap-4">
+                <div className="flex-shrink-0 w-10 h-10 bg-orange text-navy rounded-full flex items-center justify-center font-bold" aria-hidden="true">
                   2
                 </div>
                 <div>
                   <h3 className="font-semibold text-navy">We Call You Within 24 Hours</h3>
                   <p className="text-gray-600 mt-1">A team member will reach out to discuss your situation and answer any questions.</p>
                 </div>
-              </div>
-              <div className="flex gap-4">
-                <div className="flex-shrink-0 w-10 h-10 bg-orange text-navy rounded-full flex items-center justify-center font-bold">
+              </li>
+              <li className="flex gap-4">
+                <div className="flex-shrink-0 w-10 h-10 bg-orange text-navy rounded-full flex items-center justify-center font-bold" aria-hidden="true">
                   3
                 </div>
                 <div>
                   <h3 className="font-semibold text-navy">You Get a Fair Cash Offer</h3>
                   <p className="text-gray-600 mt-1">No obligation. No pressure. Just a straightforward offer for your home.</p>
                 </div>
-              </div>
-            </div>
+              </li>
+            </ol>
           </div>
         </div>
       </section>

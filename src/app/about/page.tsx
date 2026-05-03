@@ -108,10 +108,10 @@ export default function AboutPage() {
 
           <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-6">
             {values.map((value, index) => (
-              <div key={index} className="bg-white p-6 rounded-xl shadow-sm">
+              <article key={index} className="bg-white p-6 rounded-xl shadow-sm">
                 <h3 className="text-xl font-bold text-navy mb-3">{value.title}</h3>
                 <p className="text-gray-600">{value.description}</p>
-              </div>
+              </article>
             ))}
           </div>
         </div>
@@ -162,21 +162,21 @@ export default function AboutPage() {
             You Can Trust the Process
           </h2>
           <div className="grid md:grid-cols-3 gap-8 max-w-4xl mx-auto">
-            <div>
-              <div className="text-4xl mb-4">📞</div>
+            <article>
+              <div className="text-4xl mb-4" aria-hidden="true">📞</div>
               <h3 className="font-bold mb-2">Direct Communication</h3>
               <p className="text-gray-300">You talk to me directly — not a call center or sales team.</p>
-            </div>
-            <div>
-              <div className="text-4xl mb-4">📋</div>
+            </article>
+            <article>
+              <div className="text-4xl mb-4" aria-hidden="true">📋</div>
               <h3 className="font-bold mb-2">Clear Contracts</h3>
               <p className="text-gray-300">Simple, straightforward paperwork with no hidden clauses.</p>
-            </div>
-            <div>
-              <div className="text-4xl mb-4">🏛️</div>
+            </article>
+            <article>
+              <div className="text-4xl mb-4" aria-hidden="true">🏛️</div>
               <h3 className="font-bold mb-2">Reputable Title Companies</h3>
               <p className="text-gray-300">We close through established, local title companies.</p>
-            </div>
+            </article>
           </div>
         </div>
       </section>

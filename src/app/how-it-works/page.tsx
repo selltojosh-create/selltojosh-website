@@ -89,7 +89,7 @@ export default function HowItWorksPage() {
         <div className="container-custom mx-auto">
           <div className="space-y-16 md:space-y-24">
             {steps.map((step, index) => (
-              <div key={step.number} className={`grid md:grid-cols-2 gap-8 md:gap-12 items-center ${index % 2 === 1 ? 'md:flex-row-reverse' : ''}`}>
+              <article key={step.number} className={`grid md:grid-cols-2 gap-8 md:gap-12 items-center ${index % 2 === 1 ? 'md:flex-row-reverse' : ''}`}>
                 <div className={index % 2 === 1 ? 'md:order-2' : ''}>
                   <div className="flex items-center gap-4 mb-4">
                     <div className="w-14 h-14 bg-orange text-navy rounded-full flex items-center justify-center text-2xl font-bold flex-shrink-0">
@@ -115,7 +115,7 @@ export default function HowItWorksPage() {
                 </div>
                 <div className={`bg-gray-light rounded-2xl p-8 md:p-12 ${index % 2 === 1 ? 'md:order-1' : ''}`}>
                   <div className="text-center">
-                    <div className="text-6xl md:text-8xl font-bold text-orange/20 mb-4">
+                    <div className="text-6xl md:text-8xl font-bold text-orange/20 mb-4" aria-hidden="true">
                       0{step.number}
                     </div>
                     <p className="text-navy font-semibold text-lg">
@@ -125,7 +125,7 @@ export default function HowItWorksPage() {
                     </p>
                   </div>
                 </div>
-              </div>
+              </article>
             ))}
           </div>
         </div>
@@ -145,10 +145,10 @@ export default function HowItWorksPage() {
 
           <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-6">
             {expectations.map((item, index) => (
-              <div key={index} className="bg-white p-6 rounded-xl shadow-sm">
+              <article key={index} className="bg-white p-6 rounded-xl shadow-sm">
                 <h3 className="font-bold text-navy mb-2">{item.title}</h3>
                 <p className="text-gray-600">{item.description}</p>
-              </div>
+              </article>
             ))}
           </div>
         </div>
@@ -167,9 +167,9 @@ export default function HowItWorksPage() {
             <table className="w-full text-left">
               <thead>
                 <tr className="border-b-2 border-gray-200">
-                  <th className="py-4 px-4 font-semibold text-gray-600">Factor</th>
-                  <th className="py-4 px-4 font-bold text-navy bg-orange/10">Sell to Josh</th>
-                  <th className="py-4 px-4 font-semibold text-gray-600">List with Agent</th>
+                  <th scope="col" className="py-4 px-4 font-semibold text-gray-600">Factor</th>
+                  <th scope="col" className="py-4 px-4 font-bold text-navy bg-orange/10">Sell to Josh</th>
+                  <th scope="col" className="py-4 px-4 font-semibold text-gray-600">List with Agent</th>
                 </tr>
               </thead>
               <tbody className="divide-y divide-gray-100">
