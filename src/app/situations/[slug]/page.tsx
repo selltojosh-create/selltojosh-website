@@ -237,6 +237,13 @@ export default async function SituationPage({ params }: PageProps) {
       <section className="section-padding bg-gray-light">
         <div className="container-custom mx-auto">
           <div className="max-w-4xl mx-auto">
+            <p className="text-center text-gray-600 mb-10">
+              Want to understand the process before you call? See{' '}
+              <Link href="/how-our-offer-works" className="text-navy underline hover:text-navy-dark font-semibold">
+                exactly how selling to Josh works
+              </Link>
+              .
+            </p>
             <div className="text-center mb-12">
               <h2 className="text-3xl md:text-4xl font-bold text-navy mb-4">
                 Frequently Asked Questions

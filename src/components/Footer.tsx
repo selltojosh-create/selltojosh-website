@@ -53,6 +53,21 @@ export default function Footer() {
                 </Link>
               </li>
               <li>
+                <Link href="/how-our-offer-works" className="text-gray-300 hover:text-white transition-colors">
+                  How Our Process Works
+                </Link>
+              </li>
+              <li>
+                <Link href="/sell-as-is" className="text-gray-300 hover:text-white transition-colors">
+                  Sell As-Is
+                </Link>
+              </li>
+              <li>
+                <Link href="/cash-offer" className="text-gray-300 hover:text-white transition-colors">
+                  Get a Cash Offer
+                </Link>
+              </li>
+              <li>
                 <Link href="/situations/foreclosure" className="text-gray-300 hover:text-white transition-colors">
                   Facing Foreclosure
                 </Link>

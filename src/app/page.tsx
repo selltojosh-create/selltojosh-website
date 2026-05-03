@@ -275,6 +275,13 @@ export default async function HomePage() {
             <Link href="/how-it-works" className="btn-secondary">
               Learn More About Our Process
             </Link>
+            <p className="mt-4 text-sm text-gray-600">
+              Or read{' '}
+              <Link href="/how-our-offer-works" className="text-navy underline hover:text-navy-dark font-semibold">
+                How Our Process Works
+              </Link>{' '}
+              in detail.
+            </p>
           </div>
         </div>
       </section>
