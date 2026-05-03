@@ -134,6 +134,9 @@ export default function Footer() {
           <Link href="/terms" className="text-gray-300 hover:text-white underline">
             Terms of Service
           </Link>
+          <Link href="/accessibility" className="text-gray-300 hover:text-white underline">
+            Accessibility
+          </Link>
         </nav>
 
         {/* Bottom Bar */}
