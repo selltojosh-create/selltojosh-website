@@ -20,13 +20,6 @@ function getFirstName(fullName: string): string {
   return trimmed.split(/\s+/)[0] || trimmed;
 }
 
-function toE164US(phone: string): string {
-  const digits = phone.replace(/\D/g, '');
-  if (digits.length === 10) return `+1${digits}`;
-  if (digits.length === 11 && digits.startsWith('1')) return `+${digits}`;
-  return phone;
-}
-
 interface LeadData {
   name: string;
   phone: string;
@@ -110,11 +103,10 @@ export async function POST(request: NextRequest) {
       timeStyle: 'short'
     });
 
-    // Build SMS quick-action link with personalized pre-filled message
+    // Personalized message body Josh can copy/paste into his SMS app
+    // (sms: links don't work in Gmail web or mobile — Gmail filters the protocol)
     const firstName = getFirstName(data.name);
-    const phoneE164 = toE164US(data.phone);
     const smsBody = `Hi ${firstName}, this is Josh from SellToJosh.com. I just got your message about ${data.address}. Do you have a few minutes to chat about your property?`;
-    const smsHref = `sms:${phoneE164}?&body=${encodeURIComponent(smsBody)}`;
 
     // Send email notification via Resend
     const { error: emailError } = await getResend().emails.send({
@@ -160,11 +152,18 @@ export async function POST(request: NextRequest) {
             ` : ''}
           </table>
 
-          <div style="margin-top: 30px; padding: 15px; background-color: #f7f7f7; border-radius: 8px;">
-            <p style="margin: 0; color: #666; font-size: 14px;">
-              <strong>Quick Actions:</strong><br>
-              • Call: <a href="tel:${escapeHtml(data.phone)}" style="color: #2d3367;">${escapeHtml(data.phone)}</a><br>
-              • Text: <a href="${smsHref}" style="color: #2d3367;">Send pre-filled SMS to ${escapeHtml(firstName)}</a><br>
+          <div style="margin-top: 30px; padding: 15px; background-color: #f7f7f7; border-radius: 8px; color: #666; font-size: 14px;">
+            <strong style="color: #333;">Quick Actions:</strong>
+            <p style="margin: 8px 0;">
+              • Call: <a href="tel:${escapeHtml(data.phone)}" style="color: #2d3367;">${escapeHtml(data.phone)}</a>
+            </p>
+            <p style="margin: 8px 0;">
+              • Text: copy this message to send to ${escapeHtml(firstName)}:
+            </p>
+            <div style="background: #f4f4f4; padding: 12px; border-left: 3px solid #2d3367; margin: 8px 0; font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif; font-size: 14px; line-height: 1.5; color: #333; user-select: all; -webkit-user-select: all;">
+              ${escapeHtml(smsBody)}
+            </div>
+            <p style="margin: 8px 0;">
               • Reply to this email to follow up
             </p>
           </div>
@@ -185,7 +184,8 @@ Submitted: ${timestamp}
 
 Quick Actions:
 - Call: tel:${data.phone}
-- Text: ${smsHref}
+- Text the lead — copy this message:
+  "${smsBody}"
 - Reply to this email to follow up${data.utmParams?.utm_source ? `\n\nCampaign Info:\nSource: ${escapeHtml(data.utmParams.utm_source)}${data.utmParams.utm_medium ? `\nMedium: ${escapeHtml(data.utmParams.utm_medium)}` : ''}${data.utmParams.utm_campaign ? `\nCampaign: ${escapeHtml(data.utmParams.utm_campaign)}` : ''}${data.utmParams.utm_content ? `\nContent: ${escapeHtml(data.utmParams.utm_content)}` : ''}${data.utmParams.utm_term ? `\nTerm: ${escapeHtml(data.utmParams.utm_term)}` : ''}` : ''}
       `.trim(),
     });
