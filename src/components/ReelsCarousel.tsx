@@ -40,7 +40,7 @@ export default function ReelsCarousel({ reels = staticReels }: ReelsCarouselProp
         {/* Navigation Arrows */}
         <button
           onClick={goToPrevious}
-          className="absolute left-2 md:left-4 top-1/2 -translate-y-1/2 bg-white/90 hover:bg-white text-navy p-2 md:p-3 rounded-full shadow-lg transition-all"
+          className="absolute left-2 md:left-4 top-1/2 -translate-y-1/2 bg-white/90 hover:bg-white text-navy min-w-[44px] min-h-[44px] flex items-center justify-center rounded-full shadow-lg transition-all"
           aria-label="Previous video"
         >
           <svg className="w-5 h-5 md:w-6 md:h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24" aria-hidden="true">
@@ -50,7 +50,7 @@ export default function ReelsCarousel({ reels = staticReels }: ReelsCarouselProp
 
         <button
           onClick={goToNext}
-          className="absolute right-2 md:right-4 top-1/2 -translate-y-1/2 bg-white/90 hover:bg-white text-navy p-2 md:p-3 rounded-full shadow-lg transition-all"
+          className="absolute right-2 md:right-4 top-1/2 -translate-y-1/2 bg-white/90 hover:bg-white text-navy min-w-[44px] min-h-[44px] flex items-center justify-center rounded-full shadow-lg transition-all"
           aria-label="Next video"
         >
           <svg className="w-5 h-5 md:w-6 md:h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24" aria-hidden="true">
@@ -70,18 +70,24 @@ export default function ReelsCarousel({ reels = staticReels }: ReelsCarouselProp
       </div>
 
       {/* Dots Indicator */}
-      <div className="flex justify-center gap-2 mt-6">
+      <div className="flex justify-center mt-6">
         {reels.map((_, index) => (
           <button
             key={index}
             onClick={() => setCurrentIndex(index)}
-            className={`w-3 h-3 rounded-full transition-all ${
-              index === currentIndex
-                ? 'bg-orange w-8'
-                : 'bg-gray-300 hover:bg-gray-400'
-            }`}
+            className="min-w-[44px] min-h-[44px] flex items-center justify-center"
             aria-label={`Go to video ${index + 1}`}
-          />
+            aria-current={index === currentIndex ? 'true' : undefined}
+          >
+            <span
+              aria-hidden="true"
+              className={`block h-3 rounded-full transition-all ${
+                index === currentIndex
+                  ? 'bg-orange w-8'
+                  : 'bg-gray-300 w-3 hover:bg-gray-400'
+              }`}
+            />
+          </button>
         ))}
       </div>
 

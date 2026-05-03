@@ -29,7 +29,7 @@ export default function TestimonialCard({ quote, name, location }: TestimonialCa
 
       {/* Author */}
       <div>
-        <p className="font-semibold text-navy">{name}</p>
+        <cite className="font-semibold text-navy not-italic block">{name}</cite>
         <p className="text-sm text-gray-500">{location}</p>
       </div>
     </div>
