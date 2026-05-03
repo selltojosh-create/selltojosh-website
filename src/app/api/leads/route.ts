@@ -15,6 +15,18 @@ function escapeHtml(str: string): string {
     .replace(/'/g, '&#39;');
 }
 
+function getFirstName(fullName: string): string {
+  const trimmed = fullName.trim();
+  return trimmed.split(/\s+/)[0] || trimmed;
+}
+
+function toE164US(phone: string): string {
+  const digits = phone.replace(/\D/g, '');
+  if (digits.length === 10) return `+1${digits}`;
+  if (digits.length === 11 && digits.startsWith('1')) return `+${digits}`;
+  return phone;
+}
+
 interface LeadData {
   name: string;
   phone: string;
@@ -98,6 +110,12 @@ export async function POST(request: NextRequest) {
       timeStyle: 'short'
     });
 
+    // Build SMS quick-action link with personalized pre-filled message
+    const firstName = getFirstName(data.name);
+    const phoneE164 = toE164US(data.phone);
+    const smsBody = `Hi ${firstName}, this is Josh from SellToJosh.com. I just got your message about ${data.address}. Do you have a few minutes to chat about your property?`;
+    const smsHref = `sms:${phoneE164}?&body=${encodeURIComponent(smsBody)}`;
+
     // Send email notification via Resend
     const { error: emailError } = await getResend().emails.send({
       from: 'SellToJosh.com <leads@selltojosh.com>',
@@ -146,6 +164,7 @@ export async function POST(request: NextRequest) {
             <p style="margin: 0; color: #666; font-size: 14px;">
               <strong>Quick Actions:</strong><br>
               • Call: <a href="tel:${escapeHtml(data.phone)}" style="color: #2d3367;">${escapeHtml(data.phone)}</a><br>
+              • Text: <a href="${escapeHtml(smsHref)}" style="color: #2d3367;">Send pre-filled SMS to ${escapeHtml(firstName)}</a><br>
               • Reply to this email to follow up
             </p>
           </div>
@@ -162,7 +181,12 @@ Name: ${escapeHtml(data.name)}
 Phone: ${escapeHtml(data.phone)}
 Property Address: ${escapeHtml(data.address)}
 Message: ${escapeHtml(data.message || 'No message provided')}
-Submitted: ${timestamp}${data.utmParams?.utm_source ? `\n\nCampaign Info:\nSource: ${escapeHtml(data.utmParams.utm_source)}${data.utmParams.utm_medium ? `\nMedium: ${escapeHtml(data.utmParams.utm_medium)}` : ''}${data.utmParams.utm_campaign ? `\nCampaign: ${escapeHtml(data.utmParams.utm_campaign)}` : ''}${data.utmParams.utm_content ? `\nContent: ${escapeHtml(data.utmParams.utm_content)}` : ''}${data.utmParams.utm_term ? `\nTerm: ${escapeHtml(data.utmParams.utm_term)}` : ''}` : ''}
+Submitted: ${timestamp}
+
+Quick Actions:
+- Call: tel:${data.phone}
+- Text: ${smsHref}
+- Reply to this email to follow up${data.utmParams?.utm_source ? `\n\nCampaign Info:\nSource: ${escapeHtml(data.utmParams.utm_source)}${data.utmParams.utm_medium ? `\nMedium: ${escapeHtml(data.utmParams.utm_medium)}` : ''}${data.utmParams.utm_campaign ? `\nCampaign: ${escapeHtml(data.utmParams.utm_campaign)}` : ''}${data.utmParams.utm_content ? `\nContent: ${escapeHtml(data.utmParams.utm_content)}` : ''}${data.utmParams.utm_term ? `\nTerm: ${escapeHtml(data.utmParams.utm_term)}` : ''}` : ''}
       `.trim(),
     });
 

@@ -27,7 +27,11 @@ export default function ThankYouPage() {
           </div>
           <h1 className="text-4xl md:text-5xl font-bold mb-4">Thank You!</h1>
           <p className="text-xl text-gray-300 max-w-2xl mx-auto">
-            We&apos;ve received your information and will contact you within 24 hours with your cash offer.
+            We&apos;ve received your information. Josh will personally reach out shortly to discuss your property. If you&apos;d rather not wait, you can{' '}
+            <a href={siteConfig.phoneTel} className="text-white underline font-semibold hover:text-orange transition-colors">
+              call us directly at {siteConfig.phone}
+            </a>
+            .
           </p>
         </div>
       </section>
@@ -52,8 +56,8 @@ export default function ThankYouPage() {
                   2
                 </div>
                 <div>
-                  <h3 className="font-semibold text-navy">We Call You Within 24 Hours</h3>
-                  <p className="text-gray-600 mt-1">A team member will reach out to discuss your situation and answer any questions.</p>
+                  <h3 className="font-semibold text-navy">We&apos;ll Reach Out Quickly</h3>
+                  <p className="text-gray-600 mt-1">Josh personally calls or texts every lead — usually within minutes during business hours, and the same day otherwise.</p>
                 </div>
               </li>
               <li className="flex gap-4">
