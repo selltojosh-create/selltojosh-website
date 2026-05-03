@@ -71,7 +71,10 @@ function LeadFormInner({ variant = 'default', darkMode = false, className = '', 
           event: 'generate_lead',
           lead_source: 'website_form',
           ...(utmParams.utm_source && { utm_source: utmParams.utm_source }),
+          ...(utmParams.utm_medium && { utm_medium: utmParams.utm_medium }),
           ...(utmParams.utm_campaign && { utm_campaign: utmParams.utm_campaign }),
+          ...(utmParams.utm_content && { utm_content: utmParams.utm_content }),
+          ...(utmParams.utm_term && { utm_term: utmParams.utm_term }),
         });
         router.push('/thank-you');
         return;
