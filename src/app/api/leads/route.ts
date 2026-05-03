@@ -164,7 +164,7 @@ export async function POST(request: NextRequest) {
             <p style="margin: 0; color: #666; font-size: 14px;">
               <strong>Quick Actions:</strong><br>
               • Call: <a href="tel:${escapeHtml(data.phone)}" style="color: #2d3367;">${escapeHtml(data.phone)}</a><br>
-              • Text: <a href="${escapeHtml(smsHref)}" style="color: #2d3367;">Send pre-filled SMS to ${escapeHtml(firstName)}</a><br>
+              • Text: <a href="${smsHref}" style="color: #2d3367;">Send pre-filled SMS to ${escapeHtml(firstName)}</a><br>
               • Reply to this email to follow up
             </p>
           </div>
