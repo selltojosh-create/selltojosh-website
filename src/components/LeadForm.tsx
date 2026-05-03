@@ -103,6 +103,8 @@ function LeadFormInner({ variant = 'default', darkMode = false, className = '', 
             type="text"
             id={`${id}-name`}
             required
+            aria-required="true"
+            aria-describedby={error ? `${id}-error` : undefined}
             autoComplete="name"
             value={formData.name}
             onChange={(e) => setFormData({ ...formData, name: e.target.value })}
@@ -119,6 +121,9 @@ function LeadFormInner({ variant = 'default', darkMode = false, className = '', 
             type="tel"
             id={`${id}-phone`}
             required
+            aria-required="true"
+            aria-describedby={error ? `${id}-error` : undefined}
+            inputMode="tel"
             autoComplete="tel"
             value={formData.phone}
             onChange={(e) => setFormData({ ...formData, phone: e.target.value })}
@@ -136,6 +141,8 @@ function LeadFormInner({ variant = 'default', darkMode = false, className = '', 
           type="text"
           id={`${id}-address`}
           required
+          aria-required="true"
+          aria-describedby={error ? `${id}-error` : undefined}
           autoComplete="street-address"
           value={formData.address}
           onChange={(e) => setFormData({ ...formData, address: e.target.value })}
@@ -160,7 +167,7 @@ function LeadFormInner({ variant = 'default', darkMode = false, className = '', 
         </div>
       )}
 
-      <div aria-live="polite" aria-atomic="true">
+      <div id={`${id}-error`} aria-live="polite" aria-atomic="true">
         {error && (
           <p className={`${darkMode ? 'text-red-300' : 'text-red-600'} text-sm`} role="alert">{error}</p>
         )}
