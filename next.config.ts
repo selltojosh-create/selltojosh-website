@@ -2,7 +2,7 @@ import type { NextConfig } from "next";
 
 const cspDirectives = [
   "default-src 'self'",
-  "script-src 'self' 'unsafe-inline' 'unsafe-eval' https://www.google.com https://www.gstatic.com https://www.googletagmanager.com https://va.vercel-scripts.com https://cdn.callrail.com",
+  "script-src 'self' 'unsafe-inline' 'unsafe-eval' https://www.google.com https://www.gstatic.com https://www.googletagmanager.com https://va.vercel-scripts.com https://cdn.callrail.com https://js.callrail.com",
   "style-src 'self' 'unsafe-inline' https://cdn.callrail.com",
   "img-src 'self' data: https: https://www.googletagmanager.com https://www.google-analytics.com https://*.callrail.com",
   "font-src 'self' https://fonts.gstatic.com",
