@@ -1,6 +1,6 @@
 # CLAUDE.md
 
-Snapshot of selltojosh.com current state for Claude Code sessions. Updated 2026-05-03.
+Snapshot of selltojosh.com current state for Claude Code sessions. Updated 2026-05-15.
 
 ## Project Overview
 
@@ -30,8 +30,8 @@ No test framework. Use `npm run build` to catch type errors and broken pages.
 - **Sanity CMS 5.4.0** (Studio at `/studio`, fetch with static fallback)
 - **Resend 6.7.0** (lead notification emails to `SelltoJosh@gmail.com`)
 - **Vercel** (production deploy from `main` branch)
-- **Google Tag Manager** container `GTM-5L25X4L6` — Version 3 (Live), published by selltojosh@gmail.com on 2026-05-03
-- **CallRail** company ID `180352688`, swap key `b4664efee791deafebc4` — live in production via GTM
+- **Google Tag Manager** container `GTM-5L25X4L6` — **Version 4 (Live)**, published by selltojosh@gmail.com on 2026-05-15 (fixes the `generate_lead` trigger that never fired in V3 — see Tracking section)
+- **CallRail** company ID `180352688`, swap key `b4664efee791deafebc4` — live in production via GTM (CSP fix `ec4cd57` was required for swap.js to actually load)
 - **reCAPTCHA v3** (optional — activates if env vars present)
 
 ## Architecture (high level)
@@ -109,23 +109,39 @@ Defensible: brand palette is a documented design constraint; alternate communica
 
 ## Tracking and Analytics (current state)
 
-Updated 2026-05-03 (evening session). **State:**
+Updated 2026-05-15. **State:**
 
 | System | Status |
 |---|---|
-| Google Tag Manager | **Live in production** — container `GTM-5L25X4L6`, **Version 3 (Live)** published 2026-05-03 by selltojosh@gmail.com. Loaded conditionally via `NEXT_PUBLIC_GTM_ID` in `layout.tsx`. |
+| Google Tag Manager | **Live in production** — container `GTM-5L25X4L6`, **Version 4 (Live)** published 2026-05-15 by selltojosh@gmail.com. Loaded conditionally via `NEXT_PUBLIC_GTM_ID` in `layout.tsx`. |
 | Google Analytics 4 | **Live via GTM** — "GA4 Configuration" tag |
-| Google Ads conversion tracking | **Live** — "GA4 - Thank You Conversion" tag fires `generate_lead` event; conversion action `generate_lead` (ID `528683826`) created in Google Ads, sourced from GA4, Primary, $50 default value, one-per-click, 30-day window |
-| CallRail | **Live** — "CallRail Swap Script" tag (company `180352688`, swap key `b4664efee791deafebc4`). CSP allowlists `cdn.callrail.com` + `*.callrail.com` (commit `ae4ffdf`). Number swap verified live in incognito. |
+| Google Ads conversion tracking | **Live (fixed in V4)** — tag renamed "GA4 - Thank You Conversion" → **"GA4 - Generate Lead Conversion"**. Trigger renamed "Thank You Page View" → **"Generate Lead Event"** and switched from Page View on `/thank-you` to a **Custom Event trigger on the `generate_lead` dataLayer event**. Reason for fix: Next.js App Router client-side routing doesn't generate real Page View events on `router.push('/thank-you')`, so the V3 Page View trigger never fired in production — the conversion path was broken between 2026-05-03 (V3 publish) and 2026-05-15 (V4 publish) despite GTM Preview showing it work. Conversion action `generate_lead` (ID `528683826`) in Google Ads, sourced from GA4, Primary, $50 default value, one-per-click, 30-day window. |
+| CallRail | **Live (fixed in commit `ec4cd57`)** — "CallRail Swap Script" tag (company `180352688`, swap key `b4664efee791deafebc4`). CSP allowlists `cdn.callrail.com`, `js.callrail.com`, and `*.callrail.com` (commits `ae4ffdf`, `ec4cd57`). The swap script loads from `js.callrail.com`; before `ec4cd57` only `cdn.callrail.com` was allowlisted, so the script was CSP-blocked and phone-number swapping did not actually work on production — despite the V3 GTM publish appearing complete. Number swap working on all pages post-`ec4cd57`. |
+| CallRail ↔ Google Ads integration | **Live** — verified active 2026-05-15. Separate conversion actions configured for first-time vs repeat callers. Integration-side filter: **60-second minimum call duration** before a call counts as a conversion. |
 | Facebook Pixel / Meta | Not installed |
 | Hotjar / Mixpanel / Segment / PostHog / Sentry / Datadog | None |
 | reCAPTCHA v3 | Wired but optional (activates if env vars present) |
 
-**Three live GTM tags:** GA4 Configuration, GA4 - Thank You Conversion, CallRail Swap Script.
+**Three live GTM tags:** GA4 Configuration, GA4 - Generate Lead Conversion, CallRail Swap Script.
 
 **`dataLayer` push:** `LeadForm.tsx:69-75` pushes `event: 'generate_lead'` with `utm_source`, `utm_medium`, `utm_campaign`, `utm_content`, `utm_term` (all conditional) on successful form submit.
 
-**End-to-end conversion path verified** in GTM Preview on 2026-05-03: ad click → form submit → /thank-you → GA4 `generate_lead` → Google Ads conversion.
+**End-to-end conversion path (post-V4):** ad click → form submit → `LeadForm` dataLayer push → "Generate Lead Event" custom-event trigger → "GA4 - Generate Lead Conversion" tag → GA4 → Google Ads conversion. The 2026-05-03 GTM Preview run did see the event fire (Preview attaches to the dataLayer regardless of trigger config), which masked the fact that the production tag's Page View trigger never fired on Next.js client-side `/thank-you` navigation.
+
+## Google Ads Campaign State (2026-05-15)
+
+Snapshot of the account after the 2026-05-15 cleanup pass:
+
+- **Active campaign (sole):** Bell County Flagship at **$100/day**
+- **Paused:** "Sell House As-Is — Bell County", "Cash Home Buyers — Bell County" (consolidated into Flagship)
+- **Optimization score:** 68.5% → **77.1%**
+- **Match types:** Broad → **Phrase/Exact** on top 10 keywords
+- **Negative keywords:** **+43 added**
+- **High-intent keywords:** **+15 added**
+- **Sitelinks:** 6 total
+- **Phone Call conversion count:** Every → **One**
+- **Location targeting:** confirmed **Presence-only**
+- **Bid strategy:** still on default; switch to **Maximize Conversions** is gated on accumulating **5–10 recorded conversions** in the account first
 
 ## Environment Variables
 
@@ -189,11 +205,29 @@ NEXT_PUBLIC_GTM_ID=GTM-...
 - **JSON-LD FAQ schema** on `/sell-as-is`, `/cash-offer`, `/buyer-disclosure` — not yet added because the project's PreToolUse security hook blocks new inline JSON-LD injection. Existing city/situation pages have it via pre-hook code. Resolve via the `next/script` component pattern when prioritized.
 - **Brand orange + brand navy contrast** on certain non-text elements (form input borders, footer separator) intentionally unchanged for brand identity preservation. Documented in /accessibility statement context.
 - **`.env.local.example`** does not document non-Sanity env vars (Resend, GTM, reCAPTCHA) — should be expanded for new contributors.
-- **Pre-launch pending items** (as of 2026-05-03 evening):
-  - GBP (Google Business Profile) phone update to **254-401-4216**
-  - CallRail ↔ Google Ads integration in CallRail dashboard
-  - Google Ads advertiser verification doc upload (21–30 day grace period)
-  - RSA library + 5 campaign builds at $3K total budget
+- **Outstanding** (as of 2026-05-15):
+  - GBP (Google Business Profile) phone update to **254-401-4216** — carried over from 2026-05-03
+  - Google Ads advertiser verification doc upload (21–30 day grace period) — still pending
+  - **Image assets for RSAs** (responsive search ads) — needed before scaling creative
+  - **Switch to Maximize Conversions bid strategy** — gated on 5–10 recorded conversions in the account
+- **Resolved 2026-05-15:**
+  - GTM trigger bug — `generate_lead` switched from Page View on `/thank-you` to Custom Event on the dataLayer event (GTM V4 publish). Conversion path was silently broken from 2026-05-03 (V3 publish) until V4.
+  - CallRail CSP block — `https://js.callrail.com` added to `script-src` in `next.config.ts` (commit `ec4cd57`). Number swap was non-functional on production before this fix despite the V3 GTM publish.
+  - CallRail ↔ Google Ads integration — verified live; first-time vs repeat caller conversion actions configured; 60s min-duration filter set.
+  - Google Ads campaign cleanup — two campaigns paused, match types tightened (Broad → Phrase/Exact on top 10), +43 negatives, +15 high-intent keywords, 6 sitelinks, Phone Call conversion count Every → One, Presence-only targeting confirmed. Sole active campaign: Bell County Flagship at $100/day. Optimization score 68.5% → 77.1%.
+
+## Session Log — 2026-05-03 evening to 2026-05-15 (reverse chronological)
+
+```
+ec4cd57  fix(csp): allowlist js.callrail.com in script-src  (2026-05-15)
+0f8225a  docs: update CLAUDE.md with GTM v3, CallRail, and Google Ads conversion go-live  (2026-05-03 PM)
+5f21711  feat(leads): add utm_medium, utm_content, utm_term to dataLayer push for full GTM attribution  (2026-05-03 AM)
+```
+
+Non-git work on 2026-05-15:
+- GTM container published **Version 4** — trigger fix for `generate_lead` (Page View → Custom Event), tag and trigger renamed.
+- Google Ads campaign cleanup — see "Google Ads Campaign State" section above.
+- CallRail ↔ Google Ads integration configured and verified.
 
 ## Session Log — 2026-05-02 to 2026-05-03 (18 commits, reverse chronological)
 
