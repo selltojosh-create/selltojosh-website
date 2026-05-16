@@ -1,6 +1,6 @@
 # CLAUDE.md
 
-Snapshot of selltojosh.com current state for Claude Code sessions. Updated 2026-05-15.
+Snapshot of selltojosh.com current state for Claude Code sessions. Updated 2026-05-16.
 
 ## Project Overview
 
@@ -8,7 +8,15 @@ SellToJosh.com is a lead-generation site for Josh Isbell, a Texas licensed real 
 
 Built with Next.js 16 App Router, deployed via Vercel from the GitHub `main` branch (auto-deploy on push). Sanity CMS is wired in but every page falls back to static data files in `src/data/`, so the site works 100% without Sanity configured.
 
-**Live site:** https://www.selltojosh.com (apex `selltojosh.com` 307-redirects to `www`)
+**Live site:** https://selltojosh.com (apex non-www is primary; `www.selltojosh.com` 308-redirects to apex). Fixed 2026-05-16 — see "Domain & Canonical Redirect" section below.
+
+## Domain & Canonical Redirect
+
+- **Canonical host:** `selltojosh.com` (apex, non-www) — serves Production directly with a 200 response.
+- **`www.selltojosh.com`:** single 308 Permanent Redirect → `https://selltojosh.com/...` (path preserved).
+- **Sitemap:** `src/app/sitemap.ts` builds URLs from `https://${siteConfig.domain}` where `siteConfig.domain = "selltojosh.com"`, so every sitemap URL is non-www and serves a direct 200 (no redirect hop).
+- **History / why this matters:** Before 2026-05-16 the apex 307-redirected to `www` while the canonical tags and sitemap pointed at the non-www apex. That mismatch surfaced in Google Search Console as a **"Redirect error"** — Google followed apex → www, then the canonical pointed it back to apex, producing a loop in GSC's view. Flipping the redirect direction (www → apex, 308 permanent) resolved the GSC error and aligned redirect, canonical, and sitemap on the same host.
+- **Verification:** `curl -sIL https://selltojosh.com/situations/foreclosure` returns a single `200 OK`. `curl -sIL https://www.selltojosh.com/situations/foreclosure` returns `308` → `https://selltojosh.com/situations/foreclosure` → `200 OK`.
 
 ## Commands
 
@@ -216,13 +224,16 @@ NEXT_PUBLIC_GTM_ID=GTM-...
   - CallRail ↔ Google Ads integration — verified live; first-time vs repeat caller conversion actions configured; 60s min-duration filter set.
   - Google Ads campaign cleanup — two campaigns paused, match types tightened (Broad → Phrase/Exact on top 10), +43 negatives, +15 high-intent keywords, 6 sitelinks, Phone Call conversion count Every → One, Presence-only targeting confirmed. Sole active campaign: Bell County Flagship at $100/day. Optimization score 68.5% → 77.1%.
 
-## Session Log — 2026-05-03 evening to 2026-05-15 (reverse chronological)
+## Session Log — 2026-05-03 evening to 2026-05-16 (reverse chronological)
 
 ```
 ec4cd57  fix(csp): allowlist js.callrail.com in script-src  (2026-05-15)
 0f8225a  docs: update CLAUDE.md with GTM v3, CallRail, and Google Ads conversion go-live  (2026-05-03 PM)
 5f21711  feat(leads): add utm_medium, utm_content, utm_term to dataLayer push for full GTM attribution  (2026-05-03 AM)
 ```
+
+Non-git work on 2026-05-16:
+- **Domain redirect fix** — flipped from apex→www (307) to www→apex (308 permanent). Apex `selltojosh.com` now serves Production directly with a 200; `www.selltojosh.com` permanently redirects to apex. Resolves the GSC "Redirect error" whose root cause was the old apex→www 307 conflicting with the non-www canonical tags and sitemap. See "Domain & Canonical Redirect" section above.
 
 Non-git work on 2026-05-15:
 - GTM container published **Version 4** — trigger fix for `generate_lead` (Page View → Custom Event), tag and trigger renamed.
